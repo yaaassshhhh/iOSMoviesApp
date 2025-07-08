@@ -15,7 +15,7 @@ enum NetworkError: Error {
     case encodingError
 }
 
-enum HttpMethod : String {
+enum HttpMethod: String {
     case get = "GET"
     case post = "POST"
 }
