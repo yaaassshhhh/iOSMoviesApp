@@ -10,4 +10,8 @@ import UIKit
 
 class DiscoveryPageViewController: UIViewController {
     
+    @IBOutlet weak var locationButton: UIButton!
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    
 }
