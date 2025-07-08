@@ -1,2 +1,2 @@
 # iOSMoviesApp
-Movies App with discovery and synopsis
+Movies App with movie listing and synopsis
