@@ -10,15 +10,15 @@ class MovieCarouselCell: UICollectionViewCell {
         posterImageView.clipsToBounds = true
     }
 
-    func configure(with movie: Movie) {
-        if let url = URL(string: movie.posterURL) {
-            URLSession.shared.dataTask(with: url) { data, _, _ in
-                if let data = data {
-                    DispatchQueue.main.async {
-                        self.posterImageView.image = UIImage(data: data)
-                    }
-                }
-            }.resume()
-        }
+    func configure(with movie: MovieViewModel) {
+//        if let url = URL(string: movie.posterURL) {
+//            URLSession.shared.dataTask(with: url) { data, _, _ in
+//                if let data = data {
+//                    DispatchQueue.main.async {
+//                        self.posterImageView.image = UIImage(data: data)
+//                    }
+//                }
+//            }.resume()
+//        }
     }
 }

@@ -36,17 +36,18 @@ final class WebService {
         if let body = resource.body {
             request.httpBody = body
         }
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.allHTTPHeaderFields = [
+          "accept": "application/json",
+          "Authorization": "\(BEARER_TOKEN)"
+        ]
         
         URLSession.shared.dataTask(with: request) { data, response, error in
-            
             guard let data = data, error == nil else {
                 completion(.failure(.domainError))
                 return
             }
             
             let result = resource.parse(data)
-            
             if let result = result {
                 DispatchQueue.main.async {
                     completion(.success(result))
