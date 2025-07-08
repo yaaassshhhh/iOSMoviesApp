@@ -58,7 +58,7 @@ class DiscoveryPageViewController: UIViewController {
 extension DiscoveryPageViewController: UICollectionViewDataSource, UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.movies.count
+        return viewModel.featuredMovies.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -66,7 +66,7 @@ extension DiscoveryPageViewController: UICollectionViewDataSource, UICollectionV
             return UICollectionViewCell()
         }
 
-        let movie = viewModel.movies[indexPath.row]
+        let movie = viewModel.featuredMovies[indexPath.row]
         cell.configure(with: movie)
         return cell
     }
@@ -74,6 +74,20 @@ extension DiscoveryPageViewController: UICollectionViewDataSource, UICollectionV
 
 extension DiscoveryPageViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("Search: \(searchText)")
+        viewModel.filterMovies(query: searchText)
+        carouselCollectionView.reloadData()
+    }
+
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+        viewModel.filterMovies(query: "")
+        carouselCollectionView.reloadData()
+        searchBar.setShowsCancelButton(false, animated: true)
     }
 }
+
