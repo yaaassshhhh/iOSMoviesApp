@@ -12,6 +12,7 @@ struct Movie: Decodable {
     var ageRating: Bool
     var rating : Double
     var posterURL: String
+    var description: String
     var id: Int
     
     enum CodingKeys: String, CodingKey {
@@ -20,5 +21,6 @@ struct Movie: Decodable {
         case rating = "vote_average"
         case posterURL = "poster_path"
         case id
+        case description = "overview"
     }
 }
