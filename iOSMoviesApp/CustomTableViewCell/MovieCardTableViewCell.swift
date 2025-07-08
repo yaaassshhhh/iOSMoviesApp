@@ -8,7 +8,24 @@
 import UIKit
 
 class MovieCardTableViewCell: UITableViewCell {
+    
 
+    @IBOutlet weak var movieTwoSubtitle: UILabel!
+    @IBOutlet weak var movieTwoTitle: UILabel!
+    @IBOutlet weak var movieOneSubtitle: UILabel!
+    @IBOutlet weak var movieOneTitle: UILabel!
+    
+    @IBAction func showMovie(_ sender: UIButton) {
+        
+    }
+    
+    
+    @IBOutlet weak var movieTwoImg: UIImageView!
+    @IBOutlet weak var movieOneImg: UIImageView!
+    @IBAction func movieSelected(_ sender: Any) {
+        print("Movie Selected")
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
