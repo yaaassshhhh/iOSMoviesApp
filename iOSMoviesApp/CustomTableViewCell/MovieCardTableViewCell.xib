@@ -36,6 +36,11 @@
                                     <constraint firstAttribute="bottom" secondItem="koI-7p-KsV" secondAttribute="bottom" constant="50" id="dAg-BF-go5"/>
                                     <constraint firstItem="koI-7p-KsV" firstAttribute="leading" secondItem="2O6-jT-faE" secondAttribute="leading" id="qxK-PD-j2W"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pMT-Fl-Aw2" userLabel="CardTwo">
                                 <rect key="frame" x="200" y="5" width="175" height="250"/>
