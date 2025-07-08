@@ -18,57 +18,85 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rvC-Ac-76x">
-                                <rect key="frame" x="0.0" y="78" width="393" height="80"/>
+                                <rect key="frame" x="0.0" y="78" width="393" height="60"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xek-7Q-gRk">
-                                        <rect key="frame" x="0.0" y="0.0" width="310" height="80"/>
+                                    <stackView opaque="NO" contentMode="scaleAspectFill" alignment="center" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="U2L-Ob-0Cr">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="60"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ghH-82-AGF">
-                                                <rect key="frame" x="0.0" y="0.0" width="310" height="80"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xek-7Q-gRk">
+                                                <rect key="frame" x="0.0" y="0.0" width="310" height="60"/>
                                                 <subviews>
-                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Where Stories Come Alive" translatesAutoresizingMaskIntoConstraints="NO" id="36L-Kl-dMm">
-                                                        <rect key="frame" x="0.0" y="0.0" width="310" height="50"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ghH-82-AGF">
+                                                        <rect key="frame" x="0.0" y="0.0" width="310" height="60"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Where Stories Come Alive" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aDc-5A-RAg">
+                                                                <rect key="frame" x="0.0" y="0.0" width="290" height="35"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="290" id="RTi-3E-PFm"/>
+                                                                    <constraint firstAttribute="height" constant="35" id="ey3-S2-exE"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="22"/>
+                                                                <color key="textColor" red="0.8294740657216495" green="0.20139859444808519" blue="0.042861501839838202" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="bottom" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fbh-9x-W67">
+                                                                <rect key="frame" x="0.0" y="43" width="310" height="17"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="310" id="jb9-ww-3MA"/>
+                                                                </constraints>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain" titleAlignment="trailing">
+                                                                    <imageReference key="image" image="chevron.down" catalog="system" symbolScale="small"/>
+                                                                    <attributedString key="attributedTitle">
+                                                                        <fragment content=" Bengaluru">
+                                                                            <attributes>
+                                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                                <font key="NSFont" size="12" name="Verdana"/>
+                                                                                <font key="NSOriginalFont" size="12" name="Helvetica"/>
+                                                                            </attributes>
+                                                                        </fragment>
+                                                                    </attributedString>
+                                                                    <color key="baseForegroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </buttonConfiguration>
+                                                            </button>
+                                                        </subviews>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="310" id="d8O-Ys-SCX"/>
-                                                            <constraint firstAttribute="height" constant="50" id="mYh-Ey-hTe"/>
+                                                            <constraint firstItem="aDc-5A-RAg" firstAttribute="leading" secondItem="ghH-82-AGF" secondAttribute="leading" id="2d8-2T-xb9"/>
+                                                            <constraint firstAttribute="height" constant="60" id="J9B-0P-xET"/>
+                                                            <constraint firstAttribute="width" constant="310" id="n12-xE-bO8"/>
                                                         </constraints>
-                                                        <color key="textColor" systemColor="labelColor"/>
-                                                        <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="20"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                    </textView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fbh-9x-W67">
-                                                        <rect key="frame" x="0.0" y="58" width="310" height="22"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="310" id="jb9-ww-3MA"/>
-                                                        </constraints>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title=" Bengaluru">
-                                                            <imageReference key="image" image="chevron.down" catalog="system" symbolScale="small"/>
-                                                        </buttonConfiguration>
-                                                    </button>
+                                                    </stackView>
                                                 </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="80" id="J9B-0P-xET"/>
-                                                    <constraint firstAttribute="width" constant="310" id="n12-xE-bO8"/>
+                                                    <constraint firstItem="ghH-82-AGF" firstAttribute="leading" secondItem="Xek-7Q-gRk" secondAttribute="leading" id="7qn-7C-qz6"/>
+                                                    <constraint firstItem="ghH-82-AGF" firstAttribute="top" secondItem="Xek-7Q-gRk" secondAttribute="top" id="H41-1u-tKM"/>
+                                                    <constraint firstAttribute="width" constant="310" id="P54-Ki-pPO"/>
+                                                    <constraint firstAttribute="bottom" secondItem="ghH-82-AGF" secondAttribute="bottom" id="PjC-5u-KEl"/>
                                                 </constraints>
-                                            </stackView>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="omX-04-j0r">
+                                                <rect key="frame" x="350" y="0.0" width="43" height="60"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="yRc-df-k7u"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" buttonSize="large">
+                                                    <imageReference key="image" image="person.crop.circle" catalog="system" symbolScale="large"/>
+                                                    <color key="baseForegroundColor" systemColor="secondaryLabelColor"/>
+                                                </buttonConfiguration>
+                                            </button>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="ghH-82-AGF" firstAttribute="leading" secondItem="Xek-7Q-gRk" secondAttribute="leading" id="7qn-7C-qz6"/>
-                                            <constraint firstItem="ghH-82-AGF" firstAttribute="top" secondItem="Xek-7Q-gRk" secondAttribute="top" id="H41-1u-tKM"/>
-                                            <constraint firstAttribute="width" constant="310" id="P54-Ki-pPO"/>
-                                            <constraint firstAttribute="bottom" secondItem="ghH-82-AGF" secondAttribute="bottom" id="PjC-5u-KEl"/>
+                                            <constraint firstAttribute="trailing" secondItem="omX-04-j0r" secondAttribute="trailing" id="Qg7-vi-h78"/>
                                         </constraints>
-                                    </view>
+                                    </stackView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBrownColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="4JW-FI-O19"/>
-                                    <constraint firstAttribute="bottom" secondItem="Xek-7Q-gRk" secondAttribute="bottom" id="NHo-Vd-3fJ"/>
-                                    <constraint firstItem="Xek-7Q-gRk" firstAttribute="leading" secondItem="rvC-Ac-76x" secondAttribute="leading" id="TmG-Hz-WFK"/>
-                                    <constraint firstItem="Xek-7Q-gRk" firstAttribute="top" secondItem="rvC-Ac-76x" secondAttribute="top" id="yH5-ko-YP2"/>
+                                    <constraint firstItem="U2L-Ob-0Cr" firstAttribute="top" secondItem="rvC-Ac-76x" secondAttribute="top" id="8ZZ-NQ-5G5"/>
+                                    <constraint firstAttribute="trailing" secondItem="U2L-Ob-0Cr" secondAttribute="trailing" id="9Xd-H0-Twd"/>
+                                    <constraint firstItem="U2L-Ob-0Cr" firstAttribute="leading" secondItem="rvC-Ac-76x" secondAttribute="leading" id="JCf-dD-62G"/>
+                                    <constraint firstAttribute="height" constant="60" id="OPG-E4-F0j"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -76,8 +104,8 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="rvC-Ac-76x" firstAttribute="leading" secondItem="vvc-Wr-ATE" secondAttribute="leading" id="3O0-YX-dWb"/>
-                            <constraint firstItem="vvc-Wr-ATE" firstAttribute="trailing" secondItem="rvC-Ac-76x" secondAttribute="trailing" id="3Sz-he-dRi"/>
                             <constraint firstItem="rvC-Ac-76x" firstAttribute="top" secondItem="vvc-Wr-ATE" secondAttribute="top" constant="-25" id="5f4-2b-K1Z"/>
+                            <constraint firstAttribute="trailing" secondItem="rvC-Ac-76x" secondAttribute="trailing" id="cMy-XX-Amf"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Nv3-vn-snA"/>
@@ -107,14 +135,12 @@
     </scenes>
     <resources>
         <image name="chevron.down" catalog="system" width="128" height="70"/>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        <image name="person.crop.circle" catalog="system" width="128" height="123"/>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemBrownColor">
-            <color red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
