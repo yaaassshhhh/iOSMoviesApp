@@ -19,6 +19,6 @@ struct Movie: Decodable {
         case ageRating = "adult"
         case rating = "vote_average"
         case posterURL = "poster_path"
-        case id = "id"
+        case id
     }
 }

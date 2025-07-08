@@ -36,5 +36,7 @@ class MovieCardTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+    func configureState(for movieVM : MovieViewModel){
+        
+    }
 }

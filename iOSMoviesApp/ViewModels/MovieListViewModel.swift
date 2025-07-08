@@ -4,6 +4,7 @@
 //
 //  Created by Yash Agrawal on 08/07/25.
 //
+import Foundation
 
 class MovieListViewModel {
     var movies : [MovieViewModel] = []
@@ -17,6 +18,12 @@ extension MovieListViewModel {
         }
         self.delegate = delegate
         
+    }
+    func getMovieViewModel(at index : IndexPath) -> MovieViewModel {
+        return self.movies[index.row]
+    }
+    func numberOfMovies() -> Int {
+        return self.movies.count
     }
 }
 
