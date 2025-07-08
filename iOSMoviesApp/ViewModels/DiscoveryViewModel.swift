@@ -10,6 +10,10 @@ import Foundation
 class DiscoveryViewModel {
     
     var movies: [Movie] = []
+    var filteredMovies : [Movie] = []
+    var featuredMovies: [Movie] {
+        return Array(movies.prefix(4))
+    }
 
     func fetchMovies(completion: @escaping () -> Void) {
         guard let url = URL(string: "https://example.com/api/movies") else {
@@ -35,4 +39,13 @@ class DiscoveryViewModel {
             }
         }
     }
+    
+    func filterMovies(query: String) {
+        if query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            filteredMovies = movies
+        } else {
+            filteredMovies = movies.filter { $0.title.lowercased().contains(query.lowercased()) }
+        }
+    }
+
 }
