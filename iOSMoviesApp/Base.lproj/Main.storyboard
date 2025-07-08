@@ -46,7 +46,7 @@
                                                                 </constraints>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="plain" titleAlignment="trailing">
-                                                                    <imageReference key="image" image="chevron.down" catalog="system" symbolScale="small"/>
+                                                                    <imageReference key="image" image="location" catalog="system" symbolScale="small"/>
                                                                     <attributedString key="attributedTitle">
                                                                         <fragment content=" Bengaluru">
                                                                             <attributes>
@@ -99,13 +99,54 @@
                                     <constraint firstAttribute="height" constant="60" id="OPG-E4-F0j"/>
                                 </constraints>
                             </view>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZYd-Rb-Ulw">
+                                <rect key="frame" x="0.0" y="138" width="393" height="60"/>
+                                <subviews>
+                                    <searchBar clipsSubviews="YES" contentMode="scaleAspectFill" preservesSuperviewLayoutMargins="YES" searchBarStyle="minimal" text="" placeholder="Search for movies" translatesAutoresizingMaskIntoConstraints="NO" id="cTF-Hq-6dD">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="60"/>
+                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="Mcq-ni-wvg"/>
+                                        </constraints>
+                                        <color key="barTintColor" systemColor="systemGray6Color"/>
+                                        <offsetWrapper key="searchTextPositionAdjustment" horizontal="5" vertical="0.0"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <scopeButtonTitles>
+                                            <string>Title</string>
+                                            <string>Title</string>
+                                        </scopeButtonTitles>
+                                        <connections>
+                                            <outlet property="delegate" destination="GNI-Kg-dhh" id="Ymb-0V-E7H"/>
+                                        </connections>
+                                    </searchBar>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <constraints>
+                                    <constraint firstItem="cTF-Hq-6dD" firstAttribute="top" secondItem="ZYd-Rb-Ulw" secondAttribute="top" id="3ab-6V-1NQ"/>
+                                    <constraint firstItem="cTF-Hq-6dD" firstAttribute="leading" secondItem="ZYd-Rb-Ulw" secondAttribute="leading" id="4kp-qm-Qcd"/>
+                                    <constraint firstAttribute="height" constant="60" id="4xj-sH-QYu"/>
+                                    <constraint firstAttribute="bottom" secondItem="cTF-Hq-6dD" secondAttribute="bottom" id="KMO-6S-Hhh"/>
+                                    <constraint firstAttribute="trailing" secondItem="cTF-Hq-6dD" secondAttribute="trailing" id="T27-Tj-zIr"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Ehm-JT-4bB">
+                                <rect key="frame" x="0.0" y="198" width="393" height="620"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vvc-Wr-ATE"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Ehm-JT-4bB" firstAttribute="leading" secondItem="vvc-Wr-ATE" secondAttribute="leading" id="2DU-XZ-VIc"/>
                             <constraint firstItem="rvC-Ac-76x" firstAttribute="leading" secondItem="vvc-Wr-ATE" secondAttribute="leading" id="3O0-YX-dWb"/>
                             <constraint firstItem="rvC-Ac-76x" firstAttribute="top" secondItem="vvc-Wr-ATE" secondAttribute="top" constant="-25" id="5f4-2b-K1Z"/>
+                            <constraint firstItem="vvc-Wr-ATE" firstAttribute="bottom" secondItem="Ehm-JT-4bB" secondAttribute="bottom" id="Fpf-TV-dzx"/>
+                            <constraint firstItem="ZYd-Rb-Ulw" firstAttribute="top" secondItem="rvC-Ac-76x" secondAttribute="bottom" id="J34-zz-MMo"/>
+                            <constraint firstItem="Ehm-JT-4bB" firstAttribute="top" secondItem="ZYd-Rb-Ulw" secondAttribute="bottom" id="Sjc-WO-kId"/>
                             <constraint firstAttribute="trailing" secondItem="rvC-Ac-76x" secondAttribute="trailing" id="cMy-XX-Amf"/>
+                            <constraint firstItem="vvc-Wr-ATE" firstAttribute="trailing" secondItem="Ehm-JT-4bB" secondAttribute="trailing" id="qL2-Hj-Lyq"/>
+                            <constraint firstItem="vvc-Wr-ATE" firstAttribute="trailing" secondItem="ZYd-Rb-Ulw" secondAttribute="trailing" id="to9-tz-hha"/>
+                            <constraint firstItem="ZYd-Rb-Ulw" firstAttribute="leading" secondItem="vvc-Wr-ATE" secondAttribute="leading" id="wlB-tM-5kr"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Nv3-vn-snA"/>
@@ -134,13 +175,16 @@
         </scene>
     </scenes>
     <resources>
-        <image name="chevron.down" catalog="system" width="128" height="70"/>
+        <image name="location" catalog="system" width="128" height="119"/>
         <image name="person.crop.circle" catalog="system" width="128" height="123"/>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
