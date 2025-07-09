@@ -47,5 +47,4 @@ class DiscoveryViewModel {
             filteredMovies = movies.filter { $0.title.lowercased().contains(query.lowercased()) }
         }
     }
-
 }
