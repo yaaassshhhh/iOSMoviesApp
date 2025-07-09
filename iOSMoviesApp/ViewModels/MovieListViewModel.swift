@@ -5,7 +5,6 @@
 //  Created by Yash Agrawal on 08/07/25.
 //
 import Foundation
-import UIKit
 
 class MovieListViewModel {
     var movies : [MovieViewModel] = []
@@ -93,19 +92,14 @@ extension MovieViewModel : Identifiable {
 
         if let cachedImage = ImageCache.shared.object(forKey: cacheKey) {
             DispatchQueue.main.async {
-                delegate.updatePoster(with: cachedImage)
+                delegate.updatePosterFromCache(with: cachedImage)
             }
             return
         }
 
         DispatchQueue.global(qos: .userInitiated).async {
-            if let data = try? Data(contentsOf: imageURL), let image = UIImage(data: data) {
-                ImageCache.shared.setObject(image, forKey: cacheKey)
-                DispatchQueue.main.async {
-                    delegate.updatePoster(with: image)
-                }
-            }
+            guard let imageData = try? Data(contentsOf: imageURL) else { return }
+            delegate.updatePoster(with: imageData, cacheKey: cacheKey)
         }
     }
-
 }
