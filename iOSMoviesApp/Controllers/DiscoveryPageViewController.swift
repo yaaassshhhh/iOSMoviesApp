@@ -28,7 +28,6 @@ class DiscoveryPageViewController: UIViewController {
     private func setupSearchBar() {
         searchBar.delegate = self
     }
-
     private func setupCarousel() {
         carouselCollectionView.delegate = self
         carouselCollectionView.dataSource = self
