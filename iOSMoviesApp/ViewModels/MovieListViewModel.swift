@@ -5,6 +5,7 @@
 //  Created by Yash Agrawal on 08/07/25.
 //
 import Foundation
+import UIKit
 
 class MovieListViewModel {
     var movies : [MovieViewModel] = []
@@ -63,7 +64,8 @@ extension MovieListViewModel {
 
 struct MovieViewModel {
     var movie : Movie
-    
+    var posterBaseURL: String = "https://image.tmdb.org/t/p/original"
+    var delegate : MovieCardTableViewCellDelegate?
     init(movie: Movie) {
         self.movie = movie
     }
@@ -75,13 +77,35 @@ extension MovieViewModel : Identifiable {
     var title : String {
         return self.movie.title
     }
-    var ageRating : Bool {
-        return self.movie.ageRating
-    }
-    var rating : Double {
-        return self.movie.rating
+    var releaseDate : String {
+        return self.movie.releaseDate
     }
     var description : String {
         return self.movie.description
     }
+    var posterPath : String {
+        return self.posterBaseURL + self.movie.posterPath
+    }
+    func loadImage(delegate: MovieCardTableViewCellDelegate?) {
+        guard let delegate = delegate else { return }
+        guard let imageURL = URL(string: self.posterPath) else { return }
+        let cacheKey = NSString(string: self.posterPath)
+
+        if let cachedImage = ImageCache.shared.object(forKey: cacheKey) {
+            DispatchQueue.main.async {
+                delegate.updatePoster(with: cachedImage)
+            }
+            return
+        }
+
+        DispatchQueue.global(qos: .userInitiated).async {
+            if let data = try? Data(contentsOf: imageURL), let image = UIImage(data: data) {
+                ImageCache.shared.setObject(image, forKey: cacheKey)
+                DispatchQueue.main.async {
+                    delegate.updatePoster(with: image)
+                }
+            }
+        }
+    }
+
 }
