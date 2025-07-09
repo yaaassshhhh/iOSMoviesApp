@@ -69,7 +69,7 @@ extension DiscoveryPageViewController: UITableViewDelegate, UITableViewDataSourc
         guard let cell = cell else { return UITableViewCell() }
         cell.configureState(with : cellVM)
         cell.layoutMargins = UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 16)
-        cell.heightAnchor.constraint(equalToConstant: 270).isActive = true
+        // Removed heightAnchor constraint modification for cleaner layout management
         return cell
     }
 }
