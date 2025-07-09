@@ -75,11 +75,8 @@ extension MovieViewModel : Identifiable {
     var title : String {
         return self.movie.title
     }
-    var ageRating : Bool {
-        return self.movie.ageRating
-    }
-    var rating : Double {
-        return self.movie.rating
+    var releaseDate : String {
+        return self.movie.releaseDate
     }
     var description : String {
         return self.movie.description
