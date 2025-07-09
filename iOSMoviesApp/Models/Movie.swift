@@ -9,16 +9,14 @@ import Foundation
 
 struct Movie: Decodable {
     var title: String
-    var ageRating: Bool
-    var rating : Double
+    var releaseDate : String
     var posterURL: String
     var description: String
     var id: Int
     
     enum CodingKeys: String, CodingKey {
         case title = "original_title"
-        case ageRating = "adult"
-        case rating = "vote_average"
+        case releaseDate = "release_date"
         case posterURL = "poster_path"
         case id
         case description = "overview"

@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 protocol DiscoveryPageViewControllerDelegate: AnyObject{
     func reloadTableView()
-    func reloadCarouselView()
 }
 
 class DiscoveryPageViewController: UIViewController{
@@ -70,12 +69,14 @@ extension DiscoveryPageViewController: UITableViewDelegate, UITableViewDataSourc
         let cellVM = self.movieListVM.getMovieViewModel(at: indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCardTableViewCell", for : indexPath) as? MovieCardTableViewCell
         guard let cell = cell else { return UITableViewCell() }
-        cell.configureState(for : cellVM)
+        cell.configureState(with : cellVM)
         return cell
     }
 }
 
 extension DiscoveryPageViewController : DiscoveryPageViewControllerDelegate {
+
+    
    func reloadTableView() {
        DispatchQueue.main.async{
            self.tableView.reloadData()
