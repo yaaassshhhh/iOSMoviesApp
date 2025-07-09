@@ -8,7 +8,7 @@
 import UIKit
 
 protocol MovieCardTableViewCellDelegate: AnyObject {
-    func updatePoster(with image : Data)
+    func updatePoster(with image : UIImage)
 }
 
 class MovieCardTableViewCell: UITableViewCell {
@@ -72,12 +72,11 @@ class MovieCardTableViewCell: UITableViewCell {
         movieVM.loadImage(delegate: self)
     }
 }
+
 extension MovieCardTableViewCell : MovieCardTableViewCellDelegate {
-    func updatePoster(with imageData: Data) {
-        if let image = UIImage(data: imageData) {
-            DispatchQueue.main.async {
-                self.moviePoster.image = image
-            }
+    func updatePoster(with image: UIImage) {
+        DispatchQueue.main.async {
+            self.moviePoster.image = image
         }
     }
 }
