@@ -8,7 +8,8 @@
 import UIKit
 
 protocol MovieCardTableViewCellDelegate: AnyObject {
-    func updatePoster(with image : UIImage)
+    func updatePoster(with image : Data, cacheKey: NSString)
+    func updatePosterFromCache(with image: UIImage)
 }
 
 class MovieCardTableViewCell: UITableViewCell {
@@ -74,9 +75,22 @@ class MovieCardTableViewCell: UITableViewCell {
 }
 
 extension MovieCardTableViewCell : MovieCardTableViewCellDelegate {
-    func updatePoster(with image: UIImage) {
+    func updatePoster(with imageData: Data, cacheKey : NSString ) {
+        if let image = UIImage(data: imageData) {
+            self.setUpCache(image, cacheKey)
+            DispatchQueue.main.async {
+                self.moviePoster.image = image
+            }
+        }
+        
+    }
+    func updatePosterFromCache(with image: UIImage) {
         DispatchQueue.main.async {
             self.moviePoster.image = image
         }
+    }
+    
+    func setUpCache(_ image : UIImage, _ cacheKey : NSString){
+        ImageCache.shared.setObject(image, forKey: cacheKey)
     }
 }
