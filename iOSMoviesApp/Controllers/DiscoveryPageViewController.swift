@@ -15,8 +15,6 @@ class DiscoveryPageViewController: UIViewController{
     
     @IBOutlet weak var tableView: UITableView!
     private var movieListVM = MovieListViewModel()
-    
-    @IBOutlet weak var carouselCollectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
 
     override func viewDidLoad() {
@@ -30,8 +28,10 @@ class DiscoveryPageViewController: UIViewController{
     }
     func setupTableView() {
         self.tableView.register(UINib(nibName: "MovieCardTableViewCell", bundle: nil), forCellReuseIdentifier: "MovieCardTableViewCell")
+        
         tableView.delegate = self
         tableView.dataSource = self
+        self.tableView.rowHeight = 260
     }
 
     private func setupSearchBar() {
@@ -42,7 +42,6 @@ class DiscoveryPageViewController: UIViewController{
 
 extension DiscoveryPageViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        viewModel.filterMovies(query: searchText)
         movieListVM.initializeSearch(for: searchText)
     }
 
@@ -53,7 +52,6 @@ extension DiscoveryPageViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = ""
         searchBar.resignFirstResponder()
-//        viewModel.filterMovies(query: "")
         movieListVM.initializeSearch(for: nil)
         self.reloadTableView()
         searchBar.setShowsCancelButton(false, animated: true)
@@ -71,6 +69,8 @@ extension DiscoveryPageViewController: UITableViewDelegate, UITableViewDataSourc
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCardTableViewCell", for : indexPath) as? MovieCardTableViewCell
         guard let cell = cell else { return UITableViewCell() }
         cell.configureState(with : cellVM)
+        cell.layoutMargins = UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 16)
+        cell.heightAnchor.constraint(equalToConstant: 270).isActive = true
         return cell
     }
 }

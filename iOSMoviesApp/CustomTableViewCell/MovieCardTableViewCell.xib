@@ -9,11 +9,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MovieCardTableViewCell" rowHeight="259" id="KGk-i7-Jjw" customClass="MovieCardTableViewCell" customModule="iOSMoviesApp" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="393" height="259"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MovieCardTableViewCell" rowHeight="269" id="KGk-i7-Jjw" customClass="MovieCardTableViewCell" customModule="iOSMoviesApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="270"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="393" height="259"/>
+                <rect key="frame" x="0.0" y="0.0" width="393" height="270"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FSx-ce-StS">
@@ -22,23 +22,37 @@
                             <constraint firstAttribute="width" constant="140" id="b9k-Pl-Leg"/>
                             <constraint firstAttribute="height" constant="200" id="leF-Ab-bvs"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z0k-nG-pcX">
-                        <rect key="frame" x="159" y="10" width="46" height="23"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                        <rect key="frame" x="159" y="10" width="220" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="220" id="uQ2-i3-oHb"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9YI-G6-xB3">
-                        <rect key="frame" x="160" y="43" width="31" height="14.333333333333336"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <nil key="textColor"/>
+                        <rect key="frame" x="160" y="44" width="220" height="15.666666666666664"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="220" id="iua-zE-8x3"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lLG-v4-fVs">
-                        <rect key="frame" x="160" y="67.333333333333329" width="31" height="14.333333333333329"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <nil key="textColor"/>
+                        <rect key="frame" x="160" y="69.666666666666671" width="220" height="15.666666666666671"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="220" id="SNm-on-DQJ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D0c-Cn-SRG">
@@ -48,7 +62,7 @@
                             <constraint firstAttribute="width" constant="140" id="Tsa-pJ-LBw"/>
                         </constraints>
                         <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                        <buttonConfiguration key="configuration" style="filled" title="Book"/>
                         <connections>
                             <action selector="movieSelected:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="7rG-DQ-Hp0"/>
                         </connections>
@@ -65,6 +79,7 @@
                     <constraint firstItem="lLG-v4-fVs" firstAttribute="top" secondItem="9YI-G6-xB3" secondAttribute="bottom" constant="10" id="bTr-V8-bSb"/>
                     <constraint firstItem="lLG-v4-fVs" firstAttribute="leading" secondItem="FSx-ce-StS" secondAttribute="trailing" constant="10" id="clA-Fw-PFF"/>
                     <constraint firstItem="FSx-ce-StS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="guZ-0d-8fj"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="lLG-v4-fVs" secondAttribute="bottom" constant="10" id="jcl-TJ-B6E"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -76,7 +91,7 @@
                 <outlet property="movieReleaseDate" destination="9YI-G6-xB3" id="DdV-5b-ZI9"/>
                 <outlet property="movieTitle" destination="Z0k-nG-pcX" id="iRe-8h-ijc"/>
             </connections>
-            <point key="canvasLocation" x="209.92366412213741" y="109.50704225352113"/>
+            <point key="canvasLocation" x="209.92366412213741" y="105.63380281690141"/>
         </tableViewCell>
     </objects>
 </document>

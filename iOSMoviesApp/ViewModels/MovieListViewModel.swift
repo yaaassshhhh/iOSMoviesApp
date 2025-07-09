@@ -63,7 +63,8 @@ extension MovieListViewModel {
 
 struct MovieViewModel {
     var movie : Movie
-    
+    var posterBaseURL: String = "https://image.tmdb.org/t/p/original"
+    var delegate : MovieCardTableViewCellDelegate?
     init(movie: Movie) {
         self.movie = movie
     }
@@ -80,5 +81,18 @@ extension MovieViewModel : Identifiable {
     }
     var description : String {
         return self.movie.description
+    }
+    var posterPath : String {
+        return self.posterBaseURL + self.movie.posterPath
+    }
+    func loadImage(delegate : MovieCardTableViewCellDelegate?) {
+        guard let delegate = delegate else { return }
+        guard let imageURL = URL(string: self.posterPath) else { return }
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            if let imageData = try? Data(contentsOf: imageURL) {
+                delegate.updatePoster(with: imageData)
+            }
+        }
     }
 }
