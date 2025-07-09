@@ -49,6 +49,9 @@
                         </constraints>
                         <state key="normal" title="Button"/>
                         <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                        <connections>
+                            <action selector="movieSelected:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="7rG-DQ-Hp0"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>
@@ -66,6 +69,13 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="bookButton" destination="D0c-Cn-SRG" id="h81-YU-DPp"/>
+                <outlet property="movieDescription" destination="lLG-v4-fVs" id="boQ-PQ-b5e"/>
+                <outlet property="moviePoster" destination="FSx-ce-StS" id="TQI-Is-czA"/>
+                <outlet property="movieReleaseDate" destination="9YI-G6-xB3" id="DdV-5b-ZI9"/>
+                <outlet property="movieTitle" destination="Z0k-nG-pcX" id="iRe-8h-ijc"/>
+            </connections>
             <point key="canvasLocation" x="209.92366412213741" y="109.50704225352113"/>
         </tableViewCell>
     </objects>

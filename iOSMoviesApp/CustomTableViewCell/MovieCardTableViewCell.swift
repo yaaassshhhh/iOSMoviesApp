@@ -38,7 +38,7 @@ class MovieCardTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configure(with movie: Movie) {
+    func configureState(with movie: MovieViewModel) {
         movieTitle.text = movie.title
 //        movieReleaseDate.text = "Release: \(movie.releaseDate ?? "N/A")"
 //        movieDescription.text = movie.overview
