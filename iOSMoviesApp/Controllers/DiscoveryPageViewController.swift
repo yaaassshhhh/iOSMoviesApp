@@ -75,8 +75,6 @@ extension DiscoveryPageViewController: UITableViewDelegate, UITableViewDataSourc
 }
 
 extension DiscoveryPageViewController : DiscoveryPageViewControllerDelegate {
-
-    
    func reloadTableView() {
        DispatchQueue.main.async{
            self.tableView.reloadData()
