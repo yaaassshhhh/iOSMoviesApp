@@ -37,8 +37,6 @@ class DiscoveryPageViewController: UIViewController{
     private func setupSearchBar() {
         searchBar.delegate = self
     }
-
-
 }
 
 extension DiscoveryPageViewController: UISearchBarDelegate {
