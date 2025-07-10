@@ -37,7 +37,10 @@ class DiscoveryPageViewController: UIViewController{
     private func setupSearchBar() {
         searchBar.delegate = self
     }
+<<<<<<< HEAD
     
+=======
+>>>>>>> 8d57203 (added app logo and some changes)
 }
 extension DiscoveryPageViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
