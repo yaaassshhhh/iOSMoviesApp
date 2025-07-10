@@ -85,6 +85,7 @@ extension MovieViewModel : Identifiable {
     var posterPath : String {
         return self.posterBaseURL + self.movie.posterPath
     }
+
     func loadImage(delegate: MovieCardTableViewCellDelegate?) {
         guard let delegate = delegate else { return }
         guard let imageURL = URL(string: self.posterPath) else { return }
@@ -102,4 +103,5 @@ extension MovieViewModel : Identifiable {
             delegate.updatePoster(with: imageData, cacheKey: cacheKey)
         }
     }
+
 }

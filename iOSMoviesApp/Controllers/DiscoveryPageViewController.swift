@@ -38,8 +38,6 @@ class DiscoveryPageViewController: UIViewController{
         searchBar.delegate = self
     }
 
-
-
 }
 
 extension DiscoveryPageViewController: UISearchBarDelegate {
