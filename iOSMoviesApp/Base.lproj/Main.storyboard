@@ -45,17 +45,9 @@
                                                                     <constraint firstAttribute="width" constant="310" id="jb9-ww-3MA"/>
                                                                 </constraints>
                                                                 <state key="normal" title="Button"/>
-                                                                <buttonConfiguration key="configuration" style="plain" titleAlignment="trailing">
+                                                                <buttonConfiguration key="configuration" style="plain">
                                                                     <imageReference key="image" image="location" catalog="system" symbolScale="small"/>
-                                                                    <attributedString key="attributedTitle">
-                                                                        <fragment content=" Bengaluru">
-                                                                            <attributes>
-                                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                <font key="NSFont" size="12" name="Verdana"/>
-                                                                                <font key="NSOriginalFont" size="12" name="Helvetica"/>
-                                                                            </attributes>
-                                                                        </fragment>
-                                                                    </attributedString>
+                                                                    <attributedString key="attributedTitle"/>
                                                                     <color key="baseForegroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </buttonConfiguration>
                                                             </button>
