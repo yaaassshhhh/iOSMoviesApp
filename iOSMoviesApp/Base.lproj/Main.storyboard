@@ -152,6 +152,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Nv3-vn-snA"/>
                     <connections>
+                        <outlet property="locationBtn" destination="fbh-9x-W67" id="26q-VL-KMV"/>
                         <outlet property="searchBar" destination="cTF-Hq-6dD" id="gxT-EY-XSb"/>
                         <outlet property="tableView" destination="Ehm-JT-4bB" id="zFt-rI-VFh"/>
                     </connections>
