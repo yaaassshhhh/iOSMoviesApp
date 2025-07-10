@@ -90,17 +90,18 @@ extension MovieViewModel : Identifiable {
         guard let delegate = delegate else { return }
         guard let imageURL = URL(string: self.posterPath) else { return }
         let cacheKey = NSString(string: self.posterPath)
-
+        
         if let cachedImage = ImageCache.shared.object(forKey: cacheKey) {
             DispatchQueue.main.async {
                 delegate.updatePosterFromCache(with: cachedImage)
             }
             return
         }
-
+        
         DispatchQueue.global(qos: .userInitiated).async {
             guard let imageData = try? Data(contentsOf: imageURL) else { return }
             delegate.updatePoster(with: imageData, cacheKey: cacheKey)
         }
     }
+
 }

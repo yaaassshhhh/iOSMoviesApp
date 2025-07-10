@@ -7,18 +7,23 @@
 
 import Foundation
 import UIKit
+import CoreLocation
+
 protocol DiscoveryPageViewControllerDelegate: AnyObject{
     func reloadTableView()
 }
 
 class DiscoveryPageViewController: UIViewController{
     
+    @IBOutlet weak var locationBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
     private var movieListVM = MovieListViewModel()
     @IBOutlet weak var searchBar: UISearchBar!
+    let locationService = LocationService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupLocationService()
         setupUI()
     }
     private func setupUI() {
@@ -37,10 +42,6 @@ class DiscoveryPageViewController: UIViewController{
     private func setupSearchBar() {
         searchBar.delegate = self
     }
-<<<<<<< HEAD
-    
-=======
->>>>>>> 8d57203 (added app logo and some changes)
 }
 extension DiscoveryPageViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -83,4 +84,29 @@ extension DiscoveryPageViewController : DiscoveryPageViewControllerDelegate {
            self.tableView.reloadData()
        }
    }
+}
+extension DiscoveryPageViewController : LocationServiceDelegate {
+    func didUpdateLocation(_ placeName : String) {
+        locationBtn.setTitle(placeName, for: .normal)
+        locationService.stopUpdatingLocation()
+    }
+    
+    
+    private func setupLocationService() {
+        locationService.delegate = self
+        locationService.requestLocationAccess()
+    }
+    
+    func didUpdateAuthorizationStatus(_ status: CLAuthorizationStatus) {
+        switch status {
+                case .authorizedWhenInUse, .authorizedAlways:
+                    locationService.startUpdatingLocation()
+                case .denied, .restricted:
+                    print("Location permission denied.")
+                case .notDetermined:
+                    break
+                @unknown default:
+                    break
+        }
+    }
 }
