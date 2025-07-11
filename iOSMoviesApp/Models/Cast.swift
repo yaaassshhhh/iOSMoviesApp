@@ -18,3 +18,4 @@ struct Cast: Decodable {
         case id
     }
 }
+
