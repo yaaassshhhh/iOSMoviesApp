@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ReviewSectionCell: UICollectionViewCell {
+class ReviewSectionCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!

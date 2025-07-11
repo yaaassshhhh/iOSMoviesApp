@@ -12,6 +12,12 @@ class DetailsScreenViewController: UIViewController, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
     
+    var reviews: [Review] = [
+        Review(name: "Alice", comment: "Amazing movie!"),
+        Review(name: "Bob", comment: "Pretty good."),
+        Review(name: "Charlie", comment: "Not bad.")
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
@@ -20,12 +26,6 @@ class DetailsScreenViewController: UIViewController, UITableViewDataSource {
         
         
         //ReviewCell
-        var reviews: [Review] = [
-            Review(name: "Alice", comment: "Amazing movie!"),
-            Review(name: "Bob", comment: "Pretty good."),
-            Review(name: "Charlie", comment: "Not bad.")
-        ]
-        
         tableView.register(UINib(nibName: "ReviewSectionCell", bundle: nil), forCellReuseIdentifier: "ReviewSectionCell")
 
         tableView.estimatedRowHeight = 300
