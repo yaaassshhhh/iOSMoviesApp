@@ -5,9 +5,12 @@
 //  Created by Tarang Sultania on 11/07/25.
 //
 
-import Foundation
-
 struct Review : Decodable{
-    let name: String
-    let comment: String
+    var name: String
+    var comment: String
+    
+    enum CodingKeys : String, CodingKey {
+        case name = "author"
+        case comment = "content"
+    }
 }
