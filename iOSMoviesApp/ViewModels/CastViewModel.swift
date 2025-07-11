@@ -26,22 +26,22 @@ extension CastViewModel : Identifiable {
     var fictionalName : String {
         return self.cast.fictionalName
     }
+    
+    func loadCastImage(delegate: CastCollectionViewCellDelegate?) {
+        guard let delegate = delegate else { return }
+        guard let imageURL = URL(string: self.posterPath) else { return }
+        let cacheKey = NSString(string: self.posterPath)
+        
+        if let cachedImage = ImageCache.shared.object(forKey: cacheKey) {
+            DispatchQueue.main.async {
+                delegate.updateProfilePicFromCache(with: cachedImage)
+            }
+            return
+        }
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            guard let imageData = try? Data(contentsOf: imageURL) else { return }
+            delegate.updateProfilePic(with: imageData, cacheKey: cacheKey)
+        }
+    }
 }
-
-//    func loadCastImage(delegate: castCollectionViewCellDelegate?) {
-//        guard let delegate = delegate else { return }
-//        guard let imageURL = URL(string: self.posterPath) else { return }
-//        let cacheKey = NSString(string: self.posterPath)
-//
-//        if let cachedImage = CastImageCache.shared.object(forKey: cacheKey) {
-//            DispatchQueue.main.async {
-//                delegate.updateCastPosterFromCache(with: cachedImage)
-//            }
-//            return
-//        }
-//
-//        DispatchQueue.global(qos: .userInitiated).async {
-//            guard let imageData = try? Data(contentsOf: imageURL) else { return }
-//            delegate.updateCastPoster(with: imageData, cacheKey: cacheKey)
-//        }
-//    }
