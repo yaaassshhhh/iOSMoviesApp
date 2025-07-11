@@ -153,6 +153,34 @@
             </objects>
             <point key="canvasLocation" x="1634.3511450381679" y="20.422535211267608"/>
         </scene>
+        <!--Details Screen View Controller-->
+        <scene sceneID="4U4-XW-xM6">
+            <objects>
+                <viewController id="BXD-wJ-YwU" customClass="DetailsScreenViewController" customModule="iOSMoviesApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LyA-2g-B9e">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="t2V-cA-MTg">
+                                <rect key="frame" x="0.0" y="103" width="393" height="749"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="YHd-RZ-Cf8"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="t2V-cA-MTg" firstAttribute="leading" secondItem="YHd-RZ-Cf8" secondAttribute="leading" id="7nc-P3-fil"/>
+                            <constraint firstAttribute="bottom" secondItem="t2V-cA-MTg" secondAttribute="bottom" id="RgC-aQ-rwd"/>
+                            <constraint firstAttribute="trailing" secondItem="t2V-cA-MTg" secondAttribute="trailing" id="tfB-FP-G0f"/>
+                            <constraint firstItem="t2V-cA-MTg" firstAttribute="top" secondItem="YHd-RZ-Cf8" secondAttribute="top" id="v3f-Va-nAt"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Qru-25-4rW"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FGj-B4-ufQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3333.5877862595416" y="34.507042253521128"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="MMy-hA-TPV">
             <objects>
@@ -170,6 +198,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xgy-Db-JM3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="707.63358778625957" y="20.422535211267608"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="879-81-aNZ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Iem-OC-2Zu" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CTU-fP-Pdo">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BXD-wJ-YwU" kind="relationship" relationship="rootViewController" id="QsE-u6-SGM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nCv-ja-e4U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2517" y="35"/>
         </scene>
     </scenes>
     <resources>
