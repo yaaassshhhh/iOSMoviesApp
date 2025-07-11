@@ -77,6 +77,9 @@ extension DiscoveryPageViewController: UITableViewDelegate, UITableViewDataSourc
         // Removed heightAnchor constraint modification for cleaner layout management
         return cell
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedR
+    }
 }
 
 extension DiscoveryPageViewController : DiscoveryPageViewControllerDelegate {
