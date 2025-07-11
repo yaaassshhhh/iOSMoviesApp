@@ -175,7 +175,12 @@
                             <constraint firstItem="t2V-cA-MTg" firstAttribute="top" secondItem="YHd-RZ-Cf8" secondAttribute="top" id="v3f-Va-nAt"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Qru-25-4rW"/>
+                    <navigationItem key="navigationItem" id="Qru-25-4rW">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="VVs-zj-vFX"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="t2V-cA-MTg" id="06A-9K-NA4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FGj-B4-ufQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
