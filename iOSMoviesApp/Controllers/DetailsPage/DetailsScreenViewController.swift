@@ -11,7 +11,7 @@ import UIKit
 protocol DetailsScreenViewControllerDelegate : AnyObject {
     
 }
-class DetailsScreenViewController: UIViewController, UITableViewDataSource {
+class DetailsScreenViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     private var detailsVM = DetailsScreenViewModel()
@@ -29,14 +29,16 @@ class DetailsScreenViewController: UIViewController, UITableViewDataSource {
         setupTableView()
     }
 
+
+    
+}
+
+extension DetailsScreenViewController: UITableViewDataSource , UITableViewDelegate {
+    
     private func setupTableView() {
         tableView.dataSource = self
         tableView.delegate = self
     }
-    
-}
-
-extension DetailsScreenViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         detailsVM.numberOfRows()

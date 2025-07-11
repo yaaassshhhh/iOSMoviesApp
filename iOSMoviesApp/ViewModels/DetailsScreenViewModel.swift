@@ -6,7 +6,7 @@
 //
 
 class DetailsScreenViewModel {
-    var casts : [castViewModel] = []
+    var casts : [CastViewModel] = []
     private weak var delegate : DetailsScreenViewControllerDelegate?
 }
 extension DetailsScreenViewModel {
@@ -29,11 +29,11 @@ extension DetailsScreenViewModel {
     }
     private func storeCastData (_ castData : CreditsResponse) {
         self.casts = castData.results.map({
-            castViewModel(cast: $0)
+            CastViewModel(cast: $0)
         })
     }
     
-    func getCastViewModel(at index : Int) -> castViewModel {
+    func getCastViewModel(at index : Int) -> CastViewModel {
         return self.casts[index]
     }
     
