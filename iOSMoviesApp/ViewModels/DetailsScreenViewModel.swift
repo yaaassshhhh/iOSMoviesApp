@@ -20,8 +20,7 @@ extension DetailsScreenViewModel {
             switch result {
             case .success(let castData) :
                 self.storeCastData(castData)
-                print("cast - \(castData)")
-//                self.delegate?.reloadTableView()
+                self.delegate?.reloadTableData()
             case .failure(let error) :
                 print("Error fetching data : \(error)")
             }
@@ -39,6 +38,12 @@ extension DetailsScreenViewModel {
     
     func numberOfRows() -> Int {
         return 4
+    }
+    func getNumberOfCasts() -> Int{
+        return self.casts.count
+    }
+    func getAllCastViewModel() -> [CastViewModel]{
+        return self.casts
     }
 }
 

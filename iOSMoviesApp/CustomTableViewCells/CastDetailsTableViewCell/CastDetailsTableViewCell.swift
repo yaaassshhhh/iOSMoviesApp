@@ -7,31 +7,46 @@
 
 import UIKit
 
+protocol CastDetailsTableViewCellDelegate: AnyObject {
+    func reloadCollectionView()
+}
 class CastDetailsTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var castDetailsView: UICollectionView!
-    private var castDetailsVm: CastViewModel?
+    @IBOutlet weak var castCollectionView: UICollectionView!
+    private weak var delegate : DetailsScreenViewControllerDelegate?
+    private var castDetailsVM: [CastViewModel]!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        setupCollectionView()
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    func configureState (_ castDetailsVM: [CastViewModel], delegate : DetailsScreenViewControllerDelegate ){
+        self.delegate = delegate
+        self.castDetailsVM = castDetailsVM
     }
-    
 }
 
 extension CastDetailsTableViewCell: UICollectionViewDataSource, UICollectionViewDelegate {
+    func setupCollectionView() {
+        castCollectionView.dataSource = self
+        castCollectionView.delegate = self
+    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        <#code#>
+        delegate?.numberOfCasts() ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        <#code#>
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CastCollectionViewCell", for: indexPath) as? CastCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        cell.configureState(delegate?.getCastVM(at: indexPath.row), delegate : self)
+        return cell
     }
-    
-    
+}
+
+extension CastDetailsTableViewCell: CastDetailsTableViewCellDelegate {
+    func reloadCollectionView() {
+        self.castCollectionView.reloadData()
+    }
 }
