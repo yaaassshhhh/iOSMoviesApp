@@ -17,6 +17,15 @@ class DetailsScreenViewController: UIViewController, UITableViewDataSource {
         tableView.dataSource = self
         tableView.delegate = self
         
+        
+        
+        //ReviewCell
+        var reviews: [Review] = [
+            Review(name: "Alice", comment: "Amazing movie!"),
+            Review(name: "Bob", comment: "Pretty good."),
+            Review(name: "Charlie", comment: "Not bad.")
+        ]
+        
         tableView.register(UINib(nibName: "ReviewSectionCell", bundle: nil), forCellReuseIdentifier: "ReviewSectionCell")
 
         tableView.estimatedRowHeight = 300
@@ -32,10 +41,12 @@ extension DetailsScreenViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        <#code#>
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewSectionCell", for: indexPath) as! ReviewSectionCell
+        cell.configure(with: reviews)
+        return cell
     }
 }
