@@ -36,5 +36,9 @@ extension DetailsScreenViewModel {
     func getCastViewModel(at index : Int) -> castViewModel {
         return self.casts[index]
     }
+    
+    func numberOfRows() -> Int {
+        return 4
+    }
 }
 

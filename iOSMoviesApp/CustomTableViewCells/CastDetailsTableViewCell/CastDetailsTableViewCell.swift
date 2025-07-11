@@ -9,7 +9,8 @@ import UIKit
 
 class CastDetailsTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var castDetailsView: UICollectionView!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

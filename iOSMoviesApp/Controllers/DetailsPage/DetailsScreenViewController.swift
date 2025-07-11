@@ -38,18 +38,31 @@ class DetailsScreenViewController: UIViewController, UITableViewDataSource {
 
 extension DetailsScreenViewController: UITableViewDelegate {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        detailsVM.numberOfRows()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewSectionCell", for: indexPath) as! ReviewSectionCell
-//        cell.configure(with: reviews)
-        return cell
+        let position = indexPath.row
+        switch position {
+        case 0 :
+            return UITableViewCell()
+        case 1 :
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "CastDetailsTableViewCell", for: indexPath) as? CastDetailsTableViewCell else {
+                break
+            }
+            return cell
+        case 2 :
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewSectionCell", for: indexPath) as? ReviewSectionCell else {
+                break
+            }
+            return cell
+        case 3 :
+            return UITableViewCell()
+        default :
+            return UITableViewCell()
+        }
+        return UITableViewCell()
     }
     
 }
