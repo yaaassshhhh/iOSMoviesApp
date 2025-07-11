@@ -44,9 +44,9 @@ extension MovieListViewModel {
     func numberOfMovies() -> Int {
         return self.movies.count
     }
-    func numberOfItems() -> Int {
-        return self.movies.count
-    }
+//    func numberOfItems() -> Int {
+//        return self.movies.count
+//    }
     func initializeSearch(for searchText: String?){
         self.filteredMovies = []
         guard let searchText  =  searchText else {
