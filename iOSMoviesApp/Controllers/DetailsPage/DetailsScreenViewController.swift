@@ -8,24 +8,21 @@
 import Foundation
 import UIKit
 
+protocol DetailsScreenViewControllerDelegate : AnyObject {
+    
+}
 class DetailsScreenViewController: UIViewController, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
+    private var detailsVM = DetailsScreenViewModel()
     
-//    var reviews: [Review] = [
-//        Review(name: "Alice", comment: "Amazing movie!"),
-//        Review(name: "Bob", comment: "Pretty good."),
-//        Review(name: "Charlie", comment: "Not bad.")
-//    ]
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        //ReviewCell
-//        tableView.register(UINib(nibName: "ReviewSectionCell", bundle: nil), forCellReuseIdentifier: "ReviewSectionCell")
-//
-//        tableView.estimatedRowHeight = 300
-//        tableView.rowHeight = UITableView.automaticDimension
     }
     
     private func setupUI() {
@@ -51,7 +48,8 @@ extension DetailsScreenViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewSectionCell", for: indexPath) as! ReviewSectionCell
-        cell.configure(with: reviews)
+//        cell.configure(with: reviews)
         return cell
     }
+    
 }
