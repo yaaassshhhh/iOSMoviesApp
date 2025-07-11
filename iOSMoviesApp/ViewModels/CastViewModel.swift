@@ -6,14 +6,14 @@
 //
 import Foundation
 
-struct castViewModel {
+struct CastViewModel {
     var cast : Cast
     var posterBaseURL: String = "https://image.tmdb.org/t/p/w92"
     init(cast : Cast){
         self.cast = cast
     }
 }
-extension castViewModel : Identifiable {
+extension CastViewModel : Identifiable {
     var id : Int {
         return self.cast.id
     }

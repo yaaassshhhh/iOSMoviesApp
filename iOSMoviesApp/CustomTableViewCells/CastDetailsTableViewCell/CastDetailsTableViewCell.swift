@@ -10,7 +10,7 @@ import UIKit
 class CastDetailsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var castDetailsView: UICollectionView!
-
+    private var castDetailsVm: CastViewModel?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -21,5 +21,17 @@ class CastDetailsTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+}
+
+extension CastDetailsTableViewCell: UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        <#code#>
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        <#code#>
+    }
+    
     
 }
