@@ -9,7 +9,9 @@ import Foundation
 import UIKit
 
 protocol DetailsScreenViewControllerDelegate : AnyObject {
-    
+    func numberOfCasts() -> Int
+    func getCastVM(at index : Int) -> CastViewModel
+    func reloadTableData()
 }
 class DetailsScreenViewController: UIViewController {
     
@@ -28,9 +30,6 @@ class DetailsScreenViewController: UIViewController {
     private func setupUI() {
         setupTableView()
     }
-
-
-    
 }
 
 extension DetailsScreenViewController: UITableViewDataSource , UITableViewDelegate {
@@ -53,6 +52,7 @@ extension DetailsScreenViewController: UITableViewDataSource , UITableViewDelega
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "CastDetailsTableViewCell", for: indexPath) as? CastDetailsTableViewCell else {
                 break
             }
+            cell.configureState(detailsVM.getAllCastViewModel(), delegate : self)
             return cell
         case 2 :
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewSectionCell", for: indexPath) as? ReviewSectionCell else {
@@ -67,4 +67,16 @@ extension DetailsScreenViewController: UITableViewDataSource , UITableViewDelega
         return UITableViewCell()
     }
     
+}
+
+extension DetailsScreenViewController: DetailsScreenViewControllerDelegate {
+    func numberOfCasts() -> Int {
+        return detailsVM.getNumberOfCasts()
+    }
+    func getCastVM(at index: Int) -> CastViewModel {
+        return detailsVM.getCastViewModel(at: index)
+    }
+    func reloadTableData() {
+        self.tableView.reloadData()
+    }
 }

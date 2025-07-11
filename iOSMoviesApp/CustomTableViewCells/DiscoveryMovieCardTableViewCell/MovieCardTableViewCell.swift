@@ -8,7 +8,7 @@
 import UIKit
 
 protocol MovieCardTableViewCellDelegate: AnyObject {
-    func updatePoster(with image : Data, cacheKey: NSString)
+    func updatePoster(with imageData : Data, cacheKey: NSString)
     func updatePosterFromCache(with image: UIImage)
 }
 
