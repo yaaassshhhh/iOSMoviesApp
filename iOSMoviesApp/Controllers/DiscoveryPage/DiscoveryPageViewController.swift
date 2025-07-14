@@ -77,15 +77,18 @@ extension DiscoveryPageViewController: UITableViewDelegate, UITableViewDataSourc
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let detailsVC = UIStoryboard.init(name : "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "detailsViewC") as? DetailsScreenViewController
+        self.navigationController?.pushViewController(detailsVC!, animated: true)
+        
         let selectedMovieVM = movieListVM.getMovieViewModel(at: indexPath)
+//
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        if let detailsVC = storyboard.instantiateViewController(withIdentifier: "DetailsScreenViewController") as? DetailsScreenViewController {
+//        detailsVC.movie = selectedMovieVM
+//            self.navigationController?.pushViewController(detailsVC, animated: true)
+//        }
 
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let detailsVC = storyboard.instantiateViewController(withIdentifier: "DetailsScreenViewController") as? DetailsScreenViewController {
-//            detailsVC.movie = selectedMovieVM
-            self.navigationController?.pushViewController(detailsVC, animated: true)
-        }
-
-        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
