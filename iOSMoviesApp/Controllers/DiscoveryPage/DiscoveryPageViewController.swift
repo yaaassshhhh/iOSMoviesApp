@@ -86,14 +86,6 @@ extension DiscoveryPageViewController: UITableViewDelegate, UITableViewDataSourc
         }
         detailsVC.setupMovie(movieVM: selectedMovieVM)
         self.navigationController?.pushViewController(detailsVC, animated: true)
-        
-        
-//
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        if let detailsVC = storyboard.instantiateViewController(withIdentifier: "DetailsScreenViewController") as? DetailsScreenViewController {
-//        detailsVC.movie = selectedMovieVM
-//            self.navigationController?.pushViewController(detailsVC, animated: true)
-//        }
 
     }
 }
