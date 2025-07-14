@@ -17,7 +17,11 @@ class DetailsScreenViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     private var detailsVM = DetailsScreenViewModel()
-    
+//    {
+//        didSet {
+//            getDetails()
+//        }
+//    }
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
@@ -25,10 +29,18 @@ class DetailsScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        getDetails()
     }
     
     private func setupUI() {
         setupTableView()
+    }
+    func setupMovie(movieVM : MovieViewModel){
+        self.detailsVM.movie = movieVM
+    }
+    private func getDetails() {
+        print("Calling Cast APi ...")
+        detailsVM.fetchCastDetails(delegate: self)
     }
 }
 
@@ -47,7 +59,14 @@ extension DetailsScreenViewController: UITableViewDataSource , UITableViewDelega
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         detailsVM.numberOfRows()
     }
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.row {
+        case 1:
+            return 265
+        default:
+            return UITableView.automaticDimension
+        }
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let position = indexPath.row
         switch position {

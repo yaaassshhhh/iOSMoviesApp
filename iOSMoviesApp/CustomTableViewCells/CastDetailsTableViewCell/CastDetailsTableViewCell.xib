@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="350" height="20"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cast" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SOd-cs-TuW" userLabel="CastLbl">
-                                <rect key="frame" x="10" y="5" width="35" height="21"/>
+                                <rect key="frame" x="18" y="5" width="35" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.60715532299999997" green="0.10946489130000001" blue="0.1189869568" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -29,16 +29,16 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="SOd-cs-TuW" firstAttribute="leading" secondItem="ZCW-0r-3Jl" secondAttribute="leading" constant="10" id="Hdg-y6-I2K"/>
+                            <constraint firstItem="SOd-cs-TuW" firstAttribute="leading" secondItem="ZCW-0r-3Jl" secondAttribute="leading" constant="18" id="Hdg-y6-I2K"/>
                             <constraint firstItem="SOd-cs-TuW" firstAttribute="top" secondItem="ZCW-0r-3Jl" secondAttribute="top" constant="5" id="gko-4K-LRy"/>
                             <constraint firstAttribute="width" constant="350" id="rqP-ie-nL4"/>
                             <constraint firstAttribute="height" constant="20" id="z40-h2-p5V"/>
                         </constraints>
                     </view>
-                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Ybj-uN-6U2">
-                        <rect key="frame" x="10" y="30" width="330" height="148"/>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Ybj-uN-6U2">
+                        <rect key="frame" x="10" y="35" width="330" height="143"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="WKQ-R1-crW">
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="x7f-jc-7Zp">
                             <size key="itemSize" width="128" height="128"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -48,7 +48,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="ZCW-0r-3Jl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="0aX-uG-71w"/>
-                    <constraint firstItem="Ybj-uN-6U2" firstAttribute="top" secondItem="ZCW-0r-3Jl" secondAttribute="bottom" constant="10" id="DZW-UQ-MJR"/>
+                    <constraint firstItem="Ybj-uN-6U2" firstAttribute="top" secondItem="ZCW-0r-3Jl" secondAttribute="bottom" constant="15" id="DZW-UQ-MJR"/>
                     <constraint firstAttribute="bottom" secondItem="Ybj-uN-6U2" secondAttribute="bottom" constant="10" id="FRe-cR-6Sk"/>
                     <constraint firstItem="Ybj-uN-6U2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Ij2-ND-zam"/>
                     <constraint firstAttribute="trailing" secondItem="Ybj-uN-6U2" secondAttribute="trailing" constant="10" id="TgB-IT-9cC"/>

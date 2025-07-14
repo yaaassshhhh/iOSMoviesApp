@@ -18,7 +18,9 @@ extension CastViewModel : Identifiable {
         return self.cast.id
     }
     var posterPath : String {
-        return self.posterBaseURL + self.cast.posterPath
+        guard let imageURLString = self.cast.posterPath else { return "" }
+        
+        return self.posterBaseURL + imageURLString
     }
     var realName : String {
         return self.cast.realName
@@ -29,6 +31,13 @@ extension CastViewModel : Identifiable {
     
     func loadCastImage(delegate: CastCollectionViewCellDelegate?) {
         guard let delegate = delegate else { return }
+        
+        if self.cast.posterPath == nil {
+                DispatchQueue.main.async {
+                    delegate.updateProfilePicFromPlaceholder(named: "tarangPic")
+                }
+           return
+        }
         guard let imageURL = URL(string: self.posterPath) else { return }
         let cacheKey = NSString(string: self.posterPath)
         

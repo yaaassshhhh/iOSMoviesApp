@@ -80,9 +80,14 @@ extension DiscoveryPageViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let detailsVC = UIStoryboard.init(name : "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "detailsViewC") as? DetailsScreenViewController
-        self.navigationController?.pushViewController(detailsVC!, animated: true)
-        
         let selectedMovieVM = movieListVM.getMovieViewModel(at: indexPath)
+        guard let detailsVC = detailsVC else {
+            fatalError("Cannot get DetailsScreenViewController")
+        }
+        detailsVC.setupMovie(movieVM: selectedMovieVM)
+        self.navigationController?.pushViewController(detailsVC, animated: true)
+        
+        
 //
 //        let storyboard = UIStoryboard(name: "Main", bundle: nil)
 //        if let detailsVC = storyboard.instantiateViewController(withIdentifier: "DetailsScreenViewController") as? DetailsScreenViewController {
