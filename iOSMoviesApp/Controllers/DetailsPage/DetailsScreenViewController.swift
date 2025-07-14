@@ -36,8 +36,10 @@ extension DetailsScreenViewController: UITableViewDataSource , UITableViewDelega
     
     private func setupTableView() {
 //        tableView.register(CastDetailsTableViewCell.self, forCellReuseIdentifier: "CastDetailsTableViewCell")
-        let nib = UINib(nibName: "CastDetailsTableViewCell", bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: "CastDetailsTableViewCell")
+        let castNib = UINib(nibName: "CastDetailsTableViewCell", bundle: nil)
+        let reviewNib = UINib(nibName: "ReviewTableViewCell", bundle: nil)
+        tableView.register(castNib, forCellReuseIdentifier: "CastDetailsTableViewCell")
+        tableView.register(reviewNib, forCellReuseIdentifier: "ReviewTableViewCell")
         tableView.dataSource = self
         tableView.delegate = self
     }
@@ -57,11 +59,11 @@ extension DetailsScreenViewController: UITableViewDataSource , UITableViewDelega
             }
             cell.configureState(detailsVM.getAllCastViewModel(), delegate : self)
             return cell
-//        case 2 :
-//            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewSectionCell", for: indexPath) as? ReviewSectionCell else {
-//                break
-//            }
-//            return cell
+        case 2 :
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewTableViewCell", for: indexPath) as? ReviewTableViewCell else {
+                break
+            }
+            return cell
         case 3 :
             return UITableViewCell()
         default :

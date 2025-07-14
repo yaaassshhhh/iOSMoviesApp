@@ -8,9 +8,11 @@
 struct Review : Decodable{
     var name: String
     var comment: String
+    var id: Int
     
     enum CodingKeys : String, CodingKey {
         case name = "author"
         case comment = "content"
+        case id
     }
 }
