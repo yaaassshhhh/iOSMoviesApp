@@ -31,7 +31,7 @@ extension MovieListViewModel {
     }
     
     private func storeMovieData (_ movieData : ListResponseJSON) {
-        print(movieData)
+//        print(movieData)
         self.movies = movieData.results.map({
             MovieViewModel(movie: $0)
         })

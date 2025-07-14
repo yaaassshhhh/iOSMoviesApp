@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ReviewCardCell: UICollectionViewCell {
+class ReviewCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var commentLabel: UILabel!
