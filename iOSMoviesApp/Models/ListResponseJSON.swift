@@ -10,7 +10,7 @@ import Foundation
 struct ListResponseJSON : Decodable {
     var results : [Movie]
     
-    enum codingKeys : String, CodingKey {
+    enum CodingKeys : String, CodingKey {
         case results = "results"
     }
 }

@@ -8,7 +8,7 @@ import Foundation
 
 struct MovieViewModel {
     var movie : Movie
-    var posterBaseURL: String = "https://image.tmdb.org/t/p/original"
+    var posterBaseURL: String = "https://image.tmdb.org/t/p/w185"
     var delegate : MovieCardTableViewCellDelegate?
     init(movie: Movie) {
         self.movie = movie

@@ -24,11 +24,14 @@ class CastDetailsTableViewCell: UITableViewCell {
     func configureState (_ castDetailsVM: [CastViewModel], delegate : DetailsScreenViewControllerDelegate ){
         self.delegate = delegate
         self.castDetailsVM = castDetailsVM
+        self.reloadCollectionView()
     }
 }
 
 extension CastDetailsTableViewCell: UICollectionViewDataSource, UICollectionViewDelegate {
     func setupCollectionView() {
+        let nib = UINib(nibName: "CastCollectionViewCell", bundle: nil)
+        castCollectionView.register(nib, forCellWithReuseIdentifier: "CastCollectionViewCell")
         castCollectionView.dataSource = self
         castCollectionView.delegate = self
     }
@@ -40,7 +43,7 @@ extension CastDetailsTableViewCell: UICollectionViewDataSource, UICollectionView
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CastCollectionViewCell", for: indexPath) as? CastCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.configureState(delegate?.getCastVM(at: indexPath.row), delegate : self)
+        cell.configureState(delegate?.getCastVM(at: indexPath.row))
         return cell
     }
 }
@@ -50,3 +53,11 @@ extension CastDetailsTableViewCell: CastDetailsTableViewCellDelegate {
         self.castCollectionView.reloadData()
     }
 }
+extension CastDetailsTableViewCell: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 135, height: 230)
+    }
+}
+

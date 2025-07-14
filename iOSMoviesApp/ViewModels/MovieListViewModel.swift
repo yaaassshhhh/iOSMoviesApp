@@ -31,7 +31,7 @@ extension MovieListViewModel {
     }
     
     private func storeMovieData (_ movieData : ListResponseJSON) {
-//        print(movieData)
+
         self.movies = movieData.results.map({
             MovieViewModel(movie: $0)
         })
@@ -44,9 +44,7 @@ extension MovieListViewModel {
     func numberOfMovies() -> Int {
         return self.movies.count
     }
-//    func numberOfItems() -> Int {
-//        return self.movies.count
-//    }
+
     func initializeSearch(for searchText: String?){
         self.filteredMovies = []
         guard let searchText  =  searchText else {
