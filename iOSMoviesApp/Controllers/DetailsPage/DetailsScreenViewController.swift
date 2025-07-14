@@ -47,11 +47,12 @@ class DetailsScreenViewController: UIViewController {
 extension DetailsScreenViewController: UITableViewDataSource , UITableViewDelegate {
     
     private func setupTableView() {
-//        tableView.register(CastDetailsTableViewCell.self, forCellReuseIdentifier: "CastDetailsTableViewCell")
+
         let castNib = UINib(nibName: "CastDetailsTableViewCell", bundle: nil)
         let reviewNib = UINib(nibName: "ReviewTableViewCell", bundle: nil)
         tableView.register(castNib, forCellReuseIdentifier: "CastDetailsTableViewCell")
         tableView.register(reviewNib, forCellReuseIdentifier: "ReviewTableViewCell")
+
         tableView.dataSource = self
         tableView.delegate = self
     }

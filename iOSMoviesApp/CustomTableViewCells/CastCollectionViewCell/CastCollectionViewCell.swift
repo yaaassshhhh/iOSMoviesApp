@@ -20,17 +20,16 @@ class CastCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var realName: UILabel!
     @IBOutlet weak var fictionalName: UILabel!
     @IBOutlet weak var castImage: UIImageView!
-//    private weak var delegate: CastDetailsTableViewCellDelegate?
     private var castVM : CastViewModel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
     func configureState(_ castData: CastViewModel?){
-//        guard let delegate = delegate else {return}
+
         guard let castData = castData else {return}
         self.castVM = castData
-//        self.delegate = delegate
+
         setupRealName()
         setupFictionalName()
         setupPoster()
