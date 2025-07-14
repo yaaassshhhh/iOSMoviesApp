@@ -17,13 +17,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="393" height="210"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-<<<<<<< HEAD:iOSMoviesApp/CustomTableViewCells/SimilarTableViewCell/SimilarSectionCell.xib
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Similar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jnZ-oQ-Rxb">
                         <rect key="frame" x="20" y="20" width="52" height="21"/>
-=======
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n6e-nn-djJ">
-                        <rect key="frame" x="20" y="20" width="45" height="21"/>
->>>>>>> 492358d (CastCollectionViewCell implemented with API call for data using MVVM,Layout constraints for tableVIewCell row height and Collection View Cell layout added programmatically, delegation inside collectionView Cell removed):iOSMoviesApp/CustomTableViewCells/DetailsReviewSectionCell/ReviewSectionCell.xib
+
+
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                         <nil key="textColor"/>
