@@ -44,6 +44,7 @@ class CastCollectionViewCell: UICollectionViewCell {
         castVM.loadCastImage(delegate: self)
     }
 }
+
 extension CastCollectionViewCell : CastCollectionViewCellDelegate {
         func updateProfilePic(with imageData: Data, cacheKey: NSString) {
             if let image = UIImage(data: imageData) {
