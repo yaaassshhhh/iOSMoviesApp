@@ -156,7 +156,7 @@
         <!--Details Screen View Controller-->
         <scene sceneID="4U4-XW-xM6">
             <objects>
-                <viewController id="BXD-wJ-YwU" customClass="DetailsScreenViewController" customModule="iOSMoviesApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="detailsViewC" id="BXD-wJ-YwU" customClass="DetailsScreenViewController" customModule="iOSMoviesApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LyA-2g-B9e">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -207,7 +207,7 @@
         <!--Navigation Controller-->
         <scene sceneID="879-81-aNZ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Iem-OC-2Zu" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="detailsNavC" automaticallyAdjustsScrollViewInsets="NO" id="Iem-OC-2Zu" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="CTU-fP-Pdo">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
