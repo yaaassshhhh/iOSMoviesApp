@@ -6,9 +6,13 @@
 //
 
 import UIKit
+
+
 protocol CastCollectionViewCellDelegate: AnyObject {
     func updateProfilePic(with imageData : Data, cacheKey: NSString)
     func updateProfilePicFromCache(with image: UIImage)
+    func updateProfilePicFromPlaceholder(named: String)
+
 }
 class CastCollectionViewCell: UICollectionViewCell {
     
@@ -16,19 +20,21 @@ class CastCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var realName: UILabel!
     @IBOutlet weak var fictionalName: UILabel!
     @IBOutlet weak var castImage: UIImageView!
-    private weak var delegate: CastDetailsTableViewCellDelegate?
+//    private weak var delegate: CastDetailsTableViewCellDelegate?
     private var castVM : CastViewModel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-    func configureState(_ castData: CastViewModel?, delegate : CastDetailsTableViewCellDelegate?){
-        guard let delegate = delegate else {return}
+    func configureState(_ castData: CastViewModel?){
+//        guard let delegate = delegate else {return}
         guard let castData = castData else {return}
         self.castVM = castData
+//        self.delegate = delegate
         setupRealName()
         setupFictionalName()
-        
+        setupPoster()
+        print("\n Individual Cast inside Cast Collection View cell : \n \(castVM.realName) \n \(castVM.fictionalName)")
     }
     private func setupRealName() {
         realName.text = castVM.realName
@@ -54,7 +60,9 @@ extension CastCollectionViewCell : CastCollectionViewCellDelegate {
                 }
             }
         }
-        
+    func updateProfilePicFromPlaceholder(named defaultPic: String) {
+        self.castImage.image = UIImage(named: defaultPic)
+    }
         func updateProfilePicFromCache(with image: UIImage) {
             DispatchQueue.main.async {
                 self.castImage.image = image
