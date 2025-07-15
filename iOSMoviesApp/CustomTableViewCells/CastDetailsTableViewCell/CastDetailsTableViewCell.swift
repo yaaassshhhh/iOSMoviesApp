@@ -14,7 +14,6 @@ class CastDetailsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var castCollectionView: UICollectionView!
     private weak var delegate : DetailsScreenViewControllerDelegate?
-    private var castDetailsVM: [CastViewModel]!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,7 +22,6 @@ class CastDetailsTableViewCell: UITableViewCell {
 
     func configureState (_ castDetailsVM: [CastViewModel], delegate : DetailsScreenViewControllerDelegate ){
         self.delegate = delegate
-        self.castDetailsVM = castDetailsVM
         self.reloadCollectionView()
     }
 }
@@ -44,6 +42,7 @@ extension CastDetailsTableViewCell: UICollectionViewDataSource, UICollectionView
             return UICollectionViewCell()
         }
         cell.configureState(delegate?.getCastVM(at: indexPath.row))
+
         return cell
     }
 }
@@ -57,7 +56,7 @@ extension CastDetailsTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 135, height: 230)
+        return CGSize(width: 150, height: 200)
     }
 }
 

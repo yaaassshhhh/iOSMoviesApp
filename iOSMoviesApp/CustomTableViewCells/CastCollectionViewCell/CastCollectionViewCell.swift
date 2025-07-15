@@ -46,6 +46,7 @@ class CastCollectionViewCell: UICollectionViewCell {
         fictionalName.lineBreakMode = .byWordWrapping
     }
     func setupPoster() {
+        castImage.setRounded()
         castVM.loadCastImage(delegate: self)
     }
 }
@@ -56,6 +57,7 @@ extension CastCollectionViewCell : CastCollectionViewCellDelegate {
                 self.setupCache(image, cacheKey)
                 DispatchQueue.main.async {
                     self.castImage.image = image
+                    self.castImage.setRounded()
                 }
             }
         }
@@ -65,9 +67,11 @@ extension CastCollectionViewCell : CastCollectionViewCellDelegate {
         func updateProfilePicFromCache(with image: UIImage) {
             DispatchQueue.main.async {
                 self.castImage.image = image
+                self.castImage.setRounded()
             }
         }
     func setupCache(_ image : UIImage, _ cacheKey : NSString){
         ImageCache.shared.setObject(image, forKey: cacheKey)
     }
 }
+
