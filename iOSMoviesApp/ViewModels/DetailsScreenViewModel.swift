@@ -10,9 +10,9 @@ class DetailsScreenViewModel {
     var casts : [CastViewModel] = []
     private weak var delegate : DetailsScreenViewControllerDelegate?
 }
+
 extension DetailsScreenViewModel {
     func fetchCastDetails(delegate : DetailsScreenViewControllerDelegate?){
-        //*** TBD --> INITIALIZE DELEGATE SEPERATELY SINCE IT WILL BE USED IN DIFFERENT API CALL ***
         guard let delegate = delegate else {
             return
         }
