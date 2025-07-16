@@ -176,7 +176,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Qru-25-4rW">
-                        <barButtonItem key="leftBarButtonItem" title="Back" id="VVs-zj-vFX"/>
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="VVs-zj-vFX">
+                            <connections>
+                                <action selector="backToDiscovery:" destination="BXD-wJ-YwU" id="3NY-xG-6e6"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="t2V-cA-MTg" id="06A-9K-NA4"/>

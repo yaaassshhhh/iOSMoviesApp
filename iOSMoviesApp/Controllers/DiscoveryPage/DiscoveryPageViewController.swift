@@ -72,8 +72,7 @@ extension DiscoveryPageViewController: UITableViewDelegate, UITableViewDataSourc
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCardTableViewCell", for : indexPath) as? MovieCardTableViewCell
         guard let cell = cell else { return UITableViewCell() }
         cell.configureState(with : cellVM)
-        cell.layoutMargins = UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 16)
-        // Removed heightAnchor constraint modification for cleaner layout management
+        cell.selectionStyle = .none
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -85,7 +84,6 @@ extension DiscoveryPageViewController: UITableViewDelegate, UITableViewDataSourc
         }
         detailsVC.setupMovie(movieVM: selectedMovieVM)
         self.navigationController?.pushViewController(detailsVC, animated: true)
-
     }
 }
 

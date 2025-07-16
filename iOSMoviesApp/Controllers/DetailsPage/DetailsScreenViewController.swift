@@ -15,7 +15,7 @@ class DetailsScreenViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     private var detailsVM : DetailsScreenViewModel!
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
@@ -34,6 +34,9 @@ class DetailsScreenViewController: UIViewController {
     private func getDetails() {
         print("Calling Cast APi ...")
         detailsVM.fetchCastDetails()
+    }
+    @IBAction func backToDiscovery(_ sender: UIBarButtonItem) {
+        self.navigationController?.popViewController(animated: true)
     }
 }
 
