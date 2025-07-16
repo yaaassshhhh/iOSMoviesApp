@@ -9,45 +9,37 @@ import Foundation
 import UIKit
 
 protocol DetailsScreenViewControllerDelegate : AnyObject {
-    func numberOfCasts() -> Int
-    func getCastVM(at index : Int) -> CastViewModel
     func reloadTableData()
 }
 class DetailsScreenViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    private var detailsVM = DetailsScreenViewModel()
-//    {
-//        didSet {
-//            getDetails()
-//        }
-//    }
+    private var detailsVM : DetailsScreenViewModel!
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         getDetails()
     }
-    
     private func setupUI() {
         setupTableView()
     }
     func setupMovie(movieVM : MovieViewModel){
+        self.detailsVM = DetailsScreenViewModel(delegate: self)
         self.detailsVM.movie = movieVM
     }
     private func getDetails() {
         print("Calling Cast APi ...")
-        detailsVM.fetchCastDetails(delegate: self)
+        detailsVM.fetchCastDetails()
     }
 }
 
 extension DetailsScreenViewController: UITableViewDataSource , UITableViewDelegate {
     
     private func setupTableView() {
-
         let castNib = UINib(nibName: "CastDetailsTableViewCell", bundle: nil)
         let reviewNib = UINib(nibName: "ReviewTableViewCell", bundle: nil)
         tableView.register(castNib, forCellReuseIdentifier: "CastDetailsTableViewCell")
@@ -56,7 +48,6 @@ extension DetailsScreenViewController: UITableViewDataSource , UITableViewDelega
         tableView.dataSource = self
         tableView.delegate = self
     }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         detailsVM.numberOfRows()
     }
@@ -77,7 +68,7 @@ extension DetailsScreenViewController: UITableViewDataSource , UITableViewDelega
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "CastDetailsTableViewCell", for: indexPath) as? CastDetailsTableViewCell else {
                 break
             }
-            cell.configureState(detailsVM.getAllCastViewModel(), delegate : self)
+            cell.configureState(detailsVM.getAllCastViewModel())
             return cell
         case 2 :
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewTableViewCell", for: indexPath) as? ReviewTableViewCell else {
@@ -91,16 +82,9 @@ extension DetailsScreenViewController: UITableViewDataSource , UITableViewDelega
         }
         return UITableViewCell()
     }
-    
 }
 
 extension DetailsScreenViewController: DetailsScreenViewControllerDelegate {
-    func numberOfCasts() -> Int {
-        return detailsVM.getNumberOfCasts()
-    }
-    func getCastVM(at index: Int) -> CastViewModel {
-        return detailsVM.getCastViewModel(at: index)
-    }
     func reloadTableData() {
         self.tableView.reloadData()
     }

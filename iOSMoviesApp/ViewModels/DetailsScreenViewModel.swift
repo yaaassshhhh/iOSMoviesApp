@@ -6,45 +6,45 @@
 //
 
 class DetailsScreenViewModel {
-    var movie : MovieViewModel!
-    var casts : [CastViewModel] = []
+    var movie : MovieViewModel? = nil
+    var casts : CastDetailsViewModel? = nil
     private weak var delegate : DetailsScreenViewControllerDelegate?
+    
+    init(delegate: DetailsScreenViewControllerDelegate? = nil) {
+        self.delegate = delegate
+    }
 }
 extension DetailsScreenViewModel {
-    func fetchCastDetails(delegate : DetailsScreenViewControllerDelegate?){
-        //*** TBD --> INITIALIZE DELEGATE SEPERATELY SINCE IT WILL BE USED IN DIFFERENT API CALL ***
-        guard let delegate = delegate else {
+    func fetchCastDetails() {
+        guard let delegate = self.delegate, let movie = self.movie else {
             return
         }
-        self.delegate = delegate
-        WebService().load(resource: CreditsResponse.resource(id : self.movie.id)){ result in
+        WebService().load(resource: CreditsResponse.resource(id : movie.id)) { result in
             switch result {
             case .success(let castData) :
                 self.storeCastData(castData)
-                self.delegate?.reloadTableData()
+                delegate.reloadTableData()
             case .failure(let error) :
                 print("Error fetching data : \(error)")
             }
         }
     }
     private func storeCastData (_ castData : CreditsResponse) {
-        self.casts = castData.results.map({
+        let castVMs = castData.results.map({
             CastViewModel(cast: $0)
         })
-    }
-    
-    func getCastViewModel(at index : Int) -> CastViewModel {
-        return self.casts[index]
+        self.casts = CastDetailsViewModel(castViewModels: castVMs)
     }
     
     func numberOfRows() -> Int {
         return 4
     }
-    func getNumberOfCasts() -> Int{
-        return self.casts.count
-    }
-    func getAllCastViewModel() -> [CastViewModel]{
-        return self.casts
+    
+    func getAllCastViewModel() -> CastDetailsViewModel {
+        guard let casts = self.casts else {
+            return CastDetailsViewModel(castViewModels: [])
+        }
+        return casts
     }
 }
 
