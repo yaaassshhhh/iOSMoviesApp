@@ -7,21 +7,17 @@
 
 import UIKit
 
-protocol CastDetailsTableViewCellDelegate: AnyObject {
-    func reloadCollectionView()
-}
 class CastDetailsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var castCollectionView: UICollectionView!
-    private weak var delegate : DetailsScreenViewControllerDelegate?
-    
+    private var castDetailsVM : CastDetailsViewModel?
     override func awakeFromNib() {
         super.awakeFromNib()
         setupCollectionView()
     }
 
-    func configureState (_ castDetailsVM: [CastViewModel], delegate : DetailsScreenViewControllerDelegate ){
-        self.delegate = delegate
+    func configureState (_ castDetailsVM: CastDetailsViewModel) {
+        self.castDetailsVM = castDetailsVM
         self.reloadCollectionView()
     }
 }
@@ -34,24 +30,21 @@ extension CastDetailsTableViewCell: UICollectionViewDataSource, UICollectionView
         castCollectionView.delegate = self
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        delegate?.numberOfCasts() ?? 0
+        castDetailsVM?.numberOfCasts() ?? 0
     }
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CastCollectionViewCell", for: indexPath) as? CastCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.configureState(delegate?.getCastVM(at: indexPath.row))
+        cell.configureState(castDetailsVM?.getCastViewModel(at: indexPath.row))
 
         return cell
     }
-}
-
-extension CastDetailsTableViewCell: CastDetailsTableViewCellDelegate {
-    func reloadCollectionView() {
+    private func reloadCollectionView() {
         self.castCollectionView.reloadData()
     }
 }
+
 extension CastDetailsTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
