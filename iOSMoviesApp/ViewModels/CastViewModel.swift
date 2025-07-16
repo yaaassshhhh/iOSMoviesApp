@@ -8,7 +8,7 @@ import Foundation
 
 struct CastViewModel {
     var cast : Cast
-    var posterBaseURL: String = "https://image.tmdb.org/t/p/w92"
+    var posterBaseURL: String = "https://image.tmdb.org/t/p/w185"
     init(cast : Cast){
         self.cast = cast
     }

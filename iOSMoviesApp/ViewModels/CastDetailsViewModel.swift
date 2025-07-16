@@ -16,7 +16,6 @@ extension CastDetailsViewModel {
     func getCastViewModel(at index : Int) -> CastViewModel {
         return self.castViewModels[index]
     }
-    
     func numberOfCasts() -> Int {
         return self.castViewModels.count
     }

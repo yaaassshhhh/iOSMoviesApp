@@ -37,7 +37,6 @@ extension CastDetailsTableViewCell: UICollectionViewDataSource, UICollectionView
             return UICollectionViewCell()
         }
         cell.configureState(castDetailsVM?.getCastViewModel(at: indexPath.row))
-
         return cell
     }
     private func reloadCollectionView() {
