@@ -28,8 +28,6 @@ class MovieCardTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-//        self.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-
     }
 
     override func prepareForReuse() {
@@ -38,12 +36,6 @@ class MovieCardTableViewCell: UITableViewCell {
         movieTitle.text = nil
         movieReleaseDate.text = nil
         movieDescription.text = nil
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     func configureState(with movieVM: MovieViewModel) {
@@ -82,7 +74,6 @@ extension MovieCardTableViewCell : MovieCardTableViewCellDelegate {
                 self.moviePoster.image = image
             }
         }
-        
     }
     func updatePosterFromCache(with image: UIImage) {
         DispatchQueue.main.async {

@@ -7,6 +7,7 @@
 
 class DetailsScreenViewModel {
     var movie : MovieViewModel? = nil
+    var info : InfoViewModel? = nil
     var casts : CastDetailsViewModel? = nil
     private weak var delegate : DetailsScreenViewControllerDelegate?
     
@@ -14,6 +15,7 @@ class DetailsScreenViewModel {
         self.delegate = delegate
     }
 }
+
 extension DetailsScreenViewModel {
     func fetchCastDetails() {
         guard let delegate = self.delegate, let movie = self.movie else {
@@ -48,3 +50,29 @@ extension DetailsScreenViewModel {
     }
 }
 
+extension DetailsScreenViewModel {
+    func fetchMovieInfo() {
+        guard let delegate = self.delegate, let movie = self.movie else {
+            return
+        }
+        WebService().load(resource : Info.resource(id: movie.id)) { result in
+            switch result {
+            case .success(let movieInfo) :
+                print(movieInfo)
+                self.storeMovieInfo(movieInfo)
+                delegate.reloadTableData()
+            case.failure(let error) :
+                print("Error in fetching Movie Info - \(error)")
+            }
+        }
+    }
+    private func storeMovieInfo(_ movieInfo: Info) {
+        self.info = InfoViewModel(info: movieInfo)
+    }
+    func getMovieInfo() -> InfoViewModel? {
+        guard let info = self.info else {
+            return nil
+        }
+        return info
+    }
+}

@@ -32,8 +32,8 @@ class DetailsScreenViewController: UIViewController {
         self.detailsVM.movie = movieVM
     }
     private func getDetails() {
-        print("Calling Cast APi ...")
         detailsVM.fetchCastDetails()
+        detailsVM.fetchMovieInfo()
     }
     @IBAction func backToDiscovery(_ sender: UIBarButtonItem) {
         self.navigationController?.popViewController(animated: true)
@@ -45,9 +45,10 @@ extension DetailsScreenViewController: UITableViewDataSource , UITableViewDelega
     private func setupTableView() {
         let castNib = UINib(nibName: "CastDetailsTableViewCell", bundle: nil)
         let reviewNib = UINib(nibName: "ReviewTableViewCell", bundle: nil)
+        let infoNib = UINib(nibName: "InfoTableViewCell", bundle: nil)
         tableView.register(castNib, forCellReuseIdentifier: "CastDetailsTableViewCell")
         tableView.register(reviewNib, forCellReuseIdentifier: "ReviewTableViewCell")
-
+        tableView.register(infoNib, forCellReuseIdentifier: "InfoTableViewCell")
         tableView.dataSource = self
         tableView.delegate = self
     }
@@ -56,7 +57,9 @@ extension DetailsScreenViewController: UITableViewDataSource , UITableViewDelega
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
-        case 1:
+        case 0:
+            return 300
+        case 2:
             return 265
         default:
             return UITableView.automaticDimension
@@ -66,17 +69,22 @@ extension DetailsScreenViewController: UITableViewDataSource , UITableViewDelega
         let position = indexPath.row
         switch position {
         case 0 :
-            return UITableViewCell()
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "InfoTableViewCell", for: indexPath) as? InfoTableViewCell else {
+                break
+            }
+            
+            cell.configureState(with: detailsVM.getMovieInfo() ?? nil)
+            return cell
         case 1 :
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewTableViewCell", for: indexPath) as? ReviewTableViewCell else {
+                break
+            }
+            return cell
+        case 2 :
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "CastDetailsTableViewCell", for: indexPath) as? CastDetailsTableViewCell else {
                 break
             }
             cell.configureState(detailsVM.getAllCastViewModel())
-            return cell
-        case 2 :
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewTableViewCell", for: indexPath) as? ReviewTableViewCell else {
-                break
-            }
             return cell
         case 3 :
             return UITableViewCell()

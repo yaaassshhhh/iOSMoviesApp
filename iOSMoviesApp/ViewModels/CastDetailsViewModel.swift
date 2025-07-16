@@ -4,6 +4,7 @@
 //
 //  Created by Yash Agrawal on 16/07/25.
 //
+import Foundation
 
 struct CastDetailsViewModel {
     var castViewModels: [CastViewModel]

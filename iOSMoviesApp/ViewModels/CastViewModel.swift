@@ -9,6 +9,7 @@ import Foundation
 struct CastViewModel {
     var cast : Cast
     var posterBaseURL: String = "https://image.tmdb.org/t/p/w185"
+    var delegate : CastCollectionViewCellDelegate?
     init(cast : Cast){
         self.cast = cast
     }
@@ -27,9 +28,10 @@ extension CastViewModel : Identifiable {
     var fictionalName : String {
         return self.cast.fictionalName
     }
-    func loadCastImage(delegate: CastCollectionViewCellDelegate?) {
+    mutating func loadCastImage(delegate: CastCollectionViewCellDelegate?) {
         guard let delegate = delegate else { return }
-        
+        self.delegate = delegate
+        guard let delegate = self.delegate else { return }
         if self.cast.posterPath == nil {
                 DispatchQueue.main.async {
                     delegate.updateProfilePicFromPlaceholder(named: "tarangPic")
