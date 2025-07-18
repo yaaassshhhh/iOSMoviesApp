@@ -98,5 +98,6 @@ extension DetailsScreenViewController: UITableViewDataSource , UITableViewDelega
 extension DetailsScreenViewController: DetailsScreenViewControllerDelegate {
     func reloadTableData() {
         self.tableView.reloadData()
+        
     }
 }
