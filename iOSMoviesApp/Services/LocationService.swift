@@ -23,20 +23,24 @@ class LocationService : NSObject, CLLocationManagerDelegate {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyReduced
     }
+    
     func requestLocationAccess() {
         
             print("Inside request location access")
             locationManager.requestWhenInUseAuthorization()
         
     }
+    
     func startUpdatingLocation() {
         print("Inside start updating location for location access")
         locationManager.startUpdatingLocation()
     }
+    
     func stopUpdatingLocation() {
         print("Inside stop updating location for location access")
         locationManager.stopUpdatingLocation()
     }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
             if let lastLocation = locations.last {
                 
@@ -53,6 +57,7 @@ class LocationService : NSObject, CLLocationManagerDelegate {
             let status = manager.authorizationStatus
             delegate?.didUpdateAuthorizationStatus(status)
         }
+    
     func getCityAndCountry(_ lat : Double,_ long : Double, completion : @escaping (String) -> Void ) {
         print("Inside getCityAndCountry")
         let location = CLLocation(latitude: lat, longitude: long)
@@ -66,6 +71,7 @@ class LocationService : NSObject, CLLocationManagerDelegate {
         }
     }
 }
+
 extension CLLocation {
     func fetchCityAndCountry(completion: @escaping (_ city: String?, _ country:  String?, _ error: Error?) -> ()) {
         print("inside fetch city and country")

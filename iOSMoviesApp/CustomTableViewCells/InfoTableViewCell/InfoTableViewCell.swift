@@ -37,36 +37,44 @@ class InfoTableViewCell: UITableViewCell {
         setupMovieGenre()
         setupMovieRating()
     }
+    
     func setupMoviePoster() {
         infoVM?.loadMoviePoster(delegate: self)
     }
+    
     func setupMovieDescription() {
         movieDescription.text = infoVM?.description ?? ""
         movieDescription.numberOfLines = 0
-        movieDescription.lineBreakMode = .byWordWrapping
+        movieDescription.lineBreakMode = .byTruncatingTail
     }
+    
     func setupMovieName() {
         movieName.text = infoVM?.movieName ?? ""
         movieName.numberOfLines = 0
         movieName.lineBreakMode = .byWordWrapping
     }
+    
     func setupMovieRating() {
         movieRating.text = infoVM?.rating ?? ""
         movieRating.numberOfLines = 0
         movieRating.lineBreakMode = .byWordWrapping
     }
+    
     func setupMovieVotes() {
         movieVotes.text = infoVM?.votes ?? ""
         movieVotes.numberOfLines = 0
         movieVotes.lineBreakMode = .byWordWrapping
     }
+    
     func setupMovieGenre() {
         movieGenre.text = infoVM?.genres ?? ""
         movieGenre.numberOfLines = 0
         movieGenre.lineBreakMode = .byWordWrapping
     }
 }
+
 extension InfoTableViewCell : InfoTableViewCellDelegate {
+    
     func updatePoster(with imageData: Data, cacheKey: NSString) {
         if let image = UIImage(data: imageData) {
             self.setUpCache(image, cacheKey)
@@ -81,6 +89,7 @@ extension InfoTableViewCell : InfoTableViewCellDelegate {
             self.MoviePoster.image = image
         }
     }
+    
     func setUpCache(_ image : UIImage, _ cacheKey : NSString){
         ImageCache.shared.setObject(image, forKey: cacheKey)
     }

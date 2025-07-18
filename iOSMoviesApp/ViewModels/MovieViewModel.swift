@@ -7,6 +7,7 @@
 import Foundation
 
 struct MovieViewModel {
+    
     var movie : Movie
     var posterBaseURL: String = "https://image.tmdb.org/t/p/w342"
     var delegate : MovieCardTableViewCellDelegate?
@@ -14,22 +15,29 @@ struct MovieViewModel {
         self.movie = movie
     }
 }
+
 extension MovieViewModel : Identifiable {
+    
     var id : Int {
         return self.movie.id
     }
+    
     var title : String {
         return self.movie.title
     }
+    
     var releaseDate : String {
         return self.movie.releaseDate
     }
+    
     var description : String {
         return self.movie.description
     }
+    
     var posterPath : String {
         return self.posterBaseURL + self.movie.posterPath
     }
+    
     mutating func loadImage(delegate: MovieCardTableViewCellDelegate?) {
         guard let delegate = delegate else { return }
         self.delegate = delegate
@@ -49,5 +57,4 @@ extension MovieViewModel : Identifiable {
             delegate.updatePoster(with: imageData, cacheKey: cacheKey)
         }
     }
-    
 }

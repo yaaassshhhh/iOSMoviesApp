@@ -7,6 +7,7 @@
 import Foundation
 
 class MovieListViewModel {
+    
     var movies : [MovieViewModel] = []
     var filteredMovies : [MovieViewModel] = []
     private weak var delegate : DiscoveryPageViewControllerDelegate?

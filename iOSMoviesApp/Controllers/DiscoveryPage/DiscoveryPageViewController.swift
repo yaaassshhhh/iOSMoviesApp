@@ -26,23 +26,25 @@ class DiscoveryPageViewController: UIViewController{
         setupLocationService()
         setupUI()
     }
+    
     private func setupUI() {
         movieListVM.fetchMovies(delegate: self)
         setupTableView()
         setupSearchBar()
     }
+    
     func setupTableView() {
         self.tableView.register(UINib(nibName: "MovieCardTableViewCell", bundle: nil), forCellReuseIdentifier: "MovieCardTableViewCell")
-        
         tableView.delegate = self
         tableView.dataSource = self
-        self.tableView.rowHeight = 260
+        self.tableView.rowHeight = UITableView.automaticDimension
     }
     
     private func setupSearchBar() {
         searchBar.delegate = self
     }
 }
+
 extension DiscoveryPageViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         movieListVM.initializeSearch(for: searchText)
@@ -70,17 +72,21 @@ extension DiscoveryPageViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellVM = self.movieListVM.getMovieViewModel(at: indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCardTableViewCell", for : indexPath) as? MovieCardTableViewCell
-        guard let cell = cell else { return UITableViewCell() }
+        guard let cell = cell else {
+            self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "DefaultCell")
+            return UITableViewCell()
+        }
         cell.configureState(with : cellVM)
         cell.selectionStyle = .none
         return cell
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let detailsVC = UIStoryboard.init(name : "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "detailsViewC") as? DetailsScreenViewController
         let selectedMovieVM = movieListVM.getMovieViewModel(at: indexPath)
         guard let detailsVC = detailsVC else {
-            fatalError("Cannot get DetailsScreenViewController")
+            return
         }
         detailsVC.setupMovie(movieVM: selectedMovieVM)
         self.navigationController?.pushViewController(detailsVC, animated: true)
@@ -94,12 +100,12 @@ extension DiscoveryPageViewController : DiscoveryPageViewControllerDelegate {
        }
    }
 }
+
 extension DiscoveryPageViewController : LocationServiceDelegate {
     func didUpdateLocation(_ placeName : String) {
         locationBtn.setTitle(placeName, for: .normal)
         locationService.stopUpdatingLocation()
     }
-    
     
     private func setupLocationService() {
         locationService.delegate = self

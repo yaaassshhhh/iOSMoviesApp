@@ -8,6 +8,7 @@
 import Foundation
 
 struct InfoViewModel {
+    
     var info : Info
     var posterBaseURL : String = "https://image.tmdb.org/t/p/w342"
     var delegate : InfoTableViewCellDelegate?
@@ -16,18 +17,24 @@ struct InfoViewModel {
     }
 }
 extension InfoViewModel {
+    
     var movieName : String {
         return self.info.movieName
     }
+    
     var description : String {
         return self.info.description
     }
+    
     var rating : String {
-        return "\(self.info.rating)/10"
+        let ratingStr : String = String(format: "%.1f",self.info.rating)
+        return "\(ratingStr)/10"
     }
+    
     var votes : String {
         return "\(self.info.votes) votes"
     }
+    
     var genres : String {
         var strGenres : [String] = []
         for genre in self.info.genres {
@@ -36,9 +43,11 @@ extension InfoViewModel {
         let genreSentence = strGenres.joined(separator: ", ")
         return genreSentence
     }
+    
     var posterPath : String {
         return self.posterBaseURL + self.info.posterPath
     }
+    
     mutating func loadMoviePoster(delegate : InfoTableViewCellDelegate?) {
         guard let delegate = delegate else { return }
         self.delegate = delegate

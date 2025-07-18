@@ -19,22 +19,27 @@ class DetailsScreenViewController: UIViewController {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         getDetails()
     }
+    
     private func setupUI() {
         setupTableView()
     }
+    
     func setupMovie(movieVM : MovieViewModel){
         self.detailsVM = DetailsScreenViewModel(delegate: self)
         self.detailsVM.movie = movieVM
     }
+    
     private func getDetails() {
         detailsVM.fetchCastDetails()
         detailsVM.fetchMovieInfo()
     }
+    
     @IBAction func backToDiscovery(_ sender: UIBarButtonItem) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -52,9 +57,11 @@ extension DetailsScreenViewController: UITableViewDataSource , UITableViewDelega
         tableView.dataSource = self
         tableView.delegate = self
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         detailsVM.numberOfRows()
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
         case 0:
@@ -65,6 +72,7 @@ extension DetailsScreenViewController: UITableViewDataSource , UITableViewDelega
             return UITableView.automaticDimension
         }
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let position = indexPath.row
         switch position {

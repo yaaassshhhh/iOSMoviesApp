@@ -29,9 +29,11 @@ extension CastDetailsTableViewCell: UICollectionViewDataSource, UICollectionView
         castCollectionView.dataSource = self
         castCollectionView.delegate = self
     }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         castDetailsVM?.numberOfCasts() ?? 0
     }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CastCollectionViewCell", for: indexPath) as? CastCollectionViewCell else {
             return UICollectionViewCell()
@@ -39,6 +41,7 @@ extension CastDetailsTableViewCell: UICollectionViewDataSource, UICollectionView
         cell.configureState(castDetailsVM?.getCastViewModel(at: indexPath.row))
         return cell
     }
+    
     private func reloadCollectionView() {
         self.castCollectionView.reloadData()
     }

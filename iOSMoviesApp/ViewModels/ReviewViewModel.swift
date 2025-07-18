@@ -8,6 +8,7 @@
 import Foundation
 
 struct ReviewViewModel {
+    
     var review: Review
     init(review: Review) {
         self.review = review
@@ -15,12 +16,15 @@ struct ReviewViewModel {
 }
 
 extension ReviewViewModel: Identifiable {
+    
     var id: Int {
         return self.review.id
     }
+    
     var name : String {
         return self.review.name
     }
+    
     var comment : String {
         return self.review.comment
     }

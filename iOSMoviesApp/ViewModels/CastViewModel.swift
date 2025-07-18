@@ -7,6 +7,7 @@
 import Foundation
 
 struct CastViewModel {
+    
     var cast : Cast
     var posterBaseURL: String = "https://image.tmdb.org/t/p/w185"
     var delegate : CastCollectionViewCellDelegate?
@@ -14,20 +15,26 @@ struct CastViewModel {
         self.cast = cast
     }
 }
+
 extension CastViewModel : Identifiable {
+    
     var id : Int {
         return self.cast.id
     }
+    
     var posterPath : String {
         guard let imageURLString = self.cast.posterPath else { return "" }
         return self.posterBaseURL + imageURLString
     }
+    
     var realName : String {
         return self.cast.realName
     }
+    
     var fictionalName : String {
         return self.cast.fictionalName
     }
+    
     mutating func loadCastImage(delegate: CastCollectionViewCellDelegate?) {
         guard let delegate = delegate else { return }
         self.delegate = delegate

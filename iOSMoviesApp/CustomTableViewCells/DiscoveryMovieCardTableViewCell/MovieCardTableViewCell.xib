@@ -46,10 +46,11 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lLG-v4-fVs">
-                        <rect key="frame" x="160" y="69.666666666666671" width="220" height="15.666666666666671"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lLG-v4-fVs">
+                        <rect key="frame" x="160" y="69.666666666666686" width="220" height="175"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="220" id="SNm-on-DQJ"/>
+                            <constraint firstAttribute="height" constant="175" id="w6o-qA-RVN"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -69,6 +70,7 @@
                     </button>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="D0c-Cn-SRG" secondAttribute="bottom" constant="15" id="3WD-jc-hKK"/>
                     <constraint firstItem="FSx-ce-StS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="IEB-iE-uAt"/>
                     <constraint firstItem="9YI-G6-xB3" firstAttribute="leading" secondItem="FSx-ce-StS" secondAttribute="trailing" constant="10" id="IRE-4b-WAn"/>
                     <constraint firstItem="Z0k-nG-pcX" firstAttribute="leading" secondItem="FSx-ce-StS" secondAttribute="trailing" constant="9" id="Ia1-4B-QIX"/>
@@ -77,9 +79,9 @@
                     <constraint firstItem="D0c-Cn-SRG" firstAttribute="centerX" secondItem="FSx-ce-StS" secondAttribute="centerX" id="QKg-3v-8de"/>
                     <constraint firstItem="Z0k-nG-pcX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="S1B-Dx-Eb8"/>
                     <constraint firstItem="lLG-v4-fVs" firstAttribute="top" secondItem="9YI-G6-xB3" secondAttribute="bottom" constant="10" id="bTr-V8-bSb"/>
+                    <constraint firstAttribute="bottom" secondItem="lLG-v4-fVs" secondAttribute="bottom" constant="10" id="baN-nJ-fhw"/>
                     <constraint firstItem="lLG-v4-fVs" firstAttribute="leading" secondItem="FSx-ce-StS" secondAttribute="trailing" constant="10" id="clA-Fw-PFF"/>
                     <constraint firstItem="FSx-ce-StS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="guZ-0d-8fj"/>
-                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="lLG-v4-fVs" secondAttribute="bottom" constant="10" id="jcl-TJ-B6E"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

@@ -51,16 +51,19 @@ class MovieCardTableViewCell: UITableViewCell {
         movieTitle.numberOfLines = 0
         movieTitle.lineBreakMode = .byWordWrapping
     }
+    
     func setupReleaseDate() {
         movieReleaseDate.text = movieVM.releaseDate
         movieReleaseDate.numberOfLines = 0
         movieReleaseDate.lineBreakMode = .byWordWrapping
     }
+    
     func setupDescription() {
         movieDescription.text = movieVM.description
         movieDescription.numberOfLines = 0
-        movieDescription.lineBreakMode = .byWordWrapping
+        movieDescription.lineBreakMode = .byTruncatingTail
     }
+    
     func setupPoster() {
         movieVM.loadImage(delegate: self)
     }
@@ -75,6 +78,7 @@ extension MovieCardTableViewCell : MovieCardTableViewCellDelegate {
             }
         }
     }
+    
     func updatePosterFromCache(with image: UIImage) {
         DispatchQueue.main.async {
             self.moviePoster.image = image

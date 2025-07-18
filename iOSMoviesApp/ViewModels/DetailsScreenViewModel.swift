@@ -6,6 +6,7 @@
 //
 
 class DetailsScreenViewModel {
+    
     var movie : MovieViewModel? = nil
     var info : InfoViewModel? = nil
     var casts : CastDetailsViewModel? = nil
@@ -17,6 +18,7 @@ class DetailsScreenViewModel {
 }
 
 extension DetailsScreenViewModel {
+    
     func fetchCastDetails() {
         guard let delegate = self.delegate, let movie = self.movie else {
             return
@@ -31,6 +33,7 @@ extension DetailsScreenViewModel {
             }
         }
     }
+    
     private func storeCastData (_ castData : CreditsResponse) {
         let castVMs = castData.results.map({
             CastViewModel(cast: $0)
@@ -51,6 +54,7 @@ extension DetailsScreenViewModel {
 }
 
 extension DetailsScreenViewModel {
+    
     func fetchMovieInfo() {
         guard let delegate = self.delegate, let movie = self.movie else {
             return
@@ -66,9 +70,11 @@ extension DetailsScreenViewModel {
             }
         }
     }
+    
     private func storeMovieInfo(_ movieInfo: Info) {
         self.info = InfoViewModel(info: movieInfo)
     }
+    
     func getMovieInfo() -> InfoViewModel? {
         guard let info = self.info else {
             return nil

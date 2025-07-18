@@ -7,6 +7,7 @@
 import Foundation
 
 struct CastDetailsViewModel {
+    
     var castViewModels: [CastViewModel]
     init(castViewModels: [CastViewModel]) {
         self.castViewModels = castViewModels
@@ -14,9 +15,11 @@ struct CastDetailsViewModel {
 }
 
 extension CastDetailsViewModel {
+    
     func getCastViewModel(at index : Int) -> CastViewModel {
         return self.castViewModels[index]
     }
+    
     func numberOfCasts() -> Int {
         return self.castViewModels.count
     }
