@@ -10,10 +10,13 @@ import UIKit
 class CastDetailsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var castCollectionView: UICollectionView!
+    
     private var castDetailsVM : CastDetailsViewModel?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setupCollectionView()
+        self.selectionStyle = .none
     }
 
     func configureState (_ castDetailsVM: CastDetailsViewModel) {
@@ -23,7 +26,9 @@ class CastDetailsTableViewCell: UITableViewCell {
 }
 
 extension CastDetailsTableViewCell: UICollectionViewDataSource, UICollectionViewDelegate {
+    
     func setupCollectionView() {
+        
         let nib = UINib(nibName: "CastCollectionViewCell", bundle: nil)
         castCollectionView.register(nib, forCellWithReuseIdentifier: "CastCollectionViewCell")
         castCollectionView.dataSource = self
@@ -35,6 +40,7 @@ extension CastDetailsTableViewCell: UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CastCollectionViewCell", for: indexPath) as? CastCollectionViewCell else {
             return UICollectionViewCell()
         }
@@ -51,7 +57,7 @@ extension CastDetailsTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 150, height: 200)
+        return PresetSizeValue.castCollectionViewItemSize
     }
 }
 

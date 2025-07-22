@@ -49,11 +49,14 @@ extension InfoViewModel {
     }
     
     mutating func loadMoviePoster(delegate : InfoTableViewCellDelegate?) {
+        
         guard let delegate = delegate else { return }
         self.delegate = delegate
         guard let delegate = self.delegate else { return }
+        
         guard let imageURL = URL(string : self.posterPath) else { return }
-        let cacheKey = NSString(string : self.posterPath)
+        let cacheKey: NSString = NSString(string : self.posterPath)
+        
         if let cachedImage = ImageCache.shared.object(forKey: cacheKey) {
             DispatchQueue.main.async {
                 delegate.updatePosterFromCache(with: cachedImage)

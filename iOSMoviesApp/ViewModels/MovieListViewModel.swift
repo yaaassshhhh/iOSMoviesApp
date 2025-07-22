@@ -14,7 +14,9 @@ class MovieListViewModel {
 }
 
 extension MovieListViewModel {
+    
     func fetchMovies(delegate : DiscoveryPageViewControllerDelegate? ) {
+        
         guard let delegate = delegate else {
             return
         }
@@ -47,8 +49,9 @@ extension MovieListViewModel {
     }
 
     func initializeSearch(for searchText: String?) {
+        
         self.filteredMovies = []
-        guard let searchText  =  searchText else {
+        guard let searchText = searchText else {
             self.filteredMovies = self.movies
             return
         }

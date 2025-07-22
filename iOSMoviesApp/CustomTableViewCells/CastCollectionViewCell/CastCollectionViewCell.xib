@@ -29,7 +29,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jil-yM-xWa">
-                        <rect key="frame" x="52" y="173" width="120" height="19"/>
+                        <rect key="frame" x="52" y="173" width="120" height="13.333333333333343"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="120" id="dyv-Jr-up4"/>
                         </constraints>
@@ -49,7 +49,6 @@
                 <constraint firstItem="47D-4U-OT2" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="18" id="iXl-Cg-rvA"/>
                 <constraint firstItem="47D-4U-OT2" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="lAK-zF-YOH"/>
                 <constraint firstItem="47D-4U-OT2" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="n0n-X2-ctE"/>
-                <constraint firstAttribute="bottom" secondItem="jil-yM-xWa" secondAttribute="bottom" constant="15" id="od1-cE-BQt"/>
             </constraints>
             <size key="customSize" width="224" height="207"/>
             <connections>

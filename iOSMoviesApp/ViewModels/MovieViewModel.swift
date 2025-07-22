@@ -39,11 +39,13 @@ extension MovieViewModel : Identifiable {
     }
     
     mutating func loadImage(delegate: MovieCardTableViewCellDelegate?) {
+        
         guard let delegate = delegate else { return }
         self.delegate = delegate
         guard let delegate = self.delegate else { return }
+        
         guard let imageURL = URL(string: self.posterPath) else { return }
-        let cacheKey = NSString(string: self.posterPath)
+        let cacheKey: NSString = NSString(string: self.posterPath)
         
         if let cachedImage = ImageCache.shared.object(forKey: cacheKey) {
             DispatchQueue.main.async {
@@ -51,7 +53,6 @@ extension MovieViewModel : Identifiable {
             }
             return
         }
-        
         DispatchQueue.global(qos: .userInitiated).async {
             guard let imageData = try? Data(contentsOf: imageURL) else { return }
             delegate.updatePoster(with: imageData, cacheKey: cacheKey)

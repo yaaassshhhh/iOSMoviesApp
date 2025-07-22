@@ -47,10 +47,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lLG-v4-fVs">
-                        <rect key="frame" x="160" y="69.666666666666686" width="220" height="175"/>
+                        <rect key="frame" x="160" y="69.666666666666686" width="220" height="170"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="220" id="SNm-on-DQJ"/>
-                            <constraint firstAttribute="height" constant="175" id="w6o-qA-RVN"/>
+                            <constraint firstAttribute="height" constant="170" id="w6o-qA-RVN"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

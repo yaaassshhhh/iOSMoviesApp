@@ -23,16 +23,16 @@ class CastCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
     
     func configureState(_ castData: CastViewModel?) {
+        
         guard let castData = castData else {return}
         self.castVM = castData
+        
         setupRealName()
         setupFictionalName()
         setupPoster()
-        print("\n Individual Cast inside Cast Collection View cell : \n \(castVM.realName) \n \(castVM.fictionalName)")
     }
     
     private func setupRealName() {

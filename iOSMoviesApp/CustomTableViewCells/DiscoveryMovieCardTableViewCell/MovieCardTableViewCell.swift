@@ -28,10 +28,12 @@ class MovieCardTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.selectionStyle = .none
     }
 
     override func prepareForReuse() {
         super.prepareForReuse()
+        
         moviePoster.image = nil
         movieTitle.text = nil
         movieReleaseDate.text = nil
@@ -40,6 +42,7 @@ class MovieCardTableViewCell: UITableViewCell {
     
     func configureState(with movieVM: MovieViewModel) {
         self.movieVM = movieVM
+        
         setupPoster()
         setupTitle()
         setupReleaseDate()

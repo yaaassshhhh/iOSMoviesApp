@@ -36,9 +36,11 @@ extension CastViewModel : Identifiable {
     }
     
     mutating func loadCastImage(delegate: CastCollectionViewCellDelegate?) {
+        
         guard let delegate = delegate else { return }
         self.delegate = delegate
         guard let delegate = self.delegate else { return }
+        
         if self.cast.posterPath == nil {
                 DispatchQueue.main.async {
                     delegate.updateProfilePicFromPlaceholder(named: "tarangPic")
@@ -46,7 +48,8 @@ extension CastViewModel : Identifiable {
            return
         }
         guard let imageURL = URL(string: self.posterPath) else { return }
-        let cacheKey = NSString(string: self.posterPath)
+        let cacheKey: NSString = NSString(string: self.posterPath)
+        
         if let cachedImage = ImageCache.shared.object(forKey: cacheKey) {
             DispatchQueue.main.async {
                 delegate.updateProfilePicFromCache(with: cachedImage)

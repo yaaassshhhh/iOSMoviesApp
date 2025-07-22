@@ -13,10 +13,6 @@ protocol InfoTableViewCellDelegate: AnyObject {
 }
 
 class InfoTableViewCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
     
     @IBOutlet weak var movieName: UILabel!
     @IBOutlet weak var movieVotes: UILabel!
@@ -27,9 +23,15 @@ class InfoTableViewCell: UITableViewCell {
     
     private var infoVM: InfoViewModel?
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.selectionStyle = .none
+    }
+    
     func configureState(with infoVM: InfoViewModel?) {
         guard let infoVM = infoVM else { return }
         self.infoVM = infoVM
+        
         setupMoviePoster()
         setupMovieName()
         setupMovieVotes()

@@ -17,9 +17,10 @@ class DiscoveryPageViewController: UIViewController{
     
     @IBOutlet weak var locationBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
-    private var movieListVM = MovieListViewModel()
+    private var movieListVM : MovieListViewModel = MovieListViewModel()
     @IBOutlet weak var searchBar: UISearchBar!
-    let locationService = LocationService()
+    
+    let locationService : LocationService = LocationService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,8 +36,8 @@ class DiscoveryPageViewController: UIViewController{
     
     func setupTableView() {
         self.tableView.register(UINib(nibName: "MovieCardTableViewCell", bundle: nil), forCellReuseIdentifier: "MovieCardTableViewCell")
-        tableView.delegate = self
-        tableView.dataSource = self
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
         self.tableView.rowHeight = UITableView.automaticDimension
     }
     
@@ -46,6 +47,7 @@ class DiscoveryPageViewController: UIViewController{
 }
 
 extension DiscoveryPageViewController: UISearchBarDelegate {
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         movieListVM.initializeSearch(for: searchText)
     }
@@ -70,21 +72,23 @@ extension DiscoveryPageViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellVM = self.movieListVM.getMovieViewModel(at: indexPath)
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCardTableViewCell", for : indexPath) as? MovieCardTableViewCell
+        
+        let cellVM: MovieViewModel = self.movieListVM.getMovieViewModel(at: indexPath)
+        let cell: MovieCardTableViewCell? = tableView.dequeueReusableCell(withIdentifier: "MovieCardTableViewCell", for : indexPath) as? MovieCardTableViewCell
+        
         guard let cell = cell else {
             self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "DefaultCell")
             return UITableViewCell()
         }
         cell.configureState(with : cellVM)
-        cell.selectionStyle = .none
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let detailsVC = UIStoryboard.init(name : "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "detailsViewC") as? DetailsScreenViewController
-        let selectedMovieVM = movieListVM.getMovieViewModel(at: indexPath)
+        let detailsVC: DetailsScreenViewController? = UIStoryboard.init(name : "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "detailsViewC") as? DetailsScreenViewController
+        let selectedMovieVM: MovieViewModel = movieListVM.getMovieViewModel(at: indexPath)
+        
         guard let detailsVC = detailsVC else {
             return
         }
@@ -102,6 +106,7 @@ extension DiscoveryPageViewController : DiscoveryPageViewControllerDelegate {
 }
 
 extension DiscoveryPageViewController : LocationServiceDelegate {
+    
     func didUpdateLocation(_ placeName : String) {
         locationBtn.setTitle(placeName, for: .normal)
         locationService.stopUpdatingLocation()

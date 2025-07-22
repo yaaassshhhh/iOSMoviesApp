@@ -35,7 +35,7 @@ extension DetailsScreenViewModel {
     }
     
     private func storeCastData (_ castData : CreditsResponse) {
-        let castVMs = castData.results.map({
+        let castVMs: [CastViewModel] = castData.results.map({
             CastViewModel(cast: $0)
         })
         self.casts = CastDetailsViewModel(castViewModels: castVMs)
@@ -65,6 +65,7 @@ extension DetailsScreenViewModel {
                 print(movieInfo)
                 self.storeMovieInfo(movieInfo)
                 delegate.reloadTableData()
+                
             case.failure(let error) :
                 print("Error in fetching Movie Info - \(error)")
             }

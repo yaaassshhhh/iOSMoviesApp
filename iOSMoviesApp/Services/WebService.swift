@@ -31,7 +31,7 @@ struct Resource<T> {
 final class WebService{
     
     func load<T>(resource : Resource<T>, completion: @escaping (Result<T, NetworkError>)-> Void) {
-        var request = URLRequest(url: resource.url)
+        var request: URLRequest = URLRequest(url: resource.url)
         request.httpMethod = resource.method.rawValue
         
         if let body = resource.body {
@@ -48,7 +48,7 @@ final class WebService{
                 return
             }
             
-            let result = resource.parse(data)
+            let result: T? = resource.parse(data)
             if let result = result {
                 DispatchQueue.main.async {
                     completion(.success(result))
