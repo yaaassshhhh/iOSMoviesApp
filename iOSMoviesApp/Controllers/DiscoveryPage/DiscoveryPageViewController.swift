@@ -17,9 +17,9 @@ class DiscoveryPageViewController: UIViewController{
     
     @IBOutlet weak var locationBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
-    private var movieListVM : MovieListViewModel = MovieListViewModel()
     @IBOutlet weak var searchBar: UISearchBar!
     
+    private var movieListVM : MovieListViewModel!
     let locationService : LocationService = LocationService()
     
     override func viewDidLoad() {
@@ -29,7 +29,8 @@ class DiscoveryPageViewController: UIViewController{
     }
     
     private func setupUI() {
-        movieListVM.fetchMovies(delegate: self)
+        movieListVM = MovieListViewModel(delegate : self)
+        movieListVM.fetchMovies()
         setupTableView()
         setupSearchBar()
     }
@@ -74,12 +75,12 @@ extension DiscoveryPageViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cellVM: MovieViewModel = self.movieListVM.getMovieViewModel(at: indexPath)
-        let cell: MovieCardTableViewCell? = tableView.dequeueReusableCell(withIdentifier: "MovieCardTableViewCell", for : indexPath) as? MovieCardTableViewCell
         
-        guard let cell = cell else {
+        guard let cell: MovieCardTableViewCell = tableView.dequeueReusableCell(withIdentifier: "MovieCardTableViewCell", for : indexPath) as? MovieCardTableViewCell else {
             self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "DefaultCell")
             return UITableViewCell()
         }
+        
         cell.configureState(with : cellVM)
         return cell
     }
@@ -89,7 +90,7 @@ extension DiscoveryPageViewController: UITableViewDelegate, UITableViewDataSourc
         let detailsVC: DetailsScreenViewController? = UIStoryboard.init(name : "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "detailsViewC") as? DetailsScreenViewController
         let selectedMovieVM: MovieViewModel = movieListVM.getMovieViewModel(at: indexPath)
         
-        guard let detailsVC = detailsVC else {
+        guard let detailsVC: DetailsScreenViewController = detailsVC else {
             return
         }
         detailsVC.setupMovie(movieVM: selectedMovieVM)

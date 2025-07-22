@@ -40,7 +40,7 @@ extension InfoViewModel {
         for genre in self.info.genres {
             strGenres.append(genre.type)
         }
-        let genreSentence = strGenres.joined(separator: ", ")
+        let genreSentence: String = strGenres.joined(separator: ", ")
         return genreSentence
     }
     
@@ -50,11 +50,11 @@ extension InfoViewModel {
     
     mutating func loadMoviePoster(delegate : InfoTableViewCellDelegate?) {
         
-        guard let delegate = delegate else { return }
+        guard let delegate: InfoTableViewCellDelegate = delegate else { return }
         self.delegate = delegate
-        guard let delegate = self.delegate else { return }
+        guard let delegate: InfoTableViewCellDelegate = self.delegate else { return }
         
-        guard let imageURL = URL(string : self.posterPath) else { return }
+        guard let imageURL: URL = URL(string : self.posterPath) else { return }
         let cacheKey: NSString = NSString(string : self.posterPath)
         
         if let cachedImage = ImageCache.shared.object(forKey: cacheKey) {
@@ -64,7 +64,7 @@ extension InfoViewModel {
             return
         }
         DispatchQueue.global(qos: .userInitiated).async {
-            guard let imageData = try? Data(contentsOf: imageURL) else { return }
+            guard let imageData: Data = try? Data(contentsOf: imageURL) else { return }
             delegate.updatePoster(with: imageData, cacheKey: cacheKey)
         }
     }

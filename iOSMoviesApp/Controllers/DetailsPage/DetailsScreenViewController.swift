@@ -50,9 +50,9 @@ class DetailsScreenViewController: UIViewController {
 extension DetailsScreenViewController: UITableViewDataSource , UITableViewDelegate {
     
     private func setupTableView() {
-        let castNib = UINib(nibName: "CastDetailsTableViewCell", bundle: nil)
-        let reviewNib = UINib(nibName: "ReviewTableViewCell", bundle: nil)
-        let infoNib = UINib(nibName: "InfoTableViewCell", bundle: nil)
+        let castNib: UINib = UINib(nibName: "CastDetailsTableViewCell", bundle: nil)
+        let reviewNib: UINib = UINib(nibName: "ReviewTableViewCell", bundle: nil)
+        let infoNib: UINib = UINib(nibName: "InfoTableViewCell", bundle: nil)
         
         tableView.register(castNib, forCellReuseIdentifier: "CastDetailsTableViewCell")
         tableView.register(reviewNib, forCellReuseIdentifier: "ReviewTableViewCell")
@@ -81,9 +81,8 @@ extension DetailsScreenViewController: UITableViewDataSource , UITableViewDelega
         let position : Int = indexPath.row
         
         switch position {
-            
         case 0 :
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "InfoTableViewCell", for: indexPath) as? InfoTableViewCell else {
+            guard let cell: InfoTableViewCell = tableView.dequeueReusableCell(withIdentifier: "InfoTableViewCell", for: indexPath) as? InfoTableViewCell else {
                 break
             }
             cell.configureState(with: detailsVM.getMovieInfo() ?? nil)
@@ -96,7 +95,7 @@ extension DetailsScreenViewController: UITableViewDataSource , UITableViewDelega
             return cell
             
         case 2 :
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "CastDetailsTableViewCell", for: indexPath) as? CastDetailsTableViewCell else {
+            guard let cell: CastDetailsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "CastDetailsTableViewCell", for: indexPath) as? CastDetailsTableViewCell else {
                 break
             }
             cell.configureState(detailsVM.getAllCastViewModel())
@@ -106,8 +105,10 @@ extension DetailsScreenViewController: UITableViewDataSource , UITableViewDelega
             return UITableViewCell()
             
         default :
+            self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "DefaultCell")
             return UITableViewCell()
         }
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "DefaultCell")
         return UITableViewCell()
     }
 }

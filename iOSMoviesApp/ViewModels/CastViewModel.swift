@@ -23,7 +23,7 @@ extension CastViewModel : Identifiable {
     }
     
     var posterPath : String {
-        guard let imageURLString = self.cast.posterPath else { return "" }
+        guard let imageURLString: String = self.cast.posterPath else { return "" }
         return self.posterBaseURL + imageURLString
     }
     
@@ -37,9 +37,9 @@ extension CastViewModel : Identifiable {
     
     mutating func loadCastImage(delegate: CastCollectionViewCellDelegate?) {
         
-        guard let delegate = delegate else { return }
+        guard let delegate: CastCollectionViewCellDelegate = delegate else { return }
         self.delegate = delegate
-        guard let delegate = self.delegate else { return }
+        guard let delegate: CastCollectionViewCellDelegate = self.delegate else { return }
         
         if self.cast.posterPath == nil {
                 DispatchQueue.main.async {
@@ -47,7 +47,7 @@ extension CastViewModel : Identifiable {
                 }
            return
         }
-        guard let imageURL = URL(string: self.posterPath) else { return }
+        guard let imageURL: URL = URL(string: self.posterPath) else { return }
         let cacheKey: NSString = NSString(string: self.posterPath)
         
         if let cachedImage = ImageCache.shared.object(forKey: cacheKey) {
@@ -57,7 +57,7 @@ extension CastViewModel : Identifiable {
             return
         }
         DispatchQueue.global(qos: .userInitiated).async {
-            guard let imageData = try? Data(contentsOf: imageURL) else { return }
+            guard let imageData: Data = try? Data(contentsOf: imageURL) else { return }
             delegate.updateProfilePic(with: imageData, cacheKey: cacheKey)
         }
     }

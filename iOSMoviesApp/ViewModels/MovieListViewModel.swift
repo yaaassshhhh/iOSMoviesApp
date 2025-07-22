@@ -11,22 +11,23 @@ class MovieListViewModel {
     var movies : [MovieViewModel] = []
     var filteredMovies : [MovieViewModel] = []
     private weak var delegate : DiscoveryPageViewControllerDelegate?
+    
+    init(delegate: DiscoveryPageViewControllerDelegate?){
+        self.delegate = delegate
+    }
 }
 
 extension MovieListViewModel {
     
-    func fetchMovies(delegate : DiscoveryPageViewControllerDelegate? ) {
+    func fetchMovies() {
         
-        guard let delegate = delegate else {
-            return
-        }
-        self.delegate = delegate
+        guard let delegate: DiscoveryPageViewControllerDelegate = self.delegate else { return }
         
         WebService().load(resource: ListResponseJSON.resource()) { result in
             switch result {
             case .success(let movieData) :
                 self.storeMovieData(movieData)
-                self.delegate?.reloadTableView()
+                delegate.reloadTableView()
             case .failure(let error) :
                 print("Error fetching data : \(error)")
             }

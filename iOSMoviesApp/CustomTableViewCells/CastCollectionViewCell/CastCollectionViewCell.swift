@@ -27,7 +27,7 @@ class CastCollectionViewCell: UICollectionViewCell {
     
     func configureState(_ castData: CastViewModel?) {
         
-        guard let castData = castData else {return}
+        guard let castData: CastViewModel = castData else {return}
         self.castVM = castData
         
         setupRealName()
@@ -37,14 +37,12 @@ class CastCollectionViewCell: UICollectionViewCell {
     
     private func setupRealName() {
         realName.text = castVM.realName
-        realName.numberOfLines = 0
-        realName.lineBreakMode = .byWordWrapping
+        realName.setLinesByWord()
     }
     
     private func setupFictionalName() {
         fictionalName.text = castVM.fictionalName
-        fictionalName.numberOfLines = 0
-        fictionalName.lineBreakMode = .byWordWrapping
+        fictionalName.setLinesByWord()
     }
     
     func setupPoster() {
@@ -56,7 +54,7 @@ class CastCollectionViewCell: UICollectionViewCell {
 extension CastCollectionViewCell : CastCollectionViewCellDelegate {
     
     func updateProfilePic(with imageData: Data, cacheKey: NSString) {
-        if let image = UIImage(data: imageData) {
+        if let image: UIImage = UIImage(data: imageData) {
             self.setupCache(image, cacheKey)
             DispatchQueue.main.async {
                 self.castImage.image = image

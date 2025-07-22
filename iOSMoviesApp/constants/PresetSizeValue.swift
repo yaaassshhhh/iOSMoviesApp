@@ -14,22 +14,27 @@ struct PresetSizeValue {
             return getInfoCellHeight()
         }
     }
+    
     static var castCellHeight: CGFloat {
         get {
             return getCastCellHeight()
         }
     }
+    
     static var castCollectionViewItemSize: CGSize {
         get {
             return castCollectionViewSize()
         }
     }
+    
     static func castCollectionViewSize() -> CGSize {
-        return CGSize(width: 100, height: 100)
+        return CGSize(width: 150, height: 200)
     }
+    
     static func getInfoCellHeight() -> CGFloat {
-        return 290
+        return 320
     }
+    
     static func getCastCellHeight() -> CGFloat {
         return 250
     }

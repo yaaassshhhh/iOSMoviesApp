@@ -29,7 +29,7 @@ class InfoTableViewCell: UITableViewCell {
     }
     
     func configureState(with infoVM: InfoViewModel?) {
-        guard let infoVM = infoVM else { return }
+        guard let infoVM: InfoViewModel = infoVM else { return }
         self.infoVM = infoVM
         
         setupMoviePoster()
@@ -46,39 +46,34 @@ class InfoTableViewCell: UITableViewCell {
     
     func setupMovieDescription() {
         movieDescription.text = infoVM?.description ?? ""
-        movieDescription.numberOfLines = 0
-        movieDescription.lineBreakMode = .byTruncatingTail
+        movieDescription.setLinesByTail()
     }
     
     func setupMovieName() {
         movieName.text = infoVM?.movieName ?? ""
-        movieName.numberOfLines = 0
-        movieName.lineBreakMode = .byWordWrapping
+        movieName.setLinesByWord()
     }
     
     func setupMovieRating() {
         movieRating.text = infoVM?.rating ?? ""
-        movieRating.numberOfLines = 0
-        movieRating.lineBreakMode = .byWordWrapping
+        movieRating.setLinesByWord()
     }
     
     func setupMovieVotes() {
         movieVotes.text = infoVM?.votes ?? ""
-        movieVotes.numberOfLines = 0
-        movieVotes.lineBreakMode = .byWordWrapping
+        movieVotes.setLinesByWord()
     }
     
     func setupMovieGenre() {
         movieGenre.text = infoVM?.genres ?? ""
-        movieGenre.numberOfLines = 0
-        movieGenre.lineBreakMode = .byWordWrapping
+        movieGenre.setLinesByWord()
     }
 }
 
 extension InfoTableViewCell : InfoTableViewCellDelegate {
     
     func updatePoster(with imageData: Data, cacheKey: NSString) {
-        if let image = UIImage(data: imageData) {
+        if let image: UIImage = UIImage(data: imageData) {
             self.setUpCache(image, cacheKey)
             DispatchQueue.main.async {
                 self.MoviePoster.image = image

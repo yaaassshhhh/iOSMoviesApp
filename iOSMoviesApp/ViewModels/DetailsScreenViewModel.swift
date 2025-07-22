@@ -56,7 +56,7 @@ extension DetailsScreenViewModel {
 extension DetailsScreenViewModel {
     
     func fetchMovieInfo() {
-        guard let delegate = self.delegate, let movie = self.movie else {
+        guard let delegate: DetailsScreenViewControllerDelegate = self.delegate, let movie: MovieViewModel = self.movie else {
             return
         }
         WebService().load(resource : Info.resource(id: movie.id)) { result in
@@ -77,7 +77,7 @@ extension DetailsScreenViewModel {
     }
     
     func getMovieInfo() -> InfoViewModel? {
-        guard let info = self.info else {
+        guard let info: InfoViewModel = self.info else {
             return nil
         }
         return info

@@ -34,7 +34,7 @@ final class WebService{
         var request: URLRequest = URLRequest(url: resource.url)
         request.httpMethod = resource.method.rawValue
         
-        if let body = resource.body {
+        if let body: Data = resource.body {
             request.httpBody = body
         }
         request.allHTTPHeaderFields = [
@@ -43,13 +43,13 @@ final class WebService{
         ]
         
         URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {
+            guard let data: Data = data, error == nil else {
                 completion(.failure(.domainError))
                 return
             }
             
             let result: T? = resource.parse(data)
-            if let result = result {
+            if let result: T = result {
                 DispatchQueue.main.async {
                     completion(.success(result))
                 }

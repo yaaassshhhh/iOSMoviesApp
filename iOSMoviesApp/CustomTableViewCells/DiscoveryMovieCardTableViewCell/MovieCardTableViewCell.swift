@@ -51,20 +51,17 @@ class MovieCardTableViewCell: UITableViewCell {
     
     func setupTitle() {
         movieTitle.text = movieVM.title
-        movieTitle.numberOfLines = 0
-        movieTitle.lineBreakMode = .byWordWrapping
+        movieTitle.setLinesByWord()
     }
     
     func setupReleaseDate() {
         movieReleaseDate.text = movieVM.releaseDate
-        movieReleaseDate.numberOfLines = 0
-        movieReleaseDate.lineBreakMode = .byWordWrapping
+        movieReleaseDate.setLinesByWord()
     }
     
     func setupDescription() {
         movieDescription.text = movieVM.description
-        movieDescription.numberOfLines = 0
-        movieDescription.lineBreakMode = .byTruncatingTail
+        movieDescription.setLinesByTail()
     }
     
     func setupPoster() {
@@ -74,7 +71,7 @@ class MovieCardTableViewCell: UITableViewCell {
 
 extension MovieCardTableViewCell : MovieCardTableViewCellDelegate {
     func updatePoster(with imageData: Data, cacheKey : NSString ) {
-        if let image = UIImage(data: imageData) {
+        if let image: UIImage = UIImage(data: imageData) {
             self.setUpCache(image, cacheKey)
             DispatchQueue.main.async {
                 self.moviePoster.image = image

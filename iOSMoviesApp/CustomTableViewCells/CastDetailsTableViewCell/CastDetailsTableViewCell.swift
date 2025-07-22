@@ -29,7 +29,7 @@ extension CastDetailsTableViewCell: UICollectionViewDataSource, UICollectionView
     
     func setupCollectionView() {
         
-        let nib = UINib(nibName: "CastCollectionViewCell", bundle: nil)
+        let nib: UINib = UINib(nibName: "CastCollectionViewCell", bundle: nil)
         castCollectionView.register(nib, forCellWithReuseIdentifier: "CastCollectionViewCell")
         castCollectionView.dataSource = self
         castCollectionView.delegate = self
@@ -41,7 +41,8 @@ extension CastDetailsTableViewCell: UICollectionViewDataSource, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CastCollectionViewCell", for: indexPath) as? CastCollectionViewCell else {
+        guard let cell: CastCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CastCollectionViewCell", for: indexPath) as? CastCollectionViewCell else {
+            self.castCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "defaultCell")
             return UICollectionViewCell()
         }
         cell.configureState(castDetailsVM?.getCastViewModel(at: indexPath.row))
