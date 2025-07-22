@@ -21,9 +21,11 @@ class MovieCardTableViewCell: UITableViewCell {
     @IBOutlet weak var movieDescription: UILabel!
     
     private var movieVM: MovieViewModel!
+    private weak var delegate: DiscoveryPageViewControllerDelegate?
+    private var indexPath: IndexPath!
     
     @IBAction func movieSelected(_ sender: Any) {
-        print("Movie Selected")
+        delegate?.navigateToDetails(for: self.indexPath)
     }
     
     override func awakeFromNib() {
@@ -40,8 +42,10 @@ class MovieCardTableViewCell: UITableViewCell {
         movieDescription.text = nil
     }
     
-    func configureState(with movieVM: MovieViewModel) {
+    func configureState(with movieVM: MovieViewModel, delegate: DiscoveryPageViewControllerDelegate?, indexPath : IndexPath) {
         self.movieVM = movieVM
+        self.delegate = delegate
+        self.indexPath = indexPath
         
         setupPoster()
         setupTitle()

@@ -11,6 +11,7 @@ import CoreLocation
 
 protocol DiscoveryPageViewControllerDelegate: AnyObject{
     func reloadTableView()
+    func navigateToDetails(for indexPath : IndexPath)
 }
 
 class DiscoveryPageViewController: UIViewController{
@@ -81,12 +82,17 @@ extension DiscoveryPageViewController: UITableViewDelegate, UITableViewDataSourc
             return UITableViewCell()
         }
         
-        cell.configureState(with : cellVM)
+        cell.configureState(with : cellVM, delegate : self, indexPath : indexPath)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        self.navigateToDetails(for: indexPath)
+    }
+}
+
+extension DiscoveryPageViewController : DiscoveryPageViewControllerDelegate {
+    func navigateToDetails(for indexPath: IndexPath) {
         let detailsVC: DetailsScreenViewController? = UIStoryboard.init(name : "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "detailsViewC") as? DetailsScreenViewController
         let selectedMovieVM: MovieViewModel = movieListVM.getMovieViewModel(at: indexPath)
         
@@ -96,9 +102,7 @@ extension DiscoveryPageViewController: UITableViewDelegate, UITableViewDataSourc
         detailsVC.setupMovie(movieVM: selectedMovieVM)
         self.navigationController?.pushViewController(detailsVC, animated: true)
     }
-}
-
-extension DiscoveryPageViewController : DiscoveryPageViewControllerDelegate {
+    
    func reloadTableView() {
        DispatchQueue.main.async{
            self.tableView.reloadData()
