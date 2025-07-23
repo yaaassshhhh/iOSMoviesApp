@@ -23,14 +23,20 @@ extension MovieListViewModel {
         
         guard let delegate: DiscoveryPageViewControllerDelegate = self.delegate else { return }
         
-        WebService().load(resource: ListResponseJSON.resource()) { result in
-            switch result {
-            case .success(let movieData) :
-                self.storeMovieData(movieData)
-                delegate.reloadTableView()
-            case .failure(let error) :
-                print("Error fetching data : \(error)")
+        let result: Result<Resource<ListResponseJSON>, NetworkError> = ListResponseJSON.resource()
+        switch result {
+        case .success(let resource):
+            WebService().load(resource: resource) { result in
+                switch result {
+                case .success(let movieData) :
+                    self.storeMovieData(movieData)
+                    delegate.reloadTableView()
+                case .failure(let error) :
+                    print("Error fetching data : \(error)")
+                }
             }
+        case .failure(let error):
+            print(error)
         }
     }
     

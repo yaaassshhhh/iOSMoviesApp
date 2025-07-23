@@ -24,13 +24,14 @@ struct Info: Decodable {
     }
 }
 extension Info {
-    static func resource(id movie_id : Int) -> Resource<Info> {
+    static func resource(id movie_id : Int) -> Result<Resource<Info>, NetworkError> {
         guard let movieListURL = URL(string : "https://api.themoviedb.org/3/movie/\(movie_id)") else {
-            fatalError("Invalid URL")
+            return .failure(.urlError)
         }
-        return Resource<Info>(url : movieListURL, parse : { data in
+        let resource = Resource<Info>(url : movieListURL, parse : { data in
             let decoded = try? JSONDecoder().decode(Info.self, from: data)
             return decoded
         })
+        return .success(resource)
     }
 }

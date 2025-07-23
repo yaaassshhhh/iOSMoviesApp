@@ -16,13 +16,14 @@ struct CreditsResponse : Decodable {
 }
 
 extension CreditsResponse {
-    static func resource(id movie_id : Int) -> Resource<CreditsResponse> {
+    static func resource(id movie_id : Int) -> Result<Resource<CreditsResponse>, NetworkError> {
         guard let creditsURL = URL(string : "https://api.themoviedb.org/3/movie/\(movie_id)/credits") else {
-            fatalError("Invalid URL")
+            return .failure(.urlError)
         }
-        return Resource<CreditsResponse>(url : creditsURL, parse : { data in
+        let resource = Resource<CreditsResponse>(url : creditsURL, parse : { data in
             let decoded = try? JSONDecoder().decode(CreditsResponse.self, from: data)
             return decoded
         })
+        return .success(resource)
     }
 }

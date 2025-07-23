@@ -23,15 +23,22 @@ extension DetailsScreenViewModel {
         guard let delegate = self.delegate, let movie = self.movie else {
             return
         }
-        WebService().load(resource: CreditsResponse.resource(id : movie.id)) { result in
-            switch result {
-            case .success(let castData) :
-                self.storeCastData(castData)
-                delegate.reloadTableData()
-            case .failure(let error) :
-                print("Error fetching data : \(error)")
+        let result : Result<Resource<CreditsResponse>, NetworkError> = CreditsResponse.resource(id: movie.id)
+        switch result {
+        case .success(let resource):
+            WebService().load(resource: resource) { result in
+                switch result {
+                case .success(let castData) :
+                    self.storeCastData(castData)
+                    delegate.reloadTableData()
+                case .failure(let error) :
+                    print("Error fetching data : \(error)")
+                }
             }
+        case .failure(let error):
+            print(error)
         }
+        
     }
     
     private func storeCastData (_ castData : CreditsResponse) {
@@ -59,16 +66,22 @@ extension DetailsScreenViewModel {
         guard let delegate: DetailsScreenViewControllerDelegate = self.delegate, let movie: MovieViewModel = self.movie else {
             return
         }
-        WebService().load(resource : Info.resource(id: movie.id)) { result in
-            switch result {
-            case .success(let movieInfo) :
-                print(movieInfo)
-                self.storeMovieInfo(movieInfo)
-                delegate.reloadTableData()
-                
-            case.failure(let error) :
-                print("Error in fetching Movie Info - \(error)")
+        let result : Result<Resource<Info>, NetworkError> = Info.resource(id: movie.id)
+        switch result {
+        case .success(let resource):
+            WebService().load(resource : resource ) { result in
+                switch result {
+                    
+                case .success(let movieInfo) :
+                    self.storeMovieInfo(movieInfo)
+                    delegate.reloadTableData()
+                    
+                case.failure(let error) :
+                    print("Error in fetching Movie Info - \(error)")
+                }
             }
+        case .failure(let error):
+            print("Error in fetching Movie Info Resource - \(error)")
         }
     }
     

@@ -31,6 +31,7 @@ struct Resource<T> {
 final class WebService{
     
     func load<T>(resource : Resource<T>, completion: @escaping (Result<T, NetworkError>)-> Void) {
+        
         var request: URLRequest = URLRequest(url: resource.url)
         request.httpMethod = resource.method.rawValue
         
