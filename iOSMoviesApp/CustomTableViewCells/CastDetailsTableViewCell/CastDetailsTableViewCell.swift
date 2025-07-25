@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CastDetailsTableViewCell: UITableViewCell {
+final class CastDetailsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var castCollectionView: UICollectionView!
     

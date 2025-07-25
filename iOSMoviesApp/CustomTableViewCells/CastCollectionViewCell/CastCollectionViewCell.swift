@@ -14,12 +14,12 @@ protocol CastCollectionViewCellDelegate: AnyObject {
     func updateProfilePicFromPlaceholder(named: String)
 }
 
-class CastCollectionViewCell: UICollectionViewCell {
+final class CastCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var realName: UILabel!
     @IBOutlet weak var fictionalName: UILabel!
     @IBOutlet weak var castImage: UIImageView!
-    private var castVM : CastViewModel!
+    private var castVM : CastViewModel?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,18 +36,20 @@ class CastCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupRealName() {
-        realName.text = castVM.realName
+        guard let actorName = castVM?.realName else {return}
+        realName.text = actorName
         realName.setLinesByWord()
     }
     
     private func setupFictionalName() {
-        fictionalName.text = castVM.fictionalName
+        guard let charName = castVM?.fictionalName else {return}
+        fictionalName.text = charName
         fictionalName.setLinesByWord()
     }
     
     func setupPoster() {
         castImage.setRounded()
-        castVM.loadCastImage(delegate: self)
+        castVM?.loadCastImage(delegate: self)
     }
 }
 

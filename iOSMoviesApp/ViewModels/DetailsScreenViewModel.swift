@@ -5,14 +5,16 @@
 //  Created by Yash Agrawal on 11/07/25.
 //
 
+import Foundation
+
 class DetailsScreenViewModel {
     
     var movie : MovieViewModel? = nil
     var info : InfoViewModel? = nil
     var casts : CastDetailsViewModel? = nil
-    private weak var delegate : DetailsScreenViewControllerDelegate?
+    private weak var delegate : ViewControllerTableReloadDelegate?
     
-    init(delegate: DetailsScreenViewControllerDelegate? = nil) {
+    init(delegate: ViewControllerTableReloadDelegate? = nil) {
         self.delegate = delegate
     }
 }
@@ -58,12 +60,22 @@ extension DetailsScreenViewModel {
         }
         return casts
     }
+    func setCellHeight(_ index: Int) -> CGFloat {
+        switch index {
+        case 0:
+            return PresetSizeValue.infoCellHeight
+        case 2:
+            return PresetSizeValue.castCellHeight
+        default:
+            return 0
+        }
+    }
 }
 
 extension DetailsScreenViewModel {
     
     func fetchMovieInfo() {
-        guard let delegate: DetailsScreenViewControllerDelegate = self.delegate, let movie: MovieViewModel = self.movie else {
+        guard let delegate: ViewControllerTableReloadDelegate = self.delegate, let movie: MovieViewModel = self.movie else {
             return
         }
         let result : Result<Resource<Info>, NetworkError> = Info.resource(id: movie.id)

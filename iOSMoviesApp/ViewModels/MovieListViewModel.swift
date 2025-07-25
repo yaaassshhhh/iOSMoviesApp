@@ -30,7 +30,7 @@ extension MovieListViewModel {
                 switch result {
                 case .success(let movieData) :
                     self.storeMovieData(movieData)
-                    delegate.reloadTableView()
+                    delegate.reloadTableData()
                 case .failure(let error) :
                     print("Error fetching data : \(error)")
                 }
@@ -48,11 +48,11 @@ extension MovieListViewModel {
     }
     
     func getMovieViewModel(at index : IndexPath) -> MovieViewModel {
-        return self.movies[index.row]
+        return self.filteredMovies[index.row]
     }
     
     func numberOfMovies() -> Int {
-        return self.movies.count
+        return self.filteredMovies.count
     }
 
     func initializeSearch(for searchText: String?) {
@@ -62,10 +62,19 @@ extension MovieListViewModel {
             self.filteredMovies = self.movies
             return
         }
-        if searchText.isEmpty {
+        
+        let validSearchText = searchText.trimmingCharacters(in: .whitespaces)
+        guard !validSearchText.isEmpty else {
             self.filteredMovies = self.movies
-        } else {
-            self.filteredMovies = self.movies.filter{$0.movie.title.lowercased().contains(searchText.lowercased())}
+            return
         }
+        
+        let smartSearch = SmartSearchAlgo(searchText : validSearchText)
+        self.filteredMovies = self.movies.filter({ movieVM in
+            let movieTitle = movieVM.title
+            return smartSearch.isMatch(movieTitle)
+        })
+        
     }
+    
 }

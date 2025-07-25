@@ -25,10 +25,8 @@ class LocationService : NSObject, CLLocationManagerDelegate {
     }
     
     func requestLocationAccess() {
-        
-            print("Inside request location access")
-            locationManager.requestWhenInUseAuthorization()
-        
+        print("Inside request location access")
+        locationManager.requestWhenInUseAuthorization()
     }
     
     func startUpdatingLocation() {

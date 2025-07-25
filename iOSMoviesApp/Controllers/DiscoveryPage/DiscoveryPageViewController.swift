@@ -9,12 +9,11 @@ import Foundation
 import UIKit
 import CoreLocation
 
-protocol DiscoveryPageViewControllerDelegate: AnyObject{
-    func reloadTableView()
+protocol DiscoveryPageViewControllerDelegate: ViewControllerTableReloadDelegate{
     func navigateToDetails(for indexPath : IndexPath)
 }
 
-class DiscoveryPageViewController: UIViewController{
+final class DiscoveryPageViewController: UIViewController{
     
     @IBOutlet weak var locationBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
@@ -52,6 +51,7 @@ extension DiscoveryPageViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         movieListVM.initializeSearch(for: searchText)
+        self.reloadTableData()
     }
 
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -61,8 +61,8 @@ extension DiscoveryPageViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = ""
         searchBar.resignFirstResponder()
-        movieListVM.initializeSearch(for: nil)
-        self.reloadTableView()
+        movieListVM.initializeSearch(for: searchBar.text)
+        self.reloadTableData()
         searchBar.setShowsCancelButton(false, animated: true)
     }
 }
@@ -92,18 +92,20 @@ extension DiscoveryPageViewController: UITableViewDelegate, UITableViewDataSourc
 }
 
 extension DiscoveryPageViewController : DiscoveryPageViewControllerDelegate {
+    
+    
     func navigateToDetails(for indexPath: IndexPath) {
-        let detailsVC: DetailsScreenViewController? = UIStoryboard.init(name : "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "detailsViewC") as? DetailsScreenViewController
-        let selectedMovieVM: MovieViewModel = movieListVM.getMovieViewModel(at: indexPath)
         
-        guard let detailsVC: DetailsScreenViewController = detailsVC else {
+        guard let detailsVC: DetailsScreenViewController = UIStoryboard.init(name : "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "detailsViewC") as? DetailsScreenViewController else {
             return
         }
+        let selectedMovieVM: MovieViewModel = movieListVM.getMovieViewModel(at: indexPath)
+        
         detailsVC.setupMovie(movieVM: selectedMovieVM)
         self.navigationController?.pushViewController(detailsVC, animated: true)
     }
     
-   func reloadTableView() {
+   func reloadTableData() {
        DispatchQueue.main.async{
            self.tableView.reloadData()
        }

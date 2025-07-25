@@ -12,7 +12,7 @@ protocol MovieCardTableViewCellDelegate: AnyObject {
     func updatePosterFromCache(with image: UIImage)
 }
 
-class MovieCardTableViewCell: UITableViewCell {
+final class MovieCardTableViewCell: UITableViewCell {
     
     @IBOutlet weak var moviePoster: UIImageView!
     @IBOutlet weak var bookButton: UIButton!
@@ -20,7 +20,7 @@ class MovieCardTableViewCell: UITableViewCell {
     @IBOutlet weak var movieReleaseDate: UILabel!
     @IBOutlet weak var movieDescription: UILabel!
     
-    private var movieVM: MovieViewModel!
+    private var movieVM: MovieViewModel?
     private weak var delegate: DiscoveryPageViewControllerDelegate?
     private var indexPath: IndexPath!
     
@@ -54,22 +54,25 @@ class MovieCardTableViewCell: UITableViewCell {
     }
     
     func setupTitle() {
-        movieTitle.text = movieVM.title
+        guard let title = movieVM?.title else { return }
+        movieTitle.text = title
         movieTitle.setLinesByWord()
     }
     
     func setupReleaseDate() {
-        movieReleaseDate.text = movieVM.releaseDate
+        guard let releaseDate = movieVM?.releaseDate else { return }
+        movieReleaseDate.text = releaseDate
         movieReleaseDate.setLinesByWord()
     }
     
     func setupDescription() {
-        movieDescription.text = movieVM.description
+        guard let description = movieVM?.description else { return }
+        movieDescription.text = description
         movieDescription.setLinesByTail()
     }
     
     func setupPoster() {
-        movieVM.loadImage(delegate: self)
+        movieVM?.loadImage(delegate: self)
     }
 }
 

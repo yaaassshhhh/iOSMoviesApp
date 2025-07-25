@@ -12,7 +12,7 @@ protocol InfoTableViewCellDelegate: AnyObject {
     func updatePosterFromCache(with image: UIImage)
 }
 
-class InfoTableViewCell: UITableViewCell {
+final class InfoTableViewCell: UITableViewCell {
     
     @IBOutlet weak var movieName: UILabel!
     @IBOutlet weak var movieVotes: UILabel!
