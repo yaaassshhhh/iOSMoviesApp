@@ -50,6 +50,8 @@ final class WebService{
             }
             
             let result: T? = resource.parse(data)
+            print(data)
+            print("hehehe \(result)")
             if let result: T = result {
                 DispatchQueue.main.async {
                     completion(.success(result))

@@ -40,6 +40,7 @@ final class DetailsScreenViewController: UIViewController {
     private func getDetails() {
         detailsVM.fetchCastDetails()
         detailsVM.fetchMovieInfo()
+        detailsVM.fetchReviewDetails()
     }
     
     @IBAction func backToDiscovery(_ sender: UIBarButtonItem) {
@@ -89,9 +90,10 @@ extension DetailsScreenViewController: UITableViewDataSource , UITableViewDelega
             return cell
             
         case 1 :
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewTableViewCell", for: indexPath) as? ReviewTableViewCell else {
+            guard let cell: ReviewTableViewCell = dequeueReviewCell(indexPath: indexPath) else {
                 break
             }
+            cell.configure(detailsVM.getAllReviewModel())
             return cell
             
         case 2 :
@@ -122,6 +124,14 @@ extension DetailsScreenViewController: UITableViewDataSource , UITableViewDelega
     private func dequeueCastCell(indexPath : IndexPath) -> CastDetailsTableViewCell? {
         
         guard let cell: CastDetailsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "CastDetailsTableViewCell", for: indexPath) as? CastDetailsTableViewCell else {
+            return nil
+        }
+        return cell
+    }
+    
+    private func dequeueReviewCell(indexPath : IndexPath) -> ReviewTableViewCell? {
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewTableViewCell", for: indexPath) as? ReviewTableViewCell else {
             return nil
         }
         return cell

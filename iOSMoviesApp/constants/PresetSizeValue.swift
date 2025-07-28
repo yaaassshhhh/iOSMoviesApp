@@ -15,6 +15,12 @@ struct PresetSizeValue {
         }
     }
     
+    static var reviewCellHeight: CGFloat {
+        get {
+            return getReviewCellHeight()
+        }
+    }
+    
     static var castCellHeight: CGFloat {
         get {
             return getCastCellHeight()
@@ -27,9 +33,21 @@ struct PresetSizeValue {
         }
     }
     
+    static var reviewCollectionViewItemSize: CGSize {
+        get {
+            return reviewCollectionViewSize()
+        }
+    }
+    
+    static func reviewCollectionViewSize() -> CGSize {
+        return CGSize(width: 250, height: 220)
+    }
+    
     static func castCollectionViewSize() -> CGSize {
         return CGSize(width: 150, height: 200)
     }
+    
+    
     
     static func getInfoCellHeight() -> CGFloat {
         return 320
@@ -37,5 +55,9 @@ struct PresetSizeValue {
     
     static func getCastCellHeight() -> CGFloat {
         return 250
+    }
+    
+    static func getReviewCellHeight() -> CGFloat {
+        return 280
     }
 }

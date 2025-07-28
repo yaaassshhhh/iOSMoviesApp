@@ -8,7 +8,7 @@
 struct Review : Decodable{
     var name: String
     var comment: String
-    var id: Int
+    var id: String
     
     enum CodingKeys : String, CodingKey {
         case name = "author"

@@ -17,7 +17,7 @@ struct ReviewViewModel {
 
 extension ReviewViewModel: Identifiable {
     
-    var id: Int {
+    var id: String {
         return self.review.id
     }
     

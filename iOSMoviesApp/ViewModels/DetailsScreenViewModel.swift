@@ -11,11 +11,50 @@ class DetailsScreenViewModel {
     
     var movie : MovieViewModel? = nil
     var info : InfoViewModel? = nil
+    var reviews: ReviewDetailsViewModel? = nil
     var casts : CastDetailsViewModel? = nil
     private weak var delegate : ViewControllerTableReloadDelegate?
     
     init(delegate: ViewControllerTableReloadDelegate? = nil) {
         self.delegate = delegate
+    }
+}
+
+extension DetailsScreenViewModel {
+    
+    func fetchReviewDetails() {
+        guard let delegate = self.delegate, let movie = self.movie else {
+            return
+        }
+        let result : Result<Resource<ReviewsResponse>, NetworkError> = ReviewsResponse.resource(id: movie.id)
+        switch result {
+        case .success(let resource):
+            WebService().load(resource: resource) { result in
+                switch result {
+                case .success(let reviewData) :
+                    self.storeReviewData(reviewData)
+                    delegate.reloadTableData()
+                case .failure(let error) :
+                    print("Error fetching dataa : \(error)")
+                }
+            }
+        case .failure(let error):
+            print("Error fetching data : \(error)")
+        }
+    }
+    
+    func storeReviewData(_ reviewData: ReviewsResponse){
+        let reviewVMs: [ReviewViewModel] = reviewData.results.map {
+            ReviewViewModel(review: $0)
+        }
+        self.reviews = ReviewDetailsViewModel(reviewViewModels: reviewVMs)
+    }
+    
+    func getAllReviewModel() -> ReviewDetailsViewModel {
+        guard let reviews = self.reviews else {
+            return ReviewDetailsViewModel(reviewViewModels: [])
+        }
+        return reviews
     }
 }
 
@@ -40,7 +79,6 @@ extension DetailsScreenViewModel {
         case .failure(let error):
             print(error)
         }
-        
     }
     
     private func storeCastData (_ castData : CreditsResponse) {
