@@ -26,10 +26,22 @@ struct PresetSizeValue {
             return getCastCellHeight()
         }
     }
+
+    static var similarCellHeight: CGFloat {
+        get {
+            return getSimilarCellHeight()
+        }
+    }
     
     static var castCollectionViewItemSize: CGSize {
         get {
             return castCollectionViewSize()
+        }
+    }
+    
+    static var similarCollectionViewItemSize: CGSize {
+        get {
+            return similarCollectionViewSize()
         }
     }
     
@@ -47,6 +59,10 @@ struct PresetSizeValue {
         return CGSize(width: 150, height: 200)
     }
     
+    static func similarCollectionViewSize() -> CGSize {
+        return CGSize(width: 150, height: 240)
+    }
+    
     
     
     static func getInfoCellHeight() -> CGFloat {
@@ -55,6 +71,10 @@ struct PresetSizeValue {
     
     static func getCastCellHeight() -> CGFloat {
         return 250
+    }
+    
+    static func getSimilarCellHeight() -> CGFloat {
+        return 280
     }
     
     static func getReviewCellHeight() -> CGFloat {

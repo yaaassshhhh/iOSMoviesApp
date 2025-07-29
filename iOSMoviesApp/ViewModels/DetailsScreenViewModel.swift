@@ -13,6 +13,7 @@ class DetailsScreenViewModel {
     var info : InfoViewModel? = nil
     var reviews: ReviewDetailsViewModel? = nil
     var casts : CastDetailsViewModel? = nil
+    var similar : SimilarDetailsViewModel? = nil
     private weak var delegate : ViewControllerTableReloadDelegate?
     
     init(delegate: ViewControllerTableReloadDelegate? = nil) {
@@ -106,11 +107,53 @@ extension DetailsScreenViewModel {
             return PresetSizeValue.reviewCellHeight
         case 2:
             return PresetSizeValue.castCellHeight
+        case 3:
+            return PresetSizeValue.similarCellHeight
         default:
             return 0
         }
     }
 }
+
+extension DetailsScreenViewModel {
+    
+    func fetchSimilarDetails() {
+        guard let delegate = self.delegate, let movie = self.movie else {
+            return
+        }
+        let result : Result<Resource<SimilarResponse>, NetworkError> = SimilarResponse.resource(id: movie.id)
+        switch result {
+        case .success(let resource):
+            WebService().load(resource: resource) { result in
+                switch result {
+                case .success(let similarData) :
+                    self.storeSimilarData(similarData)
+                    delegate.reloadTableData()
+                case .failure(let error) :
+                    print("Error fetching data : \(error)")
+                }
+            }
+        case .failure(let error):
+            print(error)
+        }
+    }
+    
+    private func storeSimilarData (_ similarData : SimilarResponse) {
+        let similarVMs: [SimilarViewModel] = similarData.results.map({
+            SimilarViewModel(similar: $0)
+        })
+        self.similar = SimilarDetailsViewModel(similarViewModels: similarVMs)
+    }
+    
+    func getAllSimilarViewModel() -> SimilarDetailsViewModel {
+        guard let similar = self.similar else {
+            return SimilarDetailsViewModel(similarViewModels: [])
+        }
+        return similar
+    }
+}
+
+
 
 extension DetailsScreenViewModel {
     

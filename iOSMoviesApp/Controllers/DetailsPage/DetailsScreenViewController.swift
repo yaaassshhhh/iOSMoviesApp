@@ -39,6 +39,7 @@ final class DetailsScreenViewController: UIViewController {
     
     private func getDetails() {
         detailsVM.fetchCastDetails()
+        detailsVM.fetchSimilarDetails()
         detailsVM.fetchMovieInfo()
         detailsVM.fetchReviewDetails()
     }
@@ -52,11 +53,13 @@ extension DetailsScreenViewController: UITableViewDataSource , UITableViewDelega
     
     private func setupTableView() {
         let castNib: UINib = UINib(nibName: "CastDetailsTableViewCell", bundle: nil)
+        let similarNib: UINib = UINib(nibName: "SimilarTableViewCell", bundle: nil)
         let reviewNib: UINib = UINib(nibName: "ReviewTableViewCell", bundle: nil)
         let infoNib: UINib = UINib(nibName: "InfoTableViewCell", bundle: nil)
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "DefaultCell")
         tableView.register(castNib, forCellReuseIdentifier: "CastDetailsTableViewCell")
+        tableView.register(similarNib, forCellReuseIdentifier: "SimilarTableViewCell")
         tableView.register(reviewNib, forCellReuseIdentifier: "ReviewTableViewCell")
         tableView.register(infoNib, forCellReuseIdentifier: "InfoTableViewCell")
         tableView.dataSource = self
@@ -113,7 +116,12 @@ extension DetailsScreenViewController: UITableViewDataSource , UITableViewDelega
             return cell
             
         case 3 :
-            fallthrough
+            guard let cell : SimilarTableViewCell = dequeueSimilarCell(indexPath: indexPath) else {
+                break
+            }
+            cell.delegate = self
+            cell.configureState(detailsVM.getAllSimilarViewModel())
+            return cell
             
         default :
             return dequeueDefaultCell(indexPath: indexPath)
@@ -138,6 +146,14 @@ extension DetailsScreenViewController: UITableViewDataSource , UITableViewDelega
         return cell
     }
     
+    private func dequeueSimilarCell(indexPath : IndexPath) -> SimilarTableViewCell? {
+        
+        guard let cell: SimilarTableViewCell = tableView.dequeueReusableCell(withIdentifier: "SimilarTableViewCell", for: indexPath) as? SimilarTableViewCell else {
+            return nil
+        }
+        return cell
+    }
+    
     private func dequeueReviewCell(indexPath : IndexPath) -> ReviewTableViewCell? {
         
         guard let cell: ReviewTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ReviewTableViewCell", for: indexPath) as? ReviewTableViewCell else {
@@ -155,5 +171,35 @@ extension DetailsScreenViewController: ViewControllerTableReloadDelegate {
 
     func reloadTableData() {
         self.tableView.reloadData()
+    }
+}
+
+extension DetailsScreenViewController: SimilarMovieSelectionDelegate {
+    
+    func didSelectSimilarMovie(with movieId: Int) {
+        navigateToMovieDetails(with: movieId)
+    }
+    
+    private func navigateToMovieDetails(with movieId: Int) {
+        guard let detailsVC: DetailsScreenViewController = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "detailsViewC") as? DetailsScreenViewController else {
+            return
+        }
+        
+        let movieVM = createMovieViewModel(with: movieId)
+        
+        detailsVC.setupMovie(movieVM: movieVM)
+        self.navigationController?.pushViewController(detailsVC, animated: true)
+    }
+    
+    private func createMovieViewModel(with movieId: Int) -> MovieViewModel {
+        let movie = Movie(
+            title: nil,
+            releaseDate: nil,
+            posterPath: nil,
+            description: nil,
+            id: movieId
+        )
+        
+        return MovieViewModel(movie: movie)
     }
 }
