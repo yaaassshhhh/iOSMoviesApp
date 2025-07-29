@@ -55,13 +55,13 @@ extension CastViewModel : Identifiable {
         
         if let cachedImage = ImageCache.shared.object(forKey: cacheKey) {
             DispatchQueue.main.async {
-                delegate.updateProfilePicFromCache(with: cachedImage)
+                delegate.updatePosterFromCache(with: cachedImage)
             }
             return
         }
         DispatchQueue.global(qos: .userInitiated).async {
             guard let imageData: Data = try? Data(contentsOf: imageURL) else { return }
-            delegate.updateProfilePic(with: imageData, cacheKey: cacheKey)
+            delegate.updatePoster(with: imageData, cacheKey: cacheKey)
         }
     }
 }

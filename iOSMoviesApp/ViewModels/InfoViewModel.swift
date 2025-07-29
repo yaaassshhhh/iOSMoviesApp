@@ -11,7 +11,7 @@ struct InfoViewModel {
     
     var info : Info
     var posterBaseURL : String = "https://image.tmdb.org/t/p/w342"
-    var delegate : InfoTableViewCellDelegate?
+    var delegate : MovieCardTableViewCellDelegate?
     init(info : Info) {
         self.info = info
     }
@@ -66,11 +66,11 @@ extension InfoViewModel {
         return self.posterBaseURL + posterPath
     }
     
-    mutating func loadMoviePoster(delegate : InfoTableViewCellDelegate?) {
+    mutating func loadMoviePoster(delegate : MovieCardTableViewCellDelegate?) {
         
-        guard let delegate: InfoTableViewCellDelegate = delegate else { return }
+        guard let delegate: MovieCardTableViewCellDelegate = delegate else { return }
         self.delegate = delegate
-        guard let delegate: InfoTableViewCellDelegate = self.delegate else { return }
+        guard let delegate: MovieCardTableViewCellDelegate = self.delegate else { return }
         
         guard let imageURL: URL = URL(string : self.posterPath) else { return }
         let cacheKey: NSString = NSString(string : self.posterPath)

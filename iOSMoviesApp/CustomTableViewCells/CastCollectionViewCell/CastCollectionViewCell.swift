@@ -8,9 +8,7 @@
 import UIKit
 
 
-protocol CastCollectionViewCellDelegate: AnyObject {
-    func updateProfilePic(with imageData : Data, cacheKey: NSString)
-    func updateProfilePicFromCache(with image: UIImage)
+protocol CastCollectionViewCellDelegate: MovieCardTableViewCellDelegate {
     func updateProfilePicFromPlaceholder(named: String)
 }
 
@@ -47,7 +45,7 @@ final class CastCollectionViewCell: UICollectionViewCell {
         fictionalName.setLinesByWord()
     }
     
-    func setupPoster() {
+    private func setupPoster() {
         castImage.setRounded()
         castVM?.loadCastImage(delegate: self)
     }
@@ -55,7 +53,7 @@ final class CastCollectionViewCell: UICollectionViewCell {
 
 extension CastCollectionViewCell : CastCollectionViewCellDelegate {
     
-    func updateProfilePic(with imageData: Data, cacheKey: NSString) {
+    func updatePoster(with imageData: Data, cacheKey: NSString) {
         if let image: UIImage = UIImage(data: imageData) {
             self.setupCache(image, cacheKey)
             DispatchQueue.main.async {
@@ -69,7 +67,7 @@ extension CastCollectionViewCell : CastCollectionViewCellDelegate {
         self.castImage.image = UIImage(named: defaultPic)
     }
     
-    func updateProfilePicFromCache(with image: UIImage) {
+    func updatePosterFromCache(with image: UIImage) {
         DispatchQueue.main.async {
             self.castImage.image = image
             self.castImage.setRounded()

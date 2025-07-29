@@ -53,25 +53,25 @@ final class MovieCardTableViewCell: UITableViewCell {
         setupDescription()
     }
     
-    func setupTitle() {
+    private func setupTitle() {
         guard let title = movieVM?.title else { return }
         movieTitle.text = title
         movieTitle.setLinesByWord()
     }
     
-    func setupReleaseDate() {
+    private func setupReleaseDate() {
         guard let releaseDate = movieVM?.releaseDate else { return }
         movieReleaseDate.text = releaseDate
         movieReleaseDate.setLinesByWord()
     }
     
-    func setupDescription() {
+    private func setupDescription() {
         guard let description = movieVM?.description else { return }
         movieDescription.text = description
         movieDescription.setLinesByTail()
     }
     
-    func setupPoster() {
+    private func setupPoster() {
         movieVM?.loadImage(delegate: self)
     }
 }

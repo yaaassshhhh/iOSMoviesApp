@@ -27,7 +27,7 @@ final class CastDetailsTableViewCell: UITableViewCell {
 
 extension CastDetailsTableViewCell: UICollectionViewDataSource, UICollectionViewDelegate {
     
-    func setupCollectionView() {
+    private func setupCollectionView() {
         
         let nib: UINib = UINib(nibName: "CastCollectionViewCell", bundle: nil)
         

@@ -35,7 +35,7 @@ final class DiscoveryPageViewController: UIViewController{
         setupSearchBar()
     }
     
-    func setupTableView() {
+    private func setupTableView() {
         self.tableView.register(UINib(nibName: "MovieCardTableViewCell", bundle: nil), forCellReuseIdentifier: "MovieCardTableViewCell")
         self.tableView.delegate = self
         self.tableView.dataSource = self

@@ -7,11 +7,6 @@
 
 import UIKit
 
-protocol InfoTableViewCellDelegate: AnyObject {
-    func updatePoster(with imageData : Data, cacheKey : NSString)
-    func updatePosterFromCache(with image: UIImage)
-}
-
 final class InfoTableViewCell: UITableViewCell {
     
     @IBOutlet weak var movieName: UILabel!
@@ -40,37 +35,37 @@ final class InfoTableViewCell: UITableViewCell {
         setupMovieRating()
     }
     
-    func setupMoviePoster() {
+    private func setupMoviePoster() {
         infoVM?.loadMoviePoster(delegate: self)
     }
     
-    func setupMovieDescription() {
+    private func setupMovieDescription() {
         movieDescription.text = infoVM?.description ?? ""
         movieDescription.setLinesByTail()
     }
     
-    func setupMovieName() {
+    private func setupMovieName() {
         movieName.text = infoVM?.movieName ?? ""
         movieName.setLinesByWord()
     }
     
-    func setupMovieRating() {
+    private func setupMovieRating() {
         movieRating.text = infoVM?.rating ?? ""
         movieRating.setLinesByWord()
     }
     
-    func setupMovieVotes() {
+    private func setupMovieVotes() {
         movieVotes.text = infoVM?.votes ?? ""
         movieVotes.setLinesByWord()
     }
     
-    func setupMovieGenre() {
+    private func setupMovieGenre() {
         movieGenre.text = infoVM?.genres ?? ""
         movieGenre.setLinesByWord()
     }
 }
 
-extension InfoTableViewCell : InfoTableViewCellDelegate {
+extension InfoTableViewCell : MovieCardTableViewCellDelegate {
     
     func updatePoster(with imageData: Data, cacheKey: NSString) {
         if let image: UIImage = UIImage(data: imageData) {
