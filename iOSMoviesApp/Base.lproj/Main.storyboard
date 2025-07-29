@@ -160,8 +160,42 @@
                     <view key="view" contentMode="scaleToFill" id="DeQ-kB-bRb">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar clipsSubviews="YES" contentMode="scaleAspectFill" preservesSuperviewLayoutMargins="YES" searchBarStyle="minimal" text="" placeholder="Search for movies" translatesAutoresizingMaskIntoConstraints="NO" id="xBG-kI-16T">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="60"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="fGi-YT-nlo"/>
+                                </constraints>
+                                <color key="barTintColor" systemColor="systemGray6Color"/>
+                                <offsetWrapper key="searchTextPositionAdjustment" horizontal="5" vertical="0.0"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
+                                <connections>
+                                    <outlet property="delegate" destination="GNI-Kg-dhh" id="ZVn-8T-4od"/>
+                                </connections>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ns0-5c-heO">
+                                <rect key="frame" x="0.0" y="60" width="393" height="400"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="400" id="7CZ-YZ-2Jg"/>
+                                </constraints>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="geC-2r-BGA"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="xBG-kI-16T" firstAttribute="top" secondItem="DeQ-kB-bRb" secondAttribute="top" id="2Gn-op-XaG"/>
+                            <constraint firstItem="ns0-5c-heO" firstAttribute="leading" secondItem="geC-2r-BGA" secondAttribute="leading" id="JK1-tY-8Qm"/>
+                            <constraint firstItem="ns0-5c-heO" firstAttribute="top" secondItem="xBG-kI-16T" secondAttribute="bottom" id="Kdu-Py-MRQ"/>
+                            <constraint firstItem="xBG-kI-16T" firstAttribute="trailing" secondItem="geC-2r-BGA" secondAttribute="trailing" id="bhC-La-rpS"/>
+                            <constraint firstItem="geC-2r-BGA" firstAttribute="trailing" secondItem="ns0-5c-heO" secondAttribute="trailing" id="bo6-gE-sT9"/>
+                            <constraint firstItem="xBG-kI-16T" firstAttribute="leading" secondItem="geC-2r-BGA" secondAttribute="leading" id="ywu-1h-DCk"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="K5D-VM-ELe"/>
                 </viewController>
