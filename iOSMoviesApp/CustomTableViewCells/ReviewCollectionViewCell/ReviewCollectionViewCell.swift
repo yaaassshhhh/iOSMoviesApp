@@ -21,16 +21,25 @@ class ReviewCollectionViewCell: UICollectionViewCell {
     
     func setupUI() {
         self.layer.cornerRadius = 12
-        self.layer.borderWidth = 0.5
+        self.layer.borderWidth = 2
         self.layer.borderColor = UIColor.lightGray.cgColor
         self.layer.masksToBounds = true
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        nameLabel?.text = ""
+        commentLabel?.text = ""
+    }
 
     func configure(_ reviewData: ReviewViewModel?) {
+        guard let reviewData = reviewData else {
+            nameLabel?.text = "No Author"
+            commentLabel?.text = "No Review Available"
+            return 
+        }
         
-        guard let reviewData = reviewData else { return }
         self.reviewVM = reviewData
-        
         setupReviewAuthor()
         setupReviewComment()
     }
@@ -46,6 +55,5 @@ class ReviewCollectionViewCell: UICollectionViewCell {
         commentLabel.text = comment
         commentLabel.setLinesByWord()
     }
-    
 }
 

@@ -58,6 +58,6 @@ struct PresetSizeValue {
     }
     
     static func getReviewCellHeight() -> CGFloat {
-        return 280
+        return 292
     }
 }

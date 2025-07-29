@@ -102,6 +102,8 @@ extension DetailsScreenViewModel {
         switch index {
         case 0:
             return PresetSizeValue.infoCellHeight
+        case 1:
+            return PresetSizeValue.reviewCellHeight
         case 2:
             return PresetSizeValue.castCellHeight
         default:

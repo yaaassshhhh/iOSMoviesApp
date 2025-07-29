@@ -61,6 +61,15 @@ extension DetailsScreenViewController: UITableViewDataSource , UITableViewDelega
         tableView.register(infoNib, forCellReuseIdentifier: "InfoTableViewCell")
         tableView.dataSource = self
         tableView.delegate = self
+        
+        // Ensure proper sizing for cells
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 300
+        
+        // Remove separators that might interfere
+        tableView.separatorStyle = .none
+        
+        print("📏 Table view frame: \(tableView.frame)")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -131,7 +140,7 @@ extension DetailsScreenViewController: UITableViewDataSource , UITableViewDelega
     
     private func dequeueReviewCell(indexPath : IndexPath) -> ReviewTableViewCell? {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewTableViewCell", for: indexPath) as? ReviewTableViewCell else {
+        guard let cell: ReviewTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ReviewTableViewCell", for: indexPath) as? ReviewTableViewCell else {
             return nil
         }
         return cell
