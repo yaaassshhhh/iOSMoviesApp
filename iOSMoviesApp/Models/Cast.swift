@@ -6,10 +6,10 @@
 //
 
 struct Cast: Decodable {
-    var realName: String
-    var fictionalName : String
+    var realName: String?
+    var fictionalName : String?
     var posterPath: String?
-    var id: Int
+    var id: Int?
     
     enum CodingKeys: String, CodingKey {
         case realName = "original_name"

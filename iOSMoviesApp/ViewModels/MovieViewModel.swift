@@ -19,23 +19,38 @@ struct MovieViewModel {
 extension MovieViewModel : Identifiable {
     
     var id : Int {
-        return self.movie.id
+        guard let id: Int = self.movie.id else {
+            return 0
+        }
+        return id
     }
     
     var title : String {
-        return self.movie.title
+        guard let title: String = self.movie.title else {
+            return ""
+        }
+        return title
     }
     
     var releaseDate : String {
-        return self.movie.releaseDate
+        guard let releaseDate: String = self.movie.releaseDate else {
+            return ""
+        }
+        return releaseDate
     }
     
     var description : String {
-        return self.movie.description
+        guard let description: String = self.movie.description else {
+            return ""
+        }
+        return description
     }
     
     var posterPath : String {
-        return self.posterBaseURL + self.movie.posterPath
+        guard let posterPath: String = self.movie.posterPath else {
+            return ""
+        }
+        return self.posterBaseURL + posterPath
     }
     
     mutating func loadImage(delegate: MovieCardTableViewCellDelegate?) {

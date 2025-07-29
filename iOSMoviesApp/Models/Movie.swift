@@ -8,11 +8,11 @@
 import Foundation
 
 struct Movie: Decodable {
-    var title: String
-    var releaseDate : String
-    var posterPath: String
-    var description: String
-    var id: Int
+    var title: String?
+    var releaseDate : String?
+    var posterPath: String?
+    var description: String?
+    var id: Int?
     
     enum CodingKeys: String, CodingKey {
         case title = "original_title"

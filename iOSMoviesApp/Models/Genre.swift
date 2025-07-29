@@ -7,7 +7,7 @@
 import Foundation
 
 struct Genre : Decodable {
-    var type : String
+    var type : String?
     
     enum CodingKeys : String, CodingKey {
         case type = "name"

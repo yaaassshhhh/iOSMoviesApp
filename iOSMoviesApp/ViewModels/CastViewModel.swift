@@ -19,7 +19,8 @@ struct CastViewModel {
 extension CastViewModel : Identifiable {
     
     var id : Int {
-        return self.cast.id
+        guard let id : Int = self.cast.id else { return 0 }
+        return id
     }
     
     var posterPath : String {
@@ -28,11 +29,13 @@ extension CastViewModel : Identifiable {
     }
     
     var realName : String {
-        return self.cast.realName
+        guard let realName : String = self.cast.realName else { return "" }
+        return realName
     }
     
     var fictionalName : String {
-        return self.cast.fictionalName
+        guard let fictionalName : String = self.cast.fictionalName else { return "" }
+        return fictionalName
     }
     
     mutating func loadCastImage(delegate: CastCollectionViewCellDelegate?) {

@@ -19,33 +19,51 @@ struct InfoViewModel {
 extension InfoViewModel {
     
     var movieName : String {
-        return self.info.movieName
+        guard let movieName: String = self.info.movieName else {
+            return ""
+        }
+        return movieName
     }
     
     var description : String {
-        return self.info.description
+        guard let description: String = self.info.description else {
+            return ""
+        }
+        return description
     }
     
     var rating : String {
-        let ratingStr : String = String(format: "%.1f",self.info.rating)
+        guard let rating: Double = self.info.rating else {
+            return ""
+        }
+        let ratingStr : String = String(format: "%.1f", rating)
         return "\(ratingStr)/10"
     }
     
     var votes : String {
-        return "\(self.info.votes) votes"
+        guard let votes: Int = self.info.votes else {
+            return ""
+        }
+        return "\(votes) votes"
     }
     
     var genres : String {
         var strGenres : [String] = []
         for genre in self.info.genres {
-            strGenres.append(genre.type)
+            guard let type : String = genre.type else {
+                return strGenres.joined(separator: ", ")
+            }
+            strGenres.append(type)
         }
         let genreSentence: String = strGenres.joined(separator: ", ")
         return genreSentence
     }
     
     var posterPath : String {
-        return self.posterBaseURL + self.info.posterPath
+        guard let posterPath: String = self.info.posterPath else {
+            return ""
+        }
+        return self.posterBaseURL + posterPath
     }
     
     mutating func loadMoviePoster(delegate : InfoTableViewCellDelegate?) {
@@ -67,5 +85,18 @@ extension InfoViewModel {
             guard let imageData: Data = try? Data(contentsOf: imageURL) else { return }
             delegate.updatePoster(with: imageData, cacheKey: cacheKey)
         }
+    }
+}
+
+extension Info {
+    static func resource(id movie_id : Int) -> Result<Resource<Info>, NetworkError> {
+        guard let movieListURL = URL(string : "https://api.themoviedb.org/3/movie/\(movie_id)") else {
+            return .failure(.urlError)
+        }
+        let resource = Resource<Info>(url : movieListURL, parse : { data in
+            let decoded = try? JSONDecoder().decode(Info.self, from: data)
+            return decoded
+        })
+        return .success(resource)
     }
 }
