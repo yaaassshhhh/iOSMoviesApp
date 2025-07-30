@@ -7,10 +7,16 @@
 
 import UIKit
 
+protocol SearchTitleChangeDelegate: AnyObject {
+    func searchTextDidChange(_ searchText: String)
+}
+
 class SearchScreenViewController: UIViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    
+    weak var delegate: SearchTitleChangeDelegate?
     
     private var searchText: String?
     private var searchVM : SearchScreenViewModel!
@@ -38,8 +44,9 @@ extension SearchScreenViewController: UITableViewDataSource, UITableViewDelegate
         
         switch position {
             case 0:
-                let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "SearchResultCell", for: indexPath)
-            return cell
+                let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "SearchTitleTableViewCell", for: indexPath)
+                delegate?.searchTextDidChange(searchText ?? "")
+                return cell
         default:
             fatalError("Invalid position")
         }

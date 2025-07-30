@@ -7,7 +7,9 @@
 
 import UIKit
 
-class SearchTitleTableViewCell: UITableViewCell {
+
+
+class SearchTitleTableViewCell: UITableViewCell, SearchTitleChangeDelegate {
     
     @IBOutlet weak var searchTitleLabel: UILabel!
 
@@ -15,11 +17,17 @@ class SearchTitleTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    func searchTextDidChange(_ searchText: String) {
+        if(searchText.isEmpty){
+            print("I am empty")
+            searchTitleLabel.text = "Recent Searched"
+        }
+        else{
+            print("I am full")
+            searchTitleLabel.text = "Searched Results"
+        }
     }
     
 }
+
