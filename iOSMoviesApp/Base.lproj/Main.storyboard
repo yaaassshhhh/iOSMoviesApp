@@ -198,6 +198,7 @@
                     <navigationItem key="navigationItem" id="K5D-VM-ELe"/>
                     <connections>
                         <outlet property="searchBar" destination="xBG-kI-16T" id="2O2-0C-Pxz"/>
+                        <outlet property="tableView" destination="ns0-5c-heO" id="VFd-kD-byu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8gY-v5-zZO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
