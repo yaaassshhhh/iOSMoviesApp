@@ -10,6 +10,8 @@ class MovieListViewModel {
     
     var movies : [MovieViewModel] = []
     var filteredMovies : [MovieViewModel] = []
+    var recentMovies : [MovieViewModel] = []
+    
     private weak var delegate : DiscoveryPageViewControllerDelegate?
     
     init(delegate: DiscoveryPageViewControllerDelegate?){
