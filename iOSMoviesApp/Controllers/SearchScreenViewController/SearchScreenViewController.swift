@@ -13,12 +13,17 @@ class SearchScreenViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private var searchText: String?
+    private var searchVM : SearchScreenViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
         
+    }
+    
+    func reloadTableData() {
+        self.tableView.reloadData()
     }
 }
 
@@ -40,28 +45,42 @@ extension SearchScreenViewController: UITableViewDataSource, UITableViewDelegate
         }
     }
     
-    
-    
 }
 
+    
 extension SearchScreenViewController: UISearchBarDelegate {
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        self.searchText = searchText
-//        movieListVM.initializeSearch(for: searchText)
-//        self.reloadTableData()
-    }
-
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchBar.setShowsCancelButton(true, animated: true)
-    }
-
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.text = ""
-        searchBar.resignFirstResponder()
-//        movieListVM.initializeSearch(for: searchBar.text)
-//        self.reloadTableData()
-        searchBar.setShowsCancelButton(false, animated: true)
-    }
+        guard let searchVC: SearchScreenViewController = UIStoryboard.init(name : "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "searchVC") as? SearchScreenViewController else {
+            return
+        }
         
+        self.navigationController?.pushViewController(searchVC, animated: true)
+    }
+    
+        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+            searchVM.initializeSearch(for: searchText)
+            self.reloadTableData()
+        }
+    
+        func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+            searchBar.setShowsCancelButton(true, animated: true)
+        }
+    
+        func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+            searchBar.text = ""
+            searchBar.resignFirstResponder()
+            movieListVM.initializeSearch(for: searchBar.text)
+            self.reloadTableData()
+            searchBar.setShowsCancelButton(false, animated: true)
+        }
+//    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+//        searchBar.text = ""
+//        searchBar.resignFirstResponder()
+//        //        movieListVM.initializeSearch(for: searchBar.text)
+//        //        self.reloadTableData()
+//        searchBar.setShowsCancelButton(false, animated: true)
+//    }
 }
+
+

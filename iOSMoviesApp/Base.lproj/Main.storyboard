@@ -166,7 +166,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <searchBar clipsSubviews="YES" contentMode="scaleAspectFill" preservesSuperviewLayoutMargins="YES" searchBarStyle="minimal" text="" placeholder="Search for movies" translatesAutoresizingMaskIntoConstraints="NO" id="xBG-kI-16T">
-                                
+                                <rect key="frame" x="0.0" y="103" width="393" height="60"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="fGi-YT-nlo"/>
@@ -182,11 +182,10 @@
                                     <outlet property="delegate" destination="GNI-Kg-dhh" id="ZVn-8T-4od"/>
                                 </connections>
                             </searchBar>
-
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ns0-5c-heO">
-                                <rect key="frame" x="0.0" y="153" width="393" height="699"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="geC-2r-BGA"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
                             <constraint firstItem="xBG-kI-16T" firstAttribute="leading" secondItem="geC-2r-BGA" secondAttribute="leading" id="40G-kI-YA8"/>
                             <constraint firstItem="ns0-5c-heO" firstAttribute="top" secondItem="xBG-kI-16T" secondAttribute="bottom" id="5vp-Ii-bC1"/>
                             <constraint firstItem="ns0-5c-heO" firstAttribute="bottom" secondItem="DeQ-kB-bRb" secondAttribute="bottom" id="ECf-F6-OMg"/>
@@ -194,15 +193,6 @@
                             <constraint firstItem="xBG-kI-16T" firstAttribute="trailing" secondItem="geC-2r-BGA" secondAttribute="trailing" id="hfw-Nr-CBg"/>
                             <constraint firstItem="xBG-kI-16T" firstAttribute="top" secondItem="geC-2r-BGA" secondAttribute="top" id="vWF-hq-Kg5"/>
                             <constraint firstItem="ns0-5c-heO" firstAttribute="trailing" secondItem="geC-2r-BGA" secondAttribute="trailing" id="ves-AS-72B"/>
-
-                            <constraint firstItem="xBG-kI-16T" firstAttribute="top" secondItem="geC-2r-BGA" secondAttribute="top" constant="-10" id="2Gn-op-XaG"/>
-                            <constraint firstItem="ns0-5c-heO" firstAttribute="trailing" secondItem="geC-2r-BGA" secondAttribute="trailing" id="EIR-gM-xGp"/>
-                            <constraint firstItem="ns0-5c-heO" firstAttribute="leading" secondItem="geC-2r-BGA" secondAttribute="leading" id="Qqb-uP-a67"/>
-                            <constraint firstItem="ns0-5c-heO" firstAttribute="top" secondItem="xBG-kI-16T" secondAttribute="bottom" id="W3i-fW-sXO"/>
-                            <constraint firstAttribute="bottom" secondItem="ns0-5c-heO" secondAttribute="bottom" id="bYR-Sw-lAf"/>
-                            <constraint firstItem="xBG-kI-16T" firstAttribute="trailing" secondItem="geC-2r-BGA" secondAttribute="trailing" id="bhC-La-rpS"/>
-                            <constraint firstItem="xBG-kI-16T" firstAttribute="leading" secondItem="geC-2r-BGA" secondAttribute="leading" id="ywu-1h-DCk"/>
-
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="K5D-VM-ELe"/>
@@ -311,13 +301,13 @@
         <image name="location" catalog="system" width="128" height="119"/>
         <image name="person.crop.circle" catalog="system" width="128" height="123"/>
         <systemColor name="secondaryLabelColor">
-            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray6Color">
-            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
