@@ -9,7 +9,7 @@ import UIKit
 
 
 
-class SearchTitleTableViewCell: UITableViewCell, SearchTitleChangeDelegate {
+class SearchTitleTableViewCell: UITableViewCell {
     
     @IBOutlet weak var searchTitleLabel: UILabel!
 
@@ -18,13 +18,10 @@ class SearchTitleTableViewCell: UITableViewCell, SearchTitleChangeDelegate {
         // Initialization code
     }
     
-    func searchTextDidChange(_ searchText: String) {
-        if(searchText.isEmpty){
-            print("I am empty")
+    func configure(_ searchText: String) {
+        if searchText.isEmpty {
             searchTitleLabel.text = "Recent Searched"
-        }
-        else{
-            print("I am full")
+        } else {
             searchTitleLabel.text = "Searched Results"
         }
     }

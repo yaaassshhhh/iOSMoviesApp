@@ -54,6 +54,9 @@ extension DiscoveryPageViewController: UISearchBarDelegate {
                 return
             }
         
+        let movies = movieListVM.getAllMovieViewModels()
+        searchVC.setupMovies(movies)
+        
         self.navigationController?.pushViewController(searchVC, animated: true)
     }
     

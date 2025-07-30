@@ -56,6 +56,10 @@ extension MovieListViewModel {
     func numberOfMovies() -> Int {
         return self.filteredMovies.count
     }
+    
+    func getAllMovieViewModels() -> [MovieViewModel] {
+        return self.movies
+    }
 
     func initializeSearch(for searchText: String?) {
         

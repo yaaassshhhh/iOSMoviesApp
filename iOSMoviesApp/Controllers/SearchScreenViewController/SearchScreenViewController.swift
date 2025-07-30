@@ -7,25 +7,49 @@
 
 import UIKit
 
-protocol SearchTitleChangeDelegate: AnyObject {
-    func searchTextDidChange(_ searchText: String)
-}
-
 class SearchScreenViewController: UIViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
-    weak var delegate: SearchTitleChangeDelegate?
-    
-    private var searchText: String?
+    private var searchText: String = ""
     private var searchVM : SearchScreenViewModel!
+    private var movies: [MovieViewModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupSearchBar()
+        setupTableView()
+        setupViewModel()
+    }
+    
+    func setupMovies(_ movies: [MovieViewModel]) {
+        self.movies = movies
+        setupViewModel() 
+    }
+    
+    func setupSearchBar() {
+        searchBar.delegate = self
+    }
+    
+    func setupViewModel() {
+        searchVM = SearchScreenViewModel(for: movies)
+    }
+    
+    func setupTableView() {
+        
         tableView.dataSource = self
         tableView.delegate = self
         
+        
+        let searchTitleNib: UINib = UINib(nibName: "SearchTitleTableViewCell", bundle: nil)
+        
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "DefaultCell")
+        tableView.register(searchTitleNib, forCellReuseIdentifier: "SearchTitleTableViewCell")
+        
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 300
+        tableView.separatorStyle = .none
     }
     
     func reloadTableData() {
@@ -40,26 +64,41 @@ extension SearchScreenViewController: UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let position : Int = indexPath.row
-        
-        switch position {
+        switch indexPath.row {
             case 0:
-                let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "SearchTitleTableViewCell", for: indexPath)
-                delegate?.searchTextDidChange(searchText ?? "")
+                guard let cell = dequeueTitleCell(indexPath: indexPath) else {
+                    return dequeueDefaultCell(indexPath: indexPath)
+                }
+                cell.configure(searchText)
                 return cell
-        default:
-            fatalError("Invalid position")
+            default:
+                return dequeueDefaultCell(indexPath: indexPath)
         }
     }
+}
+
+extension SearchScreenViewController {
+    private func dequeueTitleCell(indexPath : IndexPath) -> SearchTitleTableViewCell? {
+        
+        guard let cell: SearchTitleTableViewCell = tableView.dequeueReusableCell(withIdentifier: "SearchTitleTableViewCell", for: indexPath) as? SearchTitleTableViewCell else {
+            return nil
+        }
+        return cell
+    }
     
+    private func dequeueDefaultCell(indexPath : IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
 }
 
     
 extension SearchScreenViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.searchText = searchText
         searchVM.initializeSearch(for: searchText)
         self.reloadTableData()
+
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -68,8 +107,9 @@ extension SearchScreenViewController: UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = ""
+        self.searchText = "" 
         searchBar.resignFirstResponder()
-        searchVM.initializeSearch(for: searchBar.text)
+        searchVM.initializeSearch(for: "") 
         self.reloadTableData()
         searchBar.setShowsCancelButton(false, animated: true)
     }
