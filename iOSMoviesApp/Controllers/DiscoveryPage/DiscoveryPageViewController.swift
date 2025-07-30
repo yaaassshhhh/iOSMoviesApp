@@ -101,7 +101,6 @@ extension DiscoveryPageViewController: UITableViewDelegate, UITableViewDataSourc
 
 extension DiscoveryPageViewController : DiscoveryPageViewControllerDelegate {
     
-    
     func navigateToDetails(for indexPath: IndexPath) {
         
         guard let detailsVC: DetailsScreenViewController = UIStoryboard.init(name : "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "detailsViewC") as? DetailsScreenViewController else {
