@@ -25,6 +25,7 @@ final class MovieCardTableViewCell: UITableViewCell {
     private var indexPath: IndexPath!
     
     @IBAction func movieSelected(_ sender: Any) {
+        guard let movieVM = self.movieVM else { return }
         delegate?.navigateToDetails(for: self.indexPath)
     }
     

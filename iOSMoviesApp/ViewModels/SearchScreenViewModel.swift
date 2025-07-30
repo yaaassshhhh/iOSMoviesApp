@@ -12,16 +12,23 @@ class SearchScreenViewModel {
     var filteredMovies : [MovieViewModel] = []
     var recentMovies: [MovieViewModel?] = Array(repeating : nil, count : 5)
     
-    init(for movies: [MovieViewModel]?){
-        self.movies = movies ?? []
-        self.filteredMovies = movies ?? []
+    init(for movieListVM: MovieListViewModel?){
+        self.movies = movieListVM?.movies ?? []
     }
 }
 
 extension SearchScreenViewModel {
     
-    func getMovieViewModel(at index : IndexPath) -> MovieViewModel {
-        return self.filteredMovies[index.row]
+    func getMovieViewModel(at index : Int) -> MovieViewModel? {
+//        print(index.row)
+        print("filteredMovies count - \(filteredMovies.count)")
+        print("filteredMovies index - \(index)")
+        if filteredMovies.isEmpty || index > filteredMovies.count {
+            print("\n filteredMovies inside getMovieViewModel - \n \(filteredMovies)")
+            return nil
+        }
+        print("\n filteredMovies inside getMovieViewModel - \n \(filteredMovies)")
+        return self.filteredMovies[index-1]
     }
     
     func numberOfMovies() -> Int {
@@ -29,19 +36,27 @@ extension SearchScreenViewModel {
     }
     
     func updateRecentSearches(with movieVM: MovieViewModel) {
-        
-        
-    }
-    func initializeSearch(for searchText: String?) {
-        
+        if(recentMovies.endIndex < 4){
+            self.recentMovies.insert(movieVM, at: 0)
+        } else {
+            self.recentMovies.removeLast()
+            self.recentMovies.insert(movieVM, at: 0)
+        }
         updateFilterMovies()
-        
+    }
+    
+    func initializeSearch(for searchText: String?) {
+        print("Inside initializeSearch")
+//        updateFilterMovies()
+
         guard let searchText = searchText else {
             updateFilterMovies()
             return
         }
+        print("\n search text -- \(searchText)")
         
         let validSearchText = searchText.trimmingCharacters(in: .whitespaces)
+        print("\(validSearchText)")
         guard !validSearchText.isEmpty else {
             updateFilterMovies()
             return
@@ -52,6 +67,7 @@ extension SearchScreenViewModel {
             let movieTitle = movieVM.title
             return smartSearch.isMatch(movieTitle)
         })
+        print("filteredMovies inside search - \n \(filteredMovies)")
     }
     
    private func updateFilterMovies() {

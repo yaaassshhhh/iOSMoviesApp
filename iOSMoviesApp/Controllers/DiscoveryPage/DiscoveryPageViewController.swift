@@ -53,29 +53,11 @@ extension DiscoveryPageViewController: UISearchBarDelegate {
         guard let searchVC: SearchScreenViewController = UIStoryboard.init(name : "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "searchVC") as? SearchScreenViewController else {
                 return
             }
-        
-        let movies = movieListVM.getAllMovieViewModels()
-        searchVC.setupMovies(movies)
-        
+
+        searchVC.configure(for: movieListVM, self)
+
         self.navigationController?.pushViewController(searchVC, animated: true)
     }
-    
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        movieListVM.initializeSearch(for: searchText)
-//        self.reloadTableData()
-//    }
-//
-//    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-//        searchBar.setShowsCancelButton(true, animated: true)
-//    }
-//
-//    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-//        searchBar.text = ""
-//        searchBar.resignFirstResponder()
-//        movieListVM.initializeSearch(for: searchBar.text)
-//        self.reloadTableData()
-//        searchBar.setShowsCancelButton(false, animated: true)
-//    }
 }
 
 extension DiscoveryPageViewController: UITableViewDelegate, UITableViewDataSource {
