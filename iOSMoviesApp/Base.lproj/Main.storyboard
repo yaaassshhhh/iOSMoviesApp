@@ -156,13 +156,17 @@
         <!--Search Screen View Controller-->
         <scene sceneID="Aji-4x-bDe">
             <objects>
-                <viewController id="MEt-1G-jwy" customClass="SearchScreenViewController" customModule="iOSMoviesApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="searchVC" id="MEt-1G-jwy" customClass="SearchScreenViewController" customModule="iOSMoviesApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DeQ-kB-bRb">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ns0-5c-heO">
+                                <rect key="frame" x="0.0" y="163" width="393" height="655"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                             <searchBar clipsSubviews="YES" contentMode="scaleAspectFill" preservesSuperviewLayoutMargins="YES" searchBarStyle="minimal" text="" placeholder="Search for movies" translatesAutoresizingMaskIntoConstraints="NO" id="xBG-kI-16T">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="60"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="60"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="fGi-YT-nlo"/>
@@ -178,26 +182,23 @@
                                     <outlet property="delegate" destination="GNI-Kg-dhh" id="ZVn-8T-4od"/>
                                 </connections>
                             </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ns0-5c-heO">
-                                <rect key="frame" x="0.0" y="60" width="393" height="400"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="400" id="7CZ-YZ-2Jg"/>
-                                </constraints>
-                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="geC-2r-BGA"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="xBG-kI-16T" firstAttribute="top" secondItem="DeQ-kB-bRb" secondAttribute="top" id="2Gn-op-XaG"/>
-                            <constraint firstItem="ns0-5c-heO" firstAttribute="leading" secondItem="geC-2r-BGA" secondAttribute="leading" id="JK1-tY-8Qm"/>
-                            <constraint firstItem="ns0-5c-heO" firstAttribute="top" secondItem="xBG-kI-16T" secondAttribute="bottom" id="Kdu-Py-MRQ"/>
-                            <constraint firstItem="xBG-kI-16T" firstAttribute="trailing" secondItem="geC-2r-BGA" secondAttribute="trailing" id="bhC-La-rpS"/>
-                            <constraint firstItem="geC-2r-BGA" firstAttribute="trailing" secondItem="ns0-5c-heO" secondAttribute="trailing" id="bo6-gE-sT9"/>
-                            <constraint firstItem="xBG-kI-16T" firstAttribute="leading" secondItem="geC-2r-BGA" secondAttribute="leading" id="ywu-1h-DCk"/>
+                            <constraint firstItem="xBG-kI-16T" firstAttribute="leading" secondItem="geC-2r-BGA" secondAttribute="leading" id="40G-kI-YA8"/>
+                            <constraint firstItem="ns0-5c-heO" firstAttribute="top" secondItem="xBG-kI-16T" secondAttribute="bottom" id="5vp-Ii-bC1"/>
+                            <constraint firstItem="ns0-5c-heO" firstAttribute="bottom" secondItem="geC-2r-BGA" secondAttribute="bottom" id="ECf-F6-OMg"/>
+                            <constraint firstItem="ns0-5c-heO" firstAttribute="leading" secondItem="geC-2r-BGA" secondAttribute="leading" id="dhI-Nh-j8q"/>
+                            <constraint firstItem="xBG-kI-16T" firstAttribute="trailing" secondItem="geC-2r-BGA" secondAttribute="trailing" id="hfw-Nr-CBg"/>
+                            <constraint firstItem="xBG-kI-16T" firstAttribute="top" secondItem="geC-2r-BGA" secondAttribute="top" id="vWF-hq-Kg5"/>
+                            <constraint firstItem="ns0-5c-heO" firstAttribute="trailing" secondItem="geC-2r-BGA" secondAttribute="trailing" id="ves-AS-72B"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="K5D-VM-ELe"/>
+                    <connections>
+                        <outlet property="searchBar" destination="xBG-kI-16T" id="2O2-0C-Pxz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8gY-v5-zZO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
