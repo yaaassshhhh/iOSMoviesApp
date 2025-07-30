@@ -133,7 +133,7 @@
                             <constraint firstItem="Ehm-JT-4bB" firstAttribute="leading" secondItem="vvc-Wr-ATE" secondAttribute="leading" id="2DU-XZ-VIc"/>
                             <constraint firstItem="rvC-Ac-76x" firstAttribute="leading" secondItem="vvc-Wr-ATE" secondAttribute="leading" id="3O0-YX-dWb"/>
                             <constraint firstItem="rvC-Ac-76x" firstAttribute="top" secondItem="vvc-Wr-ATE" secondAttribute="top" constant="-25" id="5f4-2b-K1Z"/>
-                            <constraint firstItem="vvc-Wr-ATE" firstAttribute="bottom" secondItem="Ehm-JT-4bB" secondAttribute="bottom" id="Fpf-TV-dzx"/>
+                            <constraint firstAttribute="bottom" secondItem="Ehm-JT-4bB" secondAttribute="bottom" id="Fpf-TV-dzx"/>
                             <constraint firstItem="ZYd-Rb-Ulw" firstAttribute="top" secondItem="rvC-Ac-76x" secondAttribute="bottom" id="J34-zz-MMo"/>
                             <constraint firstItem="Ehm-JT-4bB" firstAttribute="top" secondItem="ZYd-Rb-Ulw" secondAttribute="bottom" id="Sjc-WO-kId"/>
                             <constraint firstAttribute="trailing" secondItem="rvC-Ac-76x" secondAttribute="trailing" id="cMy-XX-Amf"/>
@@ -162,7 +162,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ns0-5c-heO">
-                                <rect key="frame" x="0.0" y="163" width="393" height="655"/>
+                                <rect key="frame" x="0.0" y="163" width="393" height="689"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <searchBar clipsSubviews="YES" contentMode="scaleAspectFill" preservesSuperviewLayoutMargins="YES" searchBarStyle="minimal" text="" placeholder="Search for movies" translatesAutoresizingMaskIntoConstraints="NO" id="xBG-kI-16T">
@@ -188,7 +188,7 @@
                         <constraints>
                             <constraint firstItem="xBG-kI-16T" firstAttribute="leading" secondItem="geC-2r-BGA" secondAttribute="leading" id="40G-kI-YA8"/>
                             <constraint firstItem="ns0-5c-heO" firstAttribute="top" secondItem="xBG-kI-16T" secondAttribute="bottom" id="5vp-Ii-bC1"/>
-                            <constraint firstItem="ns0-5c-heO" firstAttribute="bottom" secondItem="geC-2r-BGA" secondAttribute="bottom" id="ECf-F6-OMg"/>
+                            <constraint firstItem="ns0-5c-heO" firstAttribute="bottom" secondItem="DeQ-kB-bRb" secondAttribute="bottom" id="ECf-F6-OMg"/>
                             <constraint firstItem="ns0-5c-heO" firstAttribute="leading" secondItem="geC-2r-BGA" secondAttribute="leading" id="dhI-Nh-j8q"/>
                             <constraint firstItem="xBG-kI-16T" firstAttribute="trailing" secondItem="geC-2r-BGA" secondAttribute="trailing" id="hfw-Nr-CBg"/>
                             <constraint firstItem="xBG-kI-16T" firstAttribute="top" secondItem="geC-2r-BGA" secondAttribute="top" id="vWF-hq-Kg5"/>
