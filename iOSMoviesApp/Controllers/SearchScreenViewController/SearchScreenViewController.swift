@@ -14,6 +14,7 @@ class SearchScreenViewController: UIViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchTitleLabel: UILabel!
     private var searchVM : SearchScreenViewModel?
     weak var delegate: DiscoveryPageViewControllerDelegate?
     
@@ -24,11 +25,19 @@ class SearchScreenViewController: UIViewController {
         super.viewDidLoad()
         setupSearchBar()
         setupTableView()
-
+        setupTitle()
     }
     
     func setupSearchBar() {
         searchBar.delegate = self
+    }
+    
+    func setupTitle() {
+        if searchText.isEmpty {
+            searchTitleLabel.text = "Recent Searched"
+        } else {
+            searchTitleLabel.text = "Searched Results"
+        }
     }
     
     private func setupTableView() {
@@ -75,29 +84,22 @@ extension SearchScreenViewController: UITableViewDataSource, UITableViewDelegate
             print("\n default cell in guard let")
             return UITableViewCell()
         }
+//        
+//        cell.configure(searchText)
+//        return cell
+            
+        guard let cellVM: MovieViewModel = searchVM.getMovieViewModel(at: position) else {
+            print("\n default cell in guard let cellVM: MovieViewModel")
+            return UITableViewCell()
+        }
         
-        switch position {
-        case 0:
-           guard let cell = dequeueTitleCell(indexPath: indexPath) else {
-            return dequeueDefaultCell(indexPath: indexPath)
+        guard let cell: MovieCardTableViewCell = tableView.dequeueReusableCell(withIdentifier: "MovieCardTableViewCell", for : indexPath) as? MovieCardTableViewCell else {
+            print("\n default cell in guard let cell: MovieCardTableViewCell")
+            return UITableViewCell()
         }
-        cell.configure(searchText)
+        
+        cell.configureState(with : cellVM, delegate : self.delegate, indexPath : indexPath)
         return cell
-        default:
-            
-            guard let cellVM: MovieViewModel = searchVM.getMovieViewModel(at: position) else {
-                print("\n default cell in guard let cellVM: MovieViewModel")
-                return UITableViewCell()
-            }
-            
-            guard let cell: MovieCardTableViewCell = tableView.dequeueReusableCell(withIdentifier: "MovieCardTableViewCell", for : indexPath) as? MovieCardTableViewCell else {
-                print("\n default cell in guard let cell: MovieCardTableViewCell")
-                return UITableViewCell()
-            }
-            
-            cell.configureState(with : cellVM, delegate : self.delegate, indexPath : indexPath)
-            return cell
-        }
         
     }
 
