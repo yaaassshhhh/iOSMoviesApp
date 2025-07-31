@@ -11,6 +11,10 @@ protocol SearchScreenViewControllerDelegate: AnyObject  {
     func updateRecentSearches(with movies: MovieViewModel)
 }
 class SearchScreenViewController: UIViewController {
+//    
+//    init(){
+//        
+//    }
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
@@ -19,6 +23,7 @@ class SearchScreenViewController: UIViewController {
 
     private var searchVM : SearchScreenViewModel?
     weak var delegate: DiscoveryPageViewControllerDelegate?
+    private var recentMovieList : [MovieViewModel]?
     
 
     private var searchText: String = ""
@@ -32,7 +37,14 @@ class SearchScreenViewController: UIViewController {
         setupTitle()
         setupSearchBar()
         setupTableView()
+        setupRecentSearchData()
     }
+    
+    func setupRecentSearchData() {
+        recentMovieList = RecentSearchedCache.searched.getRecentMovies()
+        print("Recent movie list : \(recentMovieList ?? [])")
+    }
+    
     private func setupSearchBar() {
         searchBar.delegate = self
     }
@@ -47,6 +59,7 @@ class SearchScreenViewController: UIViewController {
     
     private func setupTableView() {
         self.tableView.register(UINib(nibName: "MovieCardTableViewCell", bundle: nil), forCellReuseIdentifier: "MovieCardTableViewCell")
+        self.tableView.register(UINib(nibName: "RecentSearchTableViewCell", bundle: nil), forCellReuseIdentifier: "RecentSearchTableViewCell")
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "DefaultCell")
         
         tableView.rowHeight = UITableView.automaticDimension
@@ -88,20 +101,38 @@ extension SearchScreenViewController: UITableViewDataSource, UITableViewDelegate
             print("\n default cell in guard let")
             return UITableViewCell()
         }
+        
+        let didSearch: Bool = !searchText.isEmpty
+        
+        switch didSearch {
+        case true:
             
-        guard let cellVM: MovieViewModel = searchVM.getMovieViewModel(at: position) else {
-            print("\n default cell in guard let cellVM: MovieViewModel")
-            return UITableViewCell()
+            guard let cellVM: MovieViewModel = searchVM.getMovieViewModel(at: position) else {
+                print("\n default cell in guard let cellVM: MovieViewModel")
+                return UITableViewCell()
+            }
+            
+            guard let cell: MovieCardTableViewCell = tableView.dequeueReusableCell(withIdentifier: "MovieCardTableViewCell", for : indexPath) as? MovieCardTableViewCell else {
+                print("\n default cell in guard let cell: MovieCardTableViewCell")
+                return UITableViewCell()
+            }
+            
+            cell.configureState(with : cellVM, delegate : self.delegate, indexPath : indexPath)
+            return cell
+            
+        case false:
+            if recentMovieList?.count == 0 || recentMovieList?.count == nil {
+                return UITableViewCell()
+            }
+            let recentMovieVM = recentMovieList?[indexPath.row]
+            
+            let cell: RecentSearchTableViewCell = tableView.dequeueReusableCell(withIdentifier: "RecentSearchTableViewCell", for : indexPath) as! RecentSearchTableViewCell
+            guard let recentMovieVM = recentMovieVM else {
+                return cell
+            }
+            cell.configure(with: recentMovieVM)
+            return cell
         }
-        
-        guard let cell: MovieCardTableViewCell = tableView.dequeueReusableCell(withIdentifier: "MovieCardTableViewCell", for : indexPath) as? MovieCardTableViewCell else {
-            print("\n default cell in guard let cell: MovieCardTableViewCell")
-            return UITableViewCell()
-        }
-        
-        cell.configureState(with : cellVM, delegate : self.delegate, indexPath : indexPath)
-        return cell
-        
     }
 
 }
@@ -136,6 +167,11 @@ extension SearchScreenViewController: UISearchBarDelegate {
         self.reloadTableData()
         searchBar.setShowsCancelButton(false, animated: true)
     }
+}
+
+extension SearchScreenViewController {
+    
+    
 }
 
 //extension SearchScreenViewController : SearchScreenViewControllerDelegate {

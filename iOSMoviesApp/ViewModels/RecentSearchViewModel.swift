@@ -7,14 +7,21 @@
 
 import Foundation
 
-class RecentSearchViewModel: NSObject {
+class RecentSearchViewModel {
     let id: Int
     let title: String
-    let posterPath: String
     
-    init(id: Int, title: String, posterPath: String) {
+    init(id: Int, title: String) {
         self.id = id
         self.title = title
-        self.posterPath = posterPath
     }
+    
+    func getTitle() -> String {
+        return title
+    }
+    
+    func getId() -> Int {
+        return id
+    }
+    
 }

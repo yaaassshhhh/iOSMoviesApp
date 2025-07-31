@@ -33,6 +33,8 @@ final class RecentSearchedCache {
             let removedID = recentMovieIDs.removeLast()
             cache.removeObject(forKey: NSNumber(value: removedID))
         }
+        
+        print("recent cache: \(cache)")
     }
     
     func getRecentMovies() -> [MovieViewModel] {
