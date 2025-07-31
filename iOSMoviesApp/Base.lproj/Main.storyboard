@@ -209,8 +209,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="K5D-VM-ELe"/>
                     <connections>
-                        <outlet property="resultsLbl" destination="ADv-Kb-gQG" id="G12-e5-Dai"/>
                         <outlet property="searchBar" destination="xBG-kI-16T" id="2O2-0C-Pxz"/>
+                        <outlet property="searchTitleLabel" destination="ADv-Kb-gQG" id="Jt0-TS-oCZ"/>
                         <outlet property="tableView" destination="ns0-5c-heO" id="VFd-kD-byu"/>
                     </connections>
                 </viewController>
