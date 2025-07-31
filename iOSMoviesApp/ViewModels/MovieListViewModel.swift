@@ -49,8 +49,8 @@ extension MovieListViewModel {
         self.filteredMovies = self.movies
     }
     
-    func getMovieViewModel(at index : IndexPath) -> MovieViewModel {
-        return self.filteredMovies[index.row]
+    func getMovieViewModel(at index : Int) -> MovieViewModel {
+        return self.filteredMovies[index]
     }
     
     func numberOfMovies() -> Int {

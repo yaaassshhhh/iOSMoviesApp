@@ -48,7 +48,6 @@ class SearchScreenViewController: UIViewController {
     func configure(for viewModel: MovieListViewModel,_ delegate: DiscoveryPageViewControllerDelegate) {
         self.delegate = delegate
         searchVM = SearchScreenViewModel(for: viewModel)
-
     }
     
     func reloadTableData() {
@@ -60,6 +59,12 @@ extension SearchScreenViewController: UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (searchVM?.numberOfMovies() ?? 0) + 1
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let movieVM = searchVM?.getMovieViewModel(at: indexPath.row) else { return }
+        searchVM?.updateRecentSearches(with: movieVM)
+        delegate?.navigateToDetails(for: indexPath.row - 1)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

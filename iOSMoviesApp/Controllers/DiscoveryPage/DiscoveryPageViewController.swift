@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 
 protocol DiscoveryPageViewControllerDelegate: ViewControllerTableReloadDelegate{
-    func navigateToDetails(for indexPath : IndexPath)
+    func navigateToDetails(for indexPath : Int)
 }
 
 final class DiscoveryPageViewController: UIViewController{
@@ -55,7 +55,6 @@ extension DiscoveryPageViewController: UISearchBarDelegate {
             }
 
         searchVC.configure(for: movieListVM, self)
-
         self.navigationController?.pushViewController(searchVC, animated: true)
     }
 }
@@ -68,7 +67,7 @@ extension DiscoveryPageViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cellVM: MovieViewModel = self.movieListVM.getMovieViewModel(at: indexPath)
+        let cellVM: MovieViewModel = self.movieListVM.getMovieViewModel(at: indexPath.row)
         
         guard let cell: MovieCardTableViewCell = tableView.dequeueReusableCell(withIdentifier: "MovieCardTableViewCell", for : indexPath) as? MovieCardTableViewCell else {
             self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "DefaultCell")
@@ -80,13 +79,13 @@ extension DiscoveryPageViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.navigateToDetails(for: indexPath)
+        self.navigateToDetails(for: indexPath.row)
     }
 }
 
 extension DiscoveryPageViewController : DiscoveryPageViewControllerDelegate {
     
-    func navigateToDetails(for indexPath: IndexPath) {
+    func navigateToDetails(for indexPath: Int) {
         
         guard let detailsVC: DetailsScreenViewController = UIStoryboard.init(name : "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "detailsViewC") as? DetailsScreenViewController else {
             return
