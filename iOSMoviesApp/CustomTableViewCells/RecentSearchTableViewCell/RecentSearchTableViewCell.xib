@@ -3,6 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,14 +18,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RoR-Ah-mI4">
-                        <rect key="frame" x="5" y="5" width="35" height="35"/>
+                        <rect key="frame" x="5" y="11.333333333333334" width="25" height="21"/>
+                        <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="35" id="78b-2C-K5j"/>
-                            <constraint firstAttribute="width" constant="35" id="7GL-Rc-02O"/>
+                            <constraint firstAttribute="height" constant="25" id="78b-2C-K5j"/>
+                            <constraint firstAttribute="width" constant="25" id="7GL-Rc-02O"/>
                         </constraints>
+                        <imageReference key="image" image="arrow.clockwise" catalog="system" symbolScale="small"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lPH-XL-KIB">
-                        <rect key="frame" x="50" y="5" width="250" height="35"/>
+                        <rect key="frame" x="40" y="5" width="250" height="35"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="250" id="PT7-H5-7hc"/>
                             <constraint firstAttribute="height" constant="35" id="XPL-xn-kyg"/>
@@ -35,12 +38,11 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="RoR-Ah-mI4" secondAttribute="bottom" constant="5" id="OLH-6g-6fS"/>
                     <constraint firstItem="RoR-Ah-mI4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="PN9-NR-KWH"/>
                     <constraint firstItem="lPH-XL-KIB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="WFe-wx-S51"/>
                     <constraint firstItem="lPH-XL-KIB" firstAttribute="leading" secondItem="RoR-Ah-mI4" secondAttribute="trailing" constant="10" id="faF-Tg-5hs"/>
                     <constraint firstAttribute="bottom" secondItem="lPH-XL-KIB" secondAttribute="bottom" constant="5" id="mcQ-9i-6Xb"/>
-                    <constraint firstItem="RoR-Ah-mI4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="sga-li-NUn"/>
+                    <constraint firstItem="RoR-Ah-mI4" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="oru-HS-lzd"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -50,4 +52,7 @@
             <point key="canvasLocation" x="126.71755725190839" y="20.774647887323944"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="arrow.clockwise" catalog="system" width="110" height="128"/>
+    </resources>
 </document>

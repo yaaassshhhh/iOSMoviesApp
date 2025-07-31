@@ -18,13 +18,13 @@ class SearchTitleTableViewCell: UITableViewCell {
         // Initialization code
     }
     
-    func configure(_ searchText: String) {
-        if searchText.isEmpty {
-            searchTitleLabel.text = "Recent Searched"
-        } else {
-            searchTitleLabel.text = "Searched Results"
-        }
-    }
+//    func configure(_ searchText: String) {
+//        if searchText.isEmpty {
+//            searchTitleLabel.text = "Recent Searched"
+//        } else {
+//            searchTitleLabel.text = "Searched Results"
+//        }
+//    }
     
 }
 

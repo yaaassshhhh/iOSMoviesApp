@@ -7,8 +7,8 @@
 
 import UIKit
 
-protocol SearchScreenViewControllerDelegate: AnyObject  {
-    func updateRecentSearches(with movies: MovieViewModel)
+protocol RecentSearchNavigationDelegate: AnyObject {
+    func didSelectRecentMovie(with movieId: Int)
 }
 class SearchScreenViewController: UIViewController {
 //    
@@ -24,6 +24,8 @@ class SearchScreenViewController: UIViewController {
     private var searchVM : SearchScreenViewModel?
     weak var delegate: DiscoveryPageViewControllerDelegate?
     private var recentMovieList : [MovieViewModel]?
+    weak var recentDelegate: RecentSearchNavigationDelegate?
+    
     
 
     private var searchText: String = ""
@@ -87,10 +89,20 @@ extension SearchScreenViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let movieVM = searchVM?.getMovieViewModel(at: indexPath.row) else { return }
-//        searchVM?.updateRecentSearches(with: movieVM)
-        RecentSearchedCache.searched.addRecentMovie(movie: movieVM)
-        delegate?.navigateToDetails(for: indexPath.row)
+        
+        let didSearch: Bool = !searchText.isEmpty
+    
+        switch didSearch {
+        case true:
+            guard let movieVM = searchVM?.getMovieViewModel(at: indexPath.row) else { return }
+            RecentSearchedCache.searched.addRecentMovie(movie: movieVM)
+            delegate?.navigateToDetails(for: indexPath.row)
+            
+        case false :
+            guard let recentMovieVM = recentMovieList?[indexPath.row] else { return }
+            RecentSearchedCache.searched.addRecentMovie(movie: recentMovieVM)
+            recentDelegate?.didSelectRecentMovie(with: recentMovieVM.id)
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -169,29 +181,31 @@ extension SearchScreenViewController: UISearchBarDelegate {
     }
 }
 
-extension SearchScreenViewController {
+extension SearchScreenViewController : RecentSearchNavigationDelegate{
+    func didSelectRecentMovie(with movieId: Int) {
+        navigateToMovieDetails(with: movieId)
+    }
     
+    private func navigateToMovieDetails(with movieId: Int) {
+        guard let detailsVC: DetailsScreenViewController = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "detailsViewC") as? DetailsScreenViewController else {
+            return
+        }
+        
+        let movieVM = createMovieViewModel(with: movieId)
+        print("Hello i am tapped")
+        detailsVC.setupMovie(movieVM: movieVM)
+        self.navigationController?.pushViewController(detailsVC, animated: true)
+    }
     
+    private func createMovieViewModel(with movieId: Int) -> MovieViewModel {
+        let movie = Movie(
+            title: nil,
+            releaseDate: nil,
+            posterPath: nil,
+            description: nil,
+            id: movieId
+        )
+        
+        return MovieViewModel(movie: movie)
+    }
 }
-
-//extension SearchScreenViewController : SearchScreenViewControllerDelegate {
-    
-//    func updateRecentSearches(with movies: MovieViewModel) {
-//        
-//        let cacheKey: NSNumber = NSNumber(movies.id)
-//
-//        guard let movieVM = RecentSearchedCache.shared.object(forKey: cacheKey) as? MovieViewModel else {
-//            setUpCache(movies, cacheKey)
-//        }
-//        if movieVM {
-//            
-//        }
-//            
-//        }
-//        setUpCache(movies, cacheKey)
-//
-//    }
-//    func setUpCache(_ movieVM : MovieViewModel, _ cacheKey : NSString){
-//        RecentSearchedCache.shared.setObject(movieVM, forKey: cacheKey)
-//    }
-///}

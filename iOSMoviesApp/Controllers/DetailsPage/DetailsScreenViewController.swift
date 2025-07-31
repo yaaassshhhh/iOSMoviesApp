@@ -203,20 +203,3 @@ extension DetailsScreenViewController: SimilarMovieSelectionDelegate {
         return MovieViewModel(movie: movie)
     }
 }
-
-//extension DetailsScreenViewController: SearchScreenViewControllerDelegate {
-//    func updateRecentSearches(with movies: MovieViewModel) {
-//        <#code#>
-//    }
-//    
-//    private func navigateToDetails(with movieId: Int) {
-//        guard let detailsVC: DetailsScreenViewController = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "detailsViewC") as? DetailsScreenViewController else {
-//            return
-//        }
-//        
-//        let movieVM = createMovieViewModel(with: movieId)
-//        
-//        detailsVC.setupMovie(movieVM: movieVM)
-//        self.navigationController?.pushViewController(detailsVC, animated: true)
-//    }
-//}
