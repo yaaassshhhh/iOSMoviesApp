@@ -14,7 +14,9 @@ class SearchScreenViewController: UIViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+
     @IBOutlet weak var searchTitleLabel: UILabel!
+
     private var searchVM : SearchScreenViewModel?
     weak var delegate: DiscoveryPageViewControllerDelegate?
     
@@ -23,12 +25,15 @@ class SearchScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupSearchBar()
-        setupTableView()
-        setupTitle()
+        setupUI()
     }
     
-    func setupSearchBar() {
+    private func setupUI() {
+        setupTitle()
+        setupSearchBar()
+        setupTableView()
+    }
+    private func setupSearchBar() {
         searchBar.delegate = self
     }
     
@@ -42,8 +47,6 @@ class SearchScreenViewController: UIViewController {
     
     private func setupTableView() {
         self.tableView.register(UINib(nibName: "MovieCardTableViewCell", bundle: nil), forCellReuseIdentifier: "MovieCardTableViewCell")
-        let searchTitleNib: UINib = UINib(nibName: "SearchTitleTableViewCell", bundle: nil)
-        tableView.register(searchTitleNib, forCellReuseIdentifier: "SearchTitleTableViewCell")
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "DefaultCell")
         
         tableView.rowHeight = UITableView.automaticDimension
@@ -84,9 +87,6 @@ extension SearchScreenViewController: UITableViewDataSource, UITableViewDelegate
             print("\n default cell in guard let")
             return UITableViewCell()
         }
-//        
-//        cell.configure(searchText)
-//        return cell
             
         guard let cellVM: MovieViewModel = searchVM.getMovieViewModel(at: position) else {
             print("\n default cell in guard let cellVM: MovieViewModel")

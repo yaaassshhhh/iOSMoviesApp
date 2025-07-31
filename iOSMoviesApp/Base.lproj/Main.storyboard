@@ -162,7 +162,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ns0-5c-heO">
-                                <rect key="frame" x="0.0" y="163" width="393" height="689"/>
+                                <rect key="frame" x="0.0" y="203" width="393" height="649"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <searchBar clipsSubviews="YES" contentMode="scaleAspectFill" preservesSuperviewLayoutMargins="YES" searchBarStyle="minimal" text="" placeholder="Search for movies" translatesAutoresizingMaskIntoConstraints="NO" id="xBG-kI-16T">
@@ -182,13 +182,25 @@
                                     <outlet property="delegate" destination="GNI-Kg-dhh" id="ZVn-8T-4od"/>
                                 </connections>
                             </searchBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ADv-Kb-gQG">
+                                <rect key="frame" x="23" y="163" width="70" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="91o-Vb-epc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="geC-2r-BGA"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="xBG-kI-16T" firstAttribute="leading" secondItem="geC-2r-BGA" secondAttribute="leading" id="40G-kI-YA8"/>
-                            <constraint firstItem="ns0-5c-heO" firstAttribute="top" secondItem="xBG-kI-16T" secondAttribute="bottom" id="5vp-Ii-bC1"/>
+                            <constraint firstItem="ns0-5c-heO" firstAttribute="top" secondItem="xBG-kI-16T" secondAttribute="bottom" constant="40" id="5vp-Ii-bC1"/>
+                            <constraint firstItem="ns0-5c-heO" firstAttribute="top" secondItem="ADv-Kb-gQG" secondAttribute="bottom" id="CVi-gR-Dkq"/>
                             <constraint firstItem="ns0-5c-heO" firstAttribute="bottom" secondItem="DeQ-kB-bRb" secondAttribute="bottom" id="ECf-F6-OMg"/>
+                            <constraint firstItem="geC-2r-BGA" firstAttribute="trailing" secondItem="ADv-Kb-gQG" secondAttribute="trailing" constant="300" id="SmX-nN-n7c"/>
+                            <constraint firstItem="ADv-Kb-gQG" firstAttribute="top" secondItem="xBG-kI-16T" secondAttribute="bottom" id="WAK-GD-Gud"/>
                             <constraint firstItem="ns0-5c-heO" firstAttribute="leading" secondItem="geC-2r-BGA" secondAttribute="leading" id="dhI-Nh-j8q"/>
                             <constraint firstItem="xBG-kI-16T" firstAttribute="trailing" secondItem="geC-2r-BGA" secondAttribute="trailing" id="hfw-Nr-CBg"/>
                             <constraint firstItem="xBG-kI-16T" firstAttribute="top" secondItem="geC-2r-BGA" secondAttribute="top" id="vWF-hq-Kg5"/>
@@ -197,6 +209,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="K5D-VM-ELe"/>
                     <connections>
+                        <outlet property="resultsLbl" destination="ADv-Kb-gQG" id="G12-e5-Dai"/>
                         <outlet property="searchBar" destination="xBG-kI-16T" id="2O2-0C-Pxz"/>
                         <outlet property="tableView" destination="ns0-5c-heO" id="VFd-kD-byu"/>
                     </connections>
