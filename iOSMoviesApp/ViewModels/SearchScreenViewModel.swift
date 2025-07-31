@@ -20,15 +20,15 @@ class SearchScreenViewModel {
 extension SearchScreenViewModel {
     
     func getMovieViewModel(at index : Int) -> MovieViewModel? {
-//        print(index.row)
+        
         print("filteredMovies count - \(filteredMovies.count)")
         print("filteredMovies index - \(index)")
-        if filteredMovies.isEmpty || index > filteredMovies.count {
+        if filteredMovies.isEmpty || index >= filteredMovies.count {
             print("\n filteredMovies inside getMovieViewModel - \n \(filteredMovies)")
             return nil
         }
         print("\n filteredMovies inside getMovieViewModel - \n \(filteredMovies)")
-        return self.filteredMovies[index-1]
+        return self.filteredMovies[index]
     }
     
     func numberOfMovies() -> Int {
@@ -42,15 +42,13 @@ extension SearchScreenViewModel {
             self.recentMovies.removeLast()
             self.recentMovies.insert(movieVM, at: 0)
         }
-        updateFilterMovies()
     }
     
     func initializeSearch(for searchText: String?) {
         print("Inside initializeSearch")
-//        updateFilterMovies()
-
+        filteredMovies.removeAll()
+        
         guard let searchText = searchText else {
-            updateFilterMovies()
             return
         }
         print("\n search text -- \(searchText)")
@@ -58,7 +56,6 @@ extension SearchScreenViewModel {
         let validSearchText = searchText.trimmingCharacters(in: .whitespaces)
         print("\(validSearchText)")
         guard !validSearchText.isEmpty else {
-            updateFilterMovies()
             return
         }
         
@@ -70,13 +67,4 @@ extension SearchScreenViewModel {
         print("filteredMovies inside search - \n \(filteredMovies)")
     }
     
-   private func updateFilterMovies() {
-       self.filteredMovies.removeAll()
-        for movieVM in self.recentMovies {
-            guard let movieVM = movieVM else {
-                break
-            }
-            self.filteredMovies.append(movieVM)
-        }
-    }
 }

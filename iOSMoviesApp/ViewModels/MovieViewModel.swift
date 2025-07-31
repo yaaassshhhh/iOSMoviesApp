@@ -6,7 +6,7 @@
 //
 import Foundation
 
-struct MovieViewModel {
+class MovieViewModel {
     
     var movie : Movie
     var posterBaseURL: String = "https://image.tmdb.org/t/p/w342"
@@ -53,7 +53,7 @@ extension MovieViewModel : Identifiable {
         return self.posterBaseURL + posterPath
     }
     
-    mutating func loadImage(delegate: MovieCardTableViewCellDelegate?) {
+    func loadImage(delegate: MovieCardTableViewCellDelegate?) {
         
         guard let delegate: MovieCardTableViewCellDelegate = delegate else { return }
         self.delegate = delegate

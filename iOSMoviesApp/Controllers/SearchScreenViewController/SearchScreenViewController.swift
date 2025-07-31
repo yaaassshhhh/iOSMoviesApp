@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol SearchScreenViewControllerDelegate: DiscoveryPageViewControllerDelegate {
+protocol SearchScreenViewControllerDelegate: AnyObject  {
     func updateRecentSearches(with movies: MovieViewModel)
 }
 class SearchScreenViewController: UIViewController {
@@ -76,7 +76,7 @@ extension SearchScreenViewController: UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let movieVM = searchVM?.getMovieViewModel(at: indexPath.row) else { return }
         searchVM?.updateRecentSearches(with: movieVM)
-        delegate?.navigateToDetails(for: indexPath.row - 1)
+        delegate?.navigateToDetails(for: indexPath.row)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -101,21 +101,6 @@ extension SearchScreenViewController: UITableViewDataSource, UITableViewDelegate
         cell.configureState(with : cellVM, delegate : self.delegate, indexPath : indexPath)
         return cell
         
-    }
-
-}
-
-extension SearchScreenViewController {
-    private func dequeueTitleCell(indexPath : IndexPath) -> SearchTitleTableViewCell? {
-        
-        guard let cell: SearchTitleTableViewCell = tableView.dequeueReusableCell(withIdentifier: "SearchTitleTableViewCell", for: indexPath) as? SearchTitleTableViewCell else {
-            return nil
-        }
-        return cell
-    }
-    
-    private func dequeueDefaultCell(indexPath : IndexPath) -> UITableViewCell {
-        return UITableViewCell()
     }
 
 }
@@ -151,9 +136,24 @@ extension SearchScreenViewController: UISearchBarDelegate {
     }
 }
 
-//extension SearchScreenViewController : SearchScreenViewControllerDelegate {
-//    func updateRecentSearches(with cellVM: MovieViewModel) {
-//        guard let searchVM = searchVM else { return }
-//        searchVM.updateRecentSearches(with: cellVM)
-//    }
-//}
+extension SearchScreenViewController : SearchScreenViewControllerDelegate {
+    
+    func updateRecentSearches(with movies: MovieViewModel) {
+        
+        let cacheKey: NSString = NSString(string: String(movies.id))
+        
+        guard let movieVM = RecentSearchedCache.shared.object(forKey: cacheKey) as? MovieViewModel else {
+            setUpCache(movies, cacheKey)
+        }
+        if movieVM {
+            
+        }
+            
+        }
+        setUpCache(movies, cacheKey)
+
+    }
+    func setUpCache(_ movieVM : MovieViewModel, _ cacheKey : NSString){
+        RecentSearchedCache.shared.setObject(movieVM, forKey: cacheKey)
+    }
+}
