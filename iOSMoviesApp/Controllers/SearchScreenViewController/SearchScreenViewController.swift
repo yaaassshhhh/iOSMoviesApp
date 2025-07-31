@@ -75,7 +75,8 @@ extension SearchScreenViewController: UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let movieVM = searchVM?.getMovieViewModel(at: indexPath.row) else { return }
-        searchVM?.updateRecentSearches(with: movieVM)
+//        searchVM?.updateRecentSearches(with: movieVM)
+        RecentSearchedCache.searched.addRecentMovie(movie: movieVM)
         delegate?.navigateToDetails(for: indexPath.row)
     }
     
@@ -112,6 +113,7 @@ extension SearchScreenViewController: UISearchBarDelegate {
         self.searchText = searchText
         guard let searchVM = searchVM else { return }
         print("Initialize search")
+        setupTitle()
 
         searchVM.initializeSearch(for: searchText)
         print("Initialize search reloading table")
@@ -136,24 +138,24 @@ extension SearchScreenViewController: UISearchBarDelegate {
     }
 }
 
-extension SearchScreenViewController : SearchScreenViewControllerDelegate {
+//extension SearchScreenViewController : SearchScreenViewControllerDelegate {
     
-    func updateRecentSearches(with movies: MovieViewModel) {
-        
-        let cacheKey: NSString = NSString(string: String(movies.id))
-        
-        guard let movieVM = RecentSearchedCache.shared.object(forKey: cacheKey) as? MovieViewModel else {
-            setUpCache(movies, cacheKey)
-        }
-        if movieVM {
-            
-        }
-            
-        }
-        setUpCache(movies, cacheKey)
-
-    }
-    func setUpCache(_ movieVM : MovieViewModel, _ cacheKey : NSString){
-        RecentSearchedCache.shared.setObject(movieVM, forKey: cacheKey)
-    }
-}
+//    func updateRecentSearches(with movies: MovieViewModel) {
+//        
+//        let cacheKey: NSNumber = NSNumber(movies.id)
+//
+//        guard let movieVM = RecentSearchedCache.shared.object(forKey: cacheKey) as? MovieViewModel else {
+//            setUpCache(movies, cacheKey)
+//        }
+//        if movieVM {
+//            
+//        }
+//            
+//        }
+//        setUpCache(movies, cacheKey)
+//
+//    }
+//    func setUpCache(_ movieVM : MovieViewModel, _ cacheKey : NSString){
+//        RecentSearchedCache.shared.setObject(movieVM, forKey: cacheKey)
+//    }
+///}

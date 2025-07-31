@@ -183,12 +183,12 @@
                                 </connections>
                             </searchBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ADv-Kb-gQG">
-                                <rect key="frame" x="23" y="163" width="70" height="40"/>
+                                <rect key="frame" x="10" y="163" width="300" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="70" id="91o-Vb-epc"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="DVI-7a-k4d"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -199,8 +199,8 @@
                             <constraint firstItem="ns0-5c-heO" firstAttribute="top" secondItem="xBG-kI-16T" secondAttribute="bottom" constant="40" id="5vp-Ii-bC1"/>
                             <constraint firstItem="ns0-5c-heO" firstAttribute="top" secondItem="ADv-Kb-gQG" secondAttribute="bottom" id="CVi-gR-Dkq"/>
                             <constraint firstItem="ns0-5c-heO" firstAttribute="bottom" secondItem="DeQ-kB-bRb" secondAttribute="bottom" id="ECf-F6-OMg"/>
-                            <constraint firstItem="geC-2r-BGA" firstAttribute="trailing" secondItem="ADv-Kb-gQG" secondAttribute="trailing" constant="300" id="SmX-nN-n7c"/>
                             <constraint firstItem="ADv-Kb-gQG" firstAttribute="top" secondItem="xBG-kI-16T" secondAttribute="bottom" id="WAK-GD-Gud"/>
+                            <constraint firstItem="ADv-Kb-gQG" firstAttribute="leading" secondItem="DeQ-kB-bRb" secondAttribute="leading" constant="10" id="c75-YL-tzq"/>
                             <constraint firstItem="ns0-5c-heO" firstAttribute="leading" secondItem="geC-2r-BGA" secondAttribute="leading" id="dhI-Nh-j8q"/>
                             <constraint firstItem="xBG-kI-16T" firstAttribute="trailing" secondItem="geC-2r-BGA" secondAttribute="trailing" id="hfw-Nr-CBg"/>
                             <constraint firstItem="xBG-kI-16T" firstAttribute="top" secondItem="geC-2r-BGA" secondAttribute="top" id="vWF-hq-Kg5"/>
