@@ -7,14 +7,7 @@
 
 import UIKit
 
-protocol RecentSearchNavigationDelegate: AnyObject {
-    func didSelectRecentMovie(with movieId: Int)
-}
 class SearchScreenViewController: UIViewController {
-//    
-//    init(){
-//        
-//    }
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
@@ -24,7 +17,6 @@ class SearchScreenViewController: UIViewController {
     private var searchVM : SearchScreenViewModel?
     weak var delegate: DiscoveryPageViewControllerDelegate?
     private var recentMovieList : [MovieViewModel]?
-    weak var recentDelegate: RecentSearchNavigationDelegate?
     
     
 
@@ -33,6 +25,13 @@ class SearchScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if searchText.isEmpty {
+            setupRecentSearchData()
+        }
     }
     
     private func setupUI() {
@@ -45,6 +44,7 @@ class SearchScreenViewController: UIViewController {
     func setupRecentSearchData() {
         recentMovieList = RecentSearchedCache.searched.getRecentMovies()
         print("Recent movie list : \(recentMovieList ?? [])")
+        self.reloadTableData()
     }
     
     private func setupSearchBar() {
@@ -85,7 +85,14 @@ class SearchScreenViewController: UIViewController {
 extension SearchScreenViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (searchVM?.numberOfMovies() ?? 0) + 1
+        let didSearch: Bool = !searchText.isEmpty
+        
+        switch didSearch {
+        case true:
+            return searchVM?.numberOfMovies() ?? 0
+        case false:
+            return recentMovieList?.count ?? 0
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -96,12 +103,12 @@ extension SearchScreenViewController: UITableViewDataSource, UITableViewDelegate
         case true:
             guard let movieVM = searchVM?.getMovieViewModel(at: indexPath.row) else { return }
             RecentSearchedCache.searched.addRecentMovie(movie: movieVM)
-            delegate?.navigateToDetails(for: indexPath.row)
+            didSelectRecentMovie(with: movieVM.id)
             
         case false :
             guard let recentMovieVM = recentMovieList?[indexPath.row] else { return }
             RecentSearchedCache.searched.addRecentMovie(movie: recentMovieVM)
-            recentDelegate?.didSelectRecentMovie(with: recentMovieVM.id)
+            didSelectRecentMovie(with: recentMovieVM.id)
         }
     }
     
@@ -158,7 +165,12 @@ extension SearchScreenViewController: UISearchBarDelegate {
         print("Initialize search")
         setupTitle()
 
-        searchVM.initializeSearch(for: searchText)
+        if searchText.isEmpty {
+            setupRecentSearchData()
+        } else {
+            searchVM.initializeSearch(for: searchText)
+        }
+        
         print("Initialize search reloading table")
         self.reloadTableData()
 
@@ -171,6 +183,8 @@ extension SearchScreenViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = ""
         self.searchText = "" 
+        setupTitle()
+        setupRecentSearchData() 
         searchBar.resignFirstResponder()
 
         guard let searchVM = searchVM else { return }
@@ -181,7 +195,7 @@ extension SearchScreenViewController: UISearchBarDelegate {
     }
 }
 
-extension SearchScreenViewController : RecentSearchNavigationDelegate{
+extension SearchScreenViewController {
     func didSelectRecentMovie(with movieId: Int) {
         navigateToMovieDetails(with: movieId)
     }
@@ -209,3 +223,33 @@ extension SearchScreenViewController : RecentSearchNavigationDelegate{
         return MovieViewModel(movie: movie)
     }
 }
+
+
+//extension SearchScreenViewController {
+//    func didSelectSearchedMovie(with movieId: Int) {
+//        navigateToMovieDetails(with: movieId)
+//    }
+//    
+//    private func navigateToMovieDetails(with movieId: Int) {
+//        guard let detailsVC: DetailsScreenViewController = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "detailsViewC") as? DetailsScreenViewController else {
+//            return
+//        }
+//        
+//        let movieVM = createMovieViewModel(with: movieId)
+//        print("Hello i am tapped")
+//        detailsVC.setupMovie(movieVM: movieVM)
+//        self.navigationController?.pushViewController(detailsVC, animated: true)
+//    }
+//    
+//    private func createMovieViewModel(with movieId: Int) -> MovieViewModel {
+//        let movie = Movie(
+//            title: nil,
+//            releaseDate: nil,
+//            posterPath: nil,
+//            description: nil,
+//            id: movieId
+//        )
+//        
+//        return MovieViewModel(movie: movie)
+//    }
+//}
