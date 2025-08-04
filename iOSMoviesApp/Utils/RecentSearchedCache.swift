@@ -5,44 +5,50 @@
 //  Created by Tarang Sultania on 31/07/25.
 //
 
-import Foundation
+import UIKit
+
 final class RecentSearchedCache {
     
     static let searched = RecentSearchedCache()
-    private let maxLimit = 5
-    
-    private var recentMovieIDs: [Int] = []
     private let cache = NSCache<NSNumber, MovieViewModel>()
+    private let maxLimit = 5
+    private var movieIds: [Int] = [] 
     
     private init() {
         cache.countLimit = maxLimit
+        cache.name = "RecentMoviesCache"
     }
     
     func addRecentMovie(movie: MovieViewModel) {
+        let movieId = NSNumber(value: movie.id)
         
-        let key = NSNumber(value: movie.id)
-        if let index = recentMovieIDs.firstIndex(of: movie.id) {
-            recentMovieIDs.remove(at: index)
+        if let existingIndex = movieIds.firstIndex(of: movie.id) {
+            movieIds.remove(at: existingIndex)
         }
         
-        recentMovieIDs.insert(movie.id, at: 0)
+        movieIds.insert(movie.id, at: 0)
         
-        cache.setObject(movie, forKey: key)
-        
-        if recentMovieIDs.count > maxLimit {
-            let removedID = recentMovieIDs.removeLast()
-            cache.removeObject(forKey: NSNumber(value: removedID))
+        if movieIds.count > maxLimit {
+            let removedId = movieIds.removeLast()
+            cache.removeObject(forKey: NSNumber(value: removedId))
         }
         
-        print("recent cache: \(cache)")
+        cache.setObject(movie, forKey: movieId)
     }
     
     func getRecentMovies() -> [MovieViewModel] {
-        return recentMovieIDs.compactMap { cache.object(forKey: NSNumber(value: $0)) }
+        var recentMovies: [MovieViewModel] = []
+        
+        for movieId in movieIds {
+            if let movie = cache.object(forKey: NSNumber(value: movieId)) {
+                recentMovies.append(movie)
+            }
+        }
+        return recentMovies
     }
     
     func clear() {
-        recentMovieIDs.removeAll()
         cache.removeAllObjects()
+        movieIds.removeAll()
     }
 }
