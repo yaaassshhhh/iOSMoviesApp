@@ -223,3 +223,33 @@ extension SearchScreenViewController {
         return MovieViewModel(movie: movie)
     }
 }
+
+
+//extension SearchScreenViewController {
+//    func didSelectSearchedMovie(with movieId: Int) {
+//        navigateToMovieDetails(with: movieId)
+//    }
+//    
+//    private func navigateToMovieDetails(with movieId: Int) {
+//        guard let detailsVC: DetailsScreenViewController = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "detailsViewC") as? DetailsScreenViewController else {
+//            return
+//        }
+//        
+//        let movieVM = createMovieViewModel(with: movieId)
+//        print("Hello i am tapped")
+//        detailsVC.setupMovie(movieVM: movieVM)
+//        self.navigationController?.pushViewController(detailsVC, animated: true)
+//    }
+//    
+//    private func createMovieViewModel(with movieId: Int) -> MovieViewModel {
+//        let movie = Movie(
+//            title: nil,
+//            releaseDate: nil,
+//            posterPath: nil,
+//            description: nil,
+//            id: movieId
+//        )
+//        
+//        return MovieViewModel(movie: movie)
+//    }
+//}
