@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SimilarCollectionViewCell" id="JZs-ir-thu" customClass="SimilarCollectionViewCell" customModule="iOSMoviesApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="224" height="207"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="224" height="207"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dvE-jf-5DG">
+                        <rect key="frame" x="10" y="18" width="204" height="119"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rLb-hR-vzz">
+                        <rect key="frame" x="52" y="149" width="120" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="120" id="DX4-oT-qTD"/>
+                            <constraint firstAttribute="height" constant="40" id="mx1-RE-Q6o"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="WOK-kj-VXY"/>
+            <constraints>
+                <constraint firstItem="rLb-hR-vzz" firstAttribute="centerX" secondItem="dvE-jf-5DG" secondAttribute="centerX" id="BmY-lS-QbR"/>
+                <constraint firstAttribute="bottom" secondItem="dvE-jf-5DG" secondAttribute="bottom" constant="70" id="G78-iv-fO5"/>
+                <constraint firstItem="dvE-jf-5DG" firstAttribute="leading" secondItem="JZs-ir-thu" secondAttribute="leading" constant="10" id="Lpi-jf-owE"/>
+                <constraint firstItem="dvE-jf-5DG" firstAttribute="top" secondItem="JZs-ir-thu" secondAttribute="top" constant="18" id="aUQ-uN-w04"/>
+                <constraint firstItem="dvE-jf-5DG" firstAttribute="centerX" secondItem="WOK-kj-VXY" secondAttribute="centerX" id="klX-Ej-37B"/>
+                <constraint firstItem="rLb-hR-vzz" firstAttribute="top" secondItem="dvE-jf-5DG" secondAttribute="bottom" constant="12" id="ovp-57-pdb"/>
+            </constraints>
+            <size key="customSize" width="224" height="207"/>
+            <connections>
+                <outlet property="moviePoster" destination="dvE-jf-5DG" id="dGb-KK-Ljk"/>
+                <outlet property="title" destination="rLb-hR-vzz" id="Bmt-bv-lLu"/>
+            </connections>
+            <point key="canvasLocation" x="225.95419847328245" y="55.985915492957751"/>
+        </collectionViewCell>
+    </objects>
+</document>

@@ -1,0 +1,130 @@
+//
+//  DiscoveryPageViewController.swift
+//  iOSMoviesApp
+//
+//  Created by Tarang Sultania on 08/07/25.
+//
+
+import Foundation
+import UIKit
+import CoreLocation
+
+protocol DiscoveryPageViewControllerDelegate: ViewControllerTableReloadDelegate{
+    func navigateToDetails(for indexPath : Int)
+}
+
+final class DiscoveryPageViewController: UIViewController{
+    
+    @IBOutlet weak var locationBtn: UIButton!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    private var movieListVM : MovieListViewModel!
+    let locationService : LocationService = LocationService()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupLocationService()
+        setupUI()
+    }
+    
+    private func setupUI() {
+        movieListVM = MovieListViewModel(delegate : self)
+        movieListVM.fetchMovies()
+        setupTableView()
+        setupSearchBar()
+    }
+    
+    private func setupTableView() {
+        self.tableView.register(UINib(nibName: "MovieCardTableViewCell", bundle: nil), forCellReuseIdentifier: "MovieCardTableViewCell")
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.rowHeight = UITableView.automaticDimension
+    }
+    
+    private func setupSearchBar() {
+        searchBar.delegate = self
+    }
+}
+
+extension DiscoveryPageViewController: UISearchBarDelegate {
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        guard let searchVC: SearchScreenViewController = UIStoryboard.init(name : "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "searchVC") as? SearchScreenViewController else {
+                return
+            }
+
+        searchVC.configure(for: movieListVM, self)
+        self.navigationController?.pushViewController(searchVC, animated: true)
+    }
+}
+
+extension DiscoveryPageViewController: UITableViewDelegate, UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return movieListVM.numberOfMovies()
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cellVM: MovieViewModel = self.movieListVM.getMovieViewModel(at: indexPath.row)
+        
+        guard let cell: MovieCardTableViewCell = tableView.dequeueReusableCell(withIdentifier: "MovieCardTableViewCell", for : indexPath) as? MovieCardTableViewCell else {
+            self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "DefaultCell")
+            return UITableViewCell()
+        }
+        
+        cell.configureState(with : cellVM, delegate : self, indexPath : indexPath)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.navigateToDetails(for: indexPath.row)
+    }
+}
+
+extension DiscoveryPageViewController : DiscoveryPageViewControllerDelegate {
+    
+    func navigateToDetails(for indexPath: Int) {
+        
+        guard let detailsVC: DetailsScreenViewController = UIStoryboard.init(name : "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "detailsViewC") as? DetailsScreenViewController else {
+            return
+        }
+        let selectedMovieVM: MovieViewModel = movieListVM.getMovieViewModel(at: indexPath)
+        
+        detailsVC.setupMovie(movieVM: selectedMovieVM)
+        self.navigationController?.pushViewController(detailsVC, animated: true)
+    }
+    
+   func reloadTableData() {
+       DispatchQueue.main.async{
+           self.tableView.reloadData()
+       }
+   }
+}
+
+extension DiscoveryPageViewController : LocationServiceDelegate {
+    
+    func didUpdateLocation(_ placeName : String) {
+        locationBtn.setTitle(placeName, for: .normal)
+        locationService.stopUpdatingLocation()
+    }
+    
+    private func setupLocationService() {
+        locationService.delegate = self
+        locationService.requestLocationAccess()
+    }
+    
+    func didUpdateAuthorizationStatus(_ status: CLAuthorizationStatus) {
+        switch status {
+                case .authorizedWhenInUse, .authorizedAlways:
+                    locationService.startUpdatingLocation()
+                case .denied, .restricted:
+                    print("Location permission denied.")
+                case .notDetermined:
+                    break
+                @unknown default:
+                    break
+        }
+    }
+}
