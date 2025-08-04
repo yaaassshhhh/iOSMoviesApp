@@ -7,10 +7,24 @@
 
 import UIKit
 
+private enum Style {
+    static let cornerRadius: CGFloat = 12
+    static let borderWidth: CGFloat = 0.5
+    static let borderColor: CGColor = UIColor.lightGray.cgColor
+}
+    
 class ReviewCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var commentLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel! {
+        didSet {
+            nameLabel.setLinesByWord()
+        }
+    }
+    @IBOutlet weak var commentLabel: UILabel!{
+        didSet {
+            commentLabel.setLinesByWord()
+        }
+    }
     private var reviewVM: ReviewViewModel?
     
 
@@ -20,10 +34,11 @@ class ReviewCollectionViewCell: UICollectionViewCell {
     }
     
     func setupUI() {
-        self.layer.cornerRadius = 12
-        self.layer.borderWidth = 2
-        self.layer.borderColor = UIColor.lightGray.cgColor
+        self.layer.cornerRadius = Style.cornerRadius
         self.layer.masksToBounds = true
+        self.backgroundColor = UIColor.systemGray6
+        self.layer.borderWidth = Style.borderWidth
+        self.layer.borderColor = Style.borderColor
     }
     
     override func prepareForReuse() {
@@ -32,7 +47,7 @@ class ReviewCollectionViewCell: UICollectionViewCell {
         commentLabel?.text = ""
     }
 
-    func configure(_ reviewData: ReviewViewModel?) {
+    func configure(_ reviewData: ReviewViewModel?) -> Void {
         guard let reviewData = reviewData else {
             nameLabel?.text = "No Author"
             commentLabel?.text = "No Review Available"

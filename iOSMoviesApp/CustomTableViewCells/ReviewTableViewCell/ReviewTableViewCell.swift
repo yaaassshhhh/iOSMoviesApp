@@ -11,8 +11,35 @@ class ReviewTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.selectionStyle = .none
-        setupUI()
+            self.selectionStyle = .none
+            setupUI()
+            
+            if let _ = reviewCollectionView {
+                setupCollectionView()
+            } else {
+                print("⚠️ reviewCollectionView is nil in awakeFromNib")
+            }
+    }
+    
+    private func setupCollectionView() {
+        let nib: UINib = UINib(nibName: "ReviewCollectionViewCell", bundle: nil)
+        reviewCollectionView.register(nib, forCellWithReuseIdentifier: "ReviewCollectionViewCell")
+        reviewCollectionView.delegate = self
+        reviewCollectionView.dataSource = self
+        
+        reviewCollectionView.backgroundColor = UIColor.clear
+        reviewCollectionView.layer.borderWidth = 0
+        reviewCollectionView.layer.borderColor = UIColor.clear.cgColor
+        reviewCollectionView.isHidden = false
+        reviewCollectionView.alpha = 1.0
+
+        if let layout = reviewCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.scrollDirection = .horizontal
+            layout.itemSize = PresetSizeValue.reviewCollectionViewItemSize
+            layout.minimumLineSpacing = 10
+            layout.minimumInteritemSpacing = 10
+            layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        }
     }
     
     func setupUI() {
@@ -39,14 +66,6 @@ class ReviewTableViewCell: UITableViewCell {
     func configure(_ reviewDetailsVM : ReviewDetailsViewModel) {
         self.reviewDetailsVM = reviewDetailsVM
         
-        setupCollectionView()
-        
-        reviewCollectionView.backgroundColor = UIColor.clear
-        reviewCollectionView.layer.borderWidth = 0
-        reviewCollectionView.layer.borderColor = UIColor.clear.cgColor
-        reviewCollectionView.isHidden = false
-        reviewCollectionView.alpha = 1.0
-        
         let cellWidth = max(self.frame.width, self.contentView.frame.width, 350)
         reviewCollectionView.frame = CGRect(x: 0, y: 35, width: cellWidth, height: 260)
         
@@ -54,7 +73,7 @@ class ReviewTableViewCell: UITableViewCell {
         self.layoutIfNeeded()
         reviewCollectionView.setNeedsLayout()
         reviewCollectionView.layoutIfNeeded()
-        
+        	
         DispatchQueue.main.async {
             let finalWidth = max(self.contentView.frame.width, 350)
             self.reviewCollectionView.frame = CGRect(x: 0, y: 35, width: finalWidth, height: 260)
@@ -64,21 +83,6 @@ class ReviewTableViewCell: UITableViewCell {
 }
 
 extension ReviewTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource{
-    
-    func setupCollectionView() {
-        let nib: UINib = UINib(nibName: "ReviewCollectionViewCell", bundle: nil)
-        reviewCollectionView.register(nib, forCellWithReuseIdentifier: "ReviewCollectionViewCell")
-        reviewCollectionView.delegate = self
-        reviewCollectionView.dataSource = self
-
-        if let layout = reviewCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.scrollDirection = .horizontal
-            layout.itemSize = PresetSizeValue.reviewCollectionViewItemSize
-            layout.minimumLineSpacing = 10
-            layout.minimumInteritemSpacing = 10
-            layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        }
-    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let count = reviewDetailsVM?.numberOfReviews() ?? 0
@@ -91,10 +95,6 @@ extension ReviewTableViewCell: UICollectionViewDelegate, UICollectionViewDataSou
             return UICollectionViewCell()
         }
         
-        cell.backgroundColor = UIColor.systemGray6
-        cell.layer.borderWidth = 0.5
-        cell.layer.borderColor = UIColor.lightGray.cgColor
-        
         guard let reviewVM = reviewDetailsVM?.getReviewViewModel(at: indexPath.row) else {
             return cell
         }
@@ -102,10 +102,6 @@ extension ReviewTableViewCell: UICollectionViewDelegate, UICollectionViewDataSou
         cell.configure(reviewVM)
         
         return cell
-    }
-    
-    private func reloadReviewView() {
-        self.reviewCollectionView.reloadData()
     }
 }
 
